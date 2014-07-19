@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
 
-@interface SettingViewController : UIViewController<RNFrostedSidebarDelegate>
+@interface SettingViewController : UIViewController<RNFrostedSidebarDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @end

@@ -64,23 +64,6 @@
     [callout show];
 }
 
-- (void)createCalendar{
-    
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
-    [self.view.layer insertSublayer:pageGradient atIndex:0];
-    
-
-    //カレンダー表示
-    [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
-
-
-}
-
 
 - (void)setSideBar{
     _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,50)];
@@ -96,7 +79,15 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_planView addSubview:listBtn];
     
-    [self createCalendar];
+    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+    pageGradient.frame = self.view.bounds;
+    pageGradient.colors =
+    [NSArray arrayWithObjects:
+     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
+     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
+    
+    
+    [self.view.layer insertSublayer:pageGradient atIndex:0];
      
 }
 
