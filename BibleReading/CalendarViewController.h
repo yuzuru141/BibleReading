@@ -10,7 +10,7 @@
 #import "RDVCalendarViewController.h"
 #import "ViewController.h"
 
-@interface CalendarViewController : RDVCalendarViewController
+@interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate>
 
 
 
