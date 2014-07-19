@@ -34,6 +34,7 @@
 		FE064EA8197A50240013BC97 /* RDVCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA2197A50240013BC97 /* RDVCalendarView.m */; };
 		FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA4197A50240013BC97 /* RDVCalendarViewController.m */; };
 		FE064EAA197A50240013BC97 /* RDVExampleDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */; };
+		FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EAC197A5CD50013BC97 /* CalendarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		FE064EA4197A50240013BC97 /* RDVCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVCalendarViewController.m; sourceTree = "<group>"; };
 		FE064EA5197A50240013BC97 /* RDVExampleDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVExampleDayCell.h; sourceTree = "<group>"; };
 		FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVExampleDayCell.m; sourceTree = "<group>"; };
+		FE064EAB197A5CD50013BC97 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		FE064EAC197A5CD50013BC97 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				FE064E89197A42670013BC97 /* souce */,
 				FE064E4F197A371A0013BC97 /* AppDelegate.h */,
 				FE064E50197A371A0013BC97 /* AppDelegate.m */,
+				FE064EAB197A5CD50013BC97 /* CalendarViewController.h */,
+				FE064EAC197A5CD50013BC97 /* CalendarViewController.m */,
 				FE064E52197A371A0013BC97 /* Main_iPhone.storyboard */,
 				FE064E55197A371A0013BC97 /* Main_iPad.storyboard */,
 				FE064E58197A371A0013BC97 /* ViewController.h */,
@@ -323,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
+				FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */,
 				FE064E5A197A371A0013BC97 /* ViewController.m in Sources */,
 				FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */,
 				FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */,

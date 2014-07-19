@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
+#import "CalendarViewController.h"
 
 @interface ViewController : UIViewController<RNFrostedSidebarDelegate>
 

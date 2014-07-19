@@ -100,7 +100,9 @@
      (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
     [_planView.layer insertSublayer:pageGradient atIndex:0];
-    NSLog(@"2枚目");
+    
+    [self performSegueWithIdentifier:@"toCalendarViewController" sender:self];
+    
 }
 
 
@@ -180,6 +182,5 @@
             }
     }
 }
-
 
 @end
