@@ -26,7 +26,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"Calendar";//石井追記
     }
     return self;
 }
@@ -37,8 +36,7 @@
     // Do any additional setup after loading the view.
     
     [self setSideBar];
-    
-    
+    [self buttonToRead];
 
 }
 
@@ -48,26 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)viewWillAppear:(BOOL)animated{
-    
-    //ここでNavigationcontrollerの色を変えてください
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.875 blue:0.541 alpha:1.0];
-    self.navigationController.navigationBar.TintColor = [UIColor blueColor];
-
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-}
-
-
-- (void)calendarView:(RDVCalendarView *)calendarView configureDayCell:(RDVCalendarDayCell *)dayCell
-             atIndex:(NSInteger)index {
-    RDVExampleDayCell *exampleDayCell = (RDVExampleDayCell *)dayCell;
-    if (index % 5 == 0) {
-        [[exampleDayCell notificationView] setHidden:NO];
-    }
-}
 
 
 - (IBAction)viewListMenu:(id)sender{
@@ -84,7 +62,6 @@
 
 - (void)createCalendar{
     
-    
     CAGradientLayer *pageGradient = [CAGradientLayer layer];
     pageGradient.frame = self.view.bounds;
     pageGradient.colors =
@@ -93,36 +70,10 @@
      (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
     [self.view.layer insertSublayer:pageGradient atIndex:0];
     
-    
-    //iPhoneのシステム設定にしたがって日付と時刻を取得する
-    NSDate *now = [NSDate date]; //現在日付取得
-    NSCalendar *baseCalender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //iPhoneの時刻と一致した値を取得
-    NSInteger flag = NSYearCalendarUnit
-    | NSMonthCalendarUnit
-    | NSDayCalendarUnit
-    | NSDayCalendarUnit
-    | NSWeekdayCalendarUnit
-    | NSHourCalendarUnit
-    | NSMinuteCalendarUnit;
-    
-    NSDateComponents *baseComponents = [baseCalender components:flag fromDate:now];
-    
-    NSString *str = [NSString stringWithFormat:@"%d年 %02d月 %02d日 %1d曜日 %02d:%02d",[baseComponents year],[baseComponents month],[baseComponents day],[baseComponents weekday],[baseComponents hour],[baseComponents minute]];
-    
-    NSLog(@"%@",str);  //曜日・・1〜7が日曜日〜土曜日
-    
-    
-    
-    [[self.navigationController navigationBar] setTranslucent:NO];
-    
+
+    //カレンダー表示
     [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
-    
-    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:[self calendarView]
-                                                                   action:@selector(showCurrentMonth)];
-    [self.navigationItem setRightBarButtonItem:todayButton];
+
 
 }
 
@@ -158,5 +109,21 @@
             break;
     }
 }
+
+
+
+//仮のボタン
+- (void)buttonToRead{
+    UIButton *dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    dateBtn.frame = CGRectMake(50, 60, 25, 25);
+    [dateBtn setTitle:@"button" forState:UIControlStateNormal];
+    [self.view addSubview:dateBtn];
+    [dateBtn addTarget:self action:@selector(buttonSelector) forControlEvents:UIControlEventTouchUpInside];
+}
+- (void)buttonSelector{
+    [self performSegueWithIdentifier:@"calendarToRead" sender:self];
+}
+
+
 
 @end
