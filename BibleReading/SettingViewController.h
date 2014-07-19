@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SettingViewController.h
 //  BibleReading
 //
 //  Created by 石井嗣 on 2014/07/19.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
 
-@interface ViewController : UIViewController<RNFrostedSidebarDelegate>
+@interface SettingViewController : UIViewController<RNFrostedSidebarDelegate>
 
 @end
