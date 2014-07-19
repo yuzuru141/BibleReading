@@ -100,6 +100,12 @@
      (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
     [_planView.layer insertSublayer:pageGradient atIndex:0];
+    
+    //カレンダー作成
+    [self setCalender];
+    
+    
+    
     NSLog(@"2枚目");
 }
 
@@ -181,5 +187,53 @@
     }
 }
 
+- (void)setCalender{
+    /*
+    [_returnButton setTitle:@"戻る" forState:UIControlStateNormal];
+    [_returnButton setTitleColor:[UIColor colorWithRed:0.969 green:0.557 blue:0.000 alpha:1.0] forState:UIControlStateNormal];
+    _returnButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    */
+    
+    //iPhoneのシステム設定にしたがって日付と時刻を取得する
+    NSDate *now = [NSDate date]; //現在日付取得
+    NSCalendar *baseCalender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    //iPhoneの時刻と一致した値を取得
+    NSInteger flag = NSYearCalendarUnit
+    | NSMonthCalendarUnit
+    | NSDayCalendarUnit
+    | NSDayCalendarUnit
+    | NSWeekdayCalendarUnit
+    | NSHourCalendarUnit
+    | NSMinuteCalendarUnit;
+    
+    NSDateComponents *baseComponents = [baseCalender components:flag fromDate:now];
+    
+    NSString *str = [NSString stringWithFormat:@"%d年 %02d月 %02d日 %1d曜日 %02d:%02d",[baseComponents year],[baseComponents month],[baseComponents day],[baseComponents weekday],[baseComponents hour],[baseComponents minute]];
+    
+    NSLog(@"%@",str);  //曜日・・1〜7が日曜日〜土曜日
+    
+    
+    
+    //[[self.navigationController navigationBar] setTranslucent:NO];
+    
+    [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
+    
+    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:[self calendarView]
+                                                                   action:@selector(showCurrentMonth)];
+    [self.navigationItem setRightBarButtonItem:todayButton];
+    
+
+}
+
+- (void)calendarView:(RDVCalendarView *)calendarView configureDayCell:(RDVCalendarDayCell *)dayCell
+             atIndex:(NSInteger)index {
+    RDVExampleDayCell *exampleDayCell = (RDVExampleDayCell *)dayCell;
+    if (index % 5 == 0) {
+        [[exampleDayCell notificationView] setHidden:NO];
+    }
+
+}
 
 @end

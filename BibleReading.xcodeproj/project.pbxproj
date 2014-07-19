@@ -30,6 +30,10 @@
 		FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E98197A4D2C0013BC97 /* Calendar-Month.png */; };
 		FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E99197A4D2C0013BC97 /* Chats.png */; };
 		FE064E9D197A4D330013BC97 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E9C197A4D330013BC97 /* Gear.png */; };
+		FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA0197A50240013BC97 /* RDVCalendarDayCell.m */; };
+		FE064EA8197A50240013BC97 /* RDVCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA2197A50240013BC97 /* RDVCalendarView.m */; };
+		FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA4197A50240013BC97 /* RDVCalendarViewController.m */; };
+		FE064EAA197A50240013BC97 /* RDVExampleDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +76,14 @@
 		FE064E98197A4D2C0013BC97 /* Calendar-Month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-Month.png"; sourceTree = "<group>"; };
 		FE064E99197A4D2C0013BC97 /* Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chats.png; sourceTree = "<group>"; };
 		FE064E9C197A4D330013BC97 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
+		FE064E9F197A50240013BC97 /* RDVCalendarDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVCalendarDayCell.h; sourceTree = "<group>"; };
+		FE064EA0197A50240013BC97 /* RDVCalendarDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVCalendarDayCell.m; sourceTree = "<group>"; };
+		FE064EA1197A50240013BC97 /* RDVCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVCalendarView.h; sourceTree = "<group>"; };
+		FE064EA2197A50240013BC97 /* RDVCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVCalendarView.m; sourceTree = "<group>"; };
+		FE064EA3197A50240013BC97 /* RDVCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVCalendarViewController.h; sourceTree = "<group>"; };
+		FE064EA4197A50240013BC97 /* RDVCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVCalendarViewController.m; sourceTree = "<group>"; };
+		FE064EA5197A50240013BC97 /* RDVExampleDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVExampleDayCell.h; sourceTree = "<group>"; };
+		FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVExampleDayCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +143,7 @@
 		FE064E46197A371A0013BC97 /* BibleReading */ = {
 			isa = PBXGroup;
 			children = (
+				FE064E9E197A50240013BC97 /* RDVCalendarView */,
 				FE064E89197A42670013BC97 /* souce */,
 				FE064E4F197A371A0013BC97 /* AppDelegate.h */,
 				FE064E50197A371A0013BC97 /* AppDelegate.m */,
@@ -187,6 +200,21 @@
 				FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */,
 			);
 			path = souce;
+			sourceTree = "<group>";
+		};
+		FE064E9E197A50240013BC97 /* RDVCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				FE064E9F197A50240013BC97 /* RDVCalendarDayCell.h */,
+				FE064EA0197A50240013BC97 /* RDVCalendarDayCell.m */,
+				FE064EA1197A50240013BC97 /* RDVCalendarView.h */,
+				FE064EA2197A50240013BC97 /* RDVCalendarView.m */,
+				FE064EA3197A50240013BC97 /* RDVCalendarViewController.h */,
+				FE064EA4197A50240013BC97 /* RDVCalendarViewController.m */,
+				FE064EA5197A50240013BC97 /* RDVExampleDayCell.h */,
+				FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */,
+			);
+			path = RDVCalendarView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,8 +322,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
 				FE064E5A197A371A0013BC97 /* ViewController.m in Sources */,
+				FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */,
 				FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */,
+				FE064EAA197A50240013BC97 /* RDVExampleDayCell.m in Sources */,
+				FE064EA8197A50240013BC97 /* RDVCalendarView.m in Sources */,
 				FE064E51197A371A0013BC97 /* AppDelegate.m in Sources */,
 				FE064E4D197A371A0013BC97 /* main.m in Sources */,
 			);

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
+#import "RDVExampleDayCell.h"
+#import "RDVCalendarViewController.h"
 
 @interface ViewController : UIViewController<RNFrostedSidebarDelegate>
 
