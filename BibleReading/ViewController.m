@@ -79,27 +79,6 @@
 
 
 - (void)createplanView{
-    _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
-    [self.view addSubview:_planView];
-    
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
-    
-    UIImage *img = [UIImage imageNamed:@"list_tk.png"];
-    listBtn = [[UIButton alloc]
-               initWithFrame:CGRectMake(15, 25, 32, 32)];
-    [listBtn setBackgroundImage:img forState:UIControlStateNormal];
-    [listBtn addTarget:self
-                action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
-    [_planView addSubview:listBtn];
-    
-    
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
-    [_planView.layer insertSublayer:pageGradient atIndex:0];
     
     [self performSegueWithIdentifier:@"toCalendarViewController" sender:self];
     

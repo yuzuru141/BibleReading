@@ -36,67 +36,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setSideBar];
     
-    
-    self.view.backgroundColor = [UIColor colorWithRed:1.000 green:0.875 blue:0.541 alpha:1.0];
-
-    
-    //iPhoneのシステム設定にしたがって日付と時刻を取得する
-    NSDate *now = [NSDate date]; //現在日付取得
-    NSCalendar *baseCalender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //iPhoneの時刻と一致した値を取得
-    NSInteger flag = NSYearCalendarUnit
-    | NSMonthCalendarUnit
-    | NSDayCalendarUnit
-    | NSDayCalendarUnit
-    | NSWeekdayCalendarUnit
-    | NSHourCalendarUnit
-    | NSMinuteCalendarUnit;
-    
-    NSDateComponents *baseComponents = [baseCalender components:flag fromDate:now];
-    
-    NSString *str = [NSString stringWithFormat:@"%d年 %02d月 %02d日 %1d曜日 %02d:%02d",[baseComponents year],[baseComponents month],[baseComponents day],[baseComponents weekday],[baseComponents hour],[baseComponents minute]];
-    
-    NSLog(@"%@",str);  //曜日・・1〜7が日曜日〜土曜日
-
-    
-    
-    [[self.navigationController navigationBar] setTranslucent:NO];
-    
-    [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
-    
-    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:[self calendarView]
-                                                                   action:@selector(showCurrentMonth)];
-    [self.navigationItem setRightBarButtonItem:todayButton];
-    
-    
-    _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
-    [self.view addSubview:_planView];
-    
-    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
-    
-    UIImage *img = [UIImage imageNamed:@"list_tk.png"];
-    listBtn = [[UIButton alloc]
-               initWithFrame:CGRectMake(15, 25, 32, 32)];
-    [listBtn setBackgroundImage:img forState:UIControlStateNormal];
-    [listBtn addTarget:self
-                action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
-    [_planView addSubview:listBtn];
-    
-    
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
-    [_planView.layer insertSublayer:pageGradient atIndex:0];
-    
-    
-    
-    
+    [self createCalendar];
 
 }
 
@@ -157,6 +99,66 @@
     [callout show];
 }
 
+- (void)createCalendar{
+    
+    
+    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+    pageGradient.frame = self.view.bounds;
+    pageGradient.colors =
+    [NSArray arrayWithObjects:
+     (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
+     (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
+    [self.view.layer insertSublayer:pageGradient atIndex:0];
+    
+    
+    //iPhoneのシステム設定にしたがって日付と時刻を取得する
+    NSDate *now = [NSDate date]; //現在日付取得
+    NSCalendar *baseCalender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    //iPhoneの時刻と一致した値を取得
+    NSInteger flag = NSYearCalendarUnit
+    | NSMonthCalendarUnit
+    | NSDayCalendarUnit
+    | NSDayCalendarUnit
+    | NSWeekdayCalendarUnit
+    | NSHourCalendarUnit
+    | NSMinuteCalendarUnit;
+    
+    NSDateComponents *baseComponents = [baseCalender components:flag fromDate:now];
+    
+    NSString *str = [NSString stringWithFormat:@"%d年 %02d月 %02d日 %1d曜日 %02d:%02d",[baseComponents year],[baseComponents month],[baseComponents day],[baseComponents weekday],[baseComponents hour],[baseComponents minute]];
+    
+    NSLog(@"%@",str);  //曜日・・1〜7が日曜日〜土曜日
+    
+    
+    
+    [[self.navigationController navigationBar] setTranslucent:NO];
+    
+    [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
+    
+    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:[self calendarView]
+                                                                   action:@selector(showCurrentMonth)];
+    [self.navigationItem setRightBarButtonItem:todayButton];
 
+}
+
+
+- (void)setSideBar{
+//    _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
+    _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,50)];
+    [self.view addSubview:_planView];
+    
+    self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
+    
+    UIImage *img = [UIImage imageNamed:@"list_tk.png"];
+    listBtn = [[UIButton alloc]
+               initWithFrame:CGRectMake(15, 25, 32, 32)];
+    [listBtn setBackgroundImage:img forState:UIControlStateNormal];
+    [listBtn addTarget:self
+                action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [_planView addSubview:listBtn];
+     
+}
 
 @end

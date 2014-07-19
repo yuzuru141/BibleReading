@@ -152,15 +152,15 @@
     
     // Layout header view
     
-    [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2),
+    [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2 +50),
                                          previousMonthButtonSize.width, previousMonthButtonSize.height)];
     
     [[self monthLabel] setFrame:CGRectMake(roundf(headerSize.width / 2 - titleSize.width / 2),
-                                         roundf(headerSize.height / 2 - titleSize.height / 2),
+                                         roundf(headerSize.height / 2 - titleSize.height / 2+50),
                                          titleSize.width, titleSize.height)];
     
     [[self forwardButton] setFrame:CGRectMake(headerSize.width - 10 - nextMonthButtonSize.width,
-                                            roundf(headerSize.height / 2 - nextMonthButtonSize.height / 2),
+                                            roundf(headerSize.height / 2 - nextMonthButtonSize.height / 2+50),
                                             nextMonthButtonSize.width, nextMonthButtonSize.height)];
     
     // Calculate sizes and distances
