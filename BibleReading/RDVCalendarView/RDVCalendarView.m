@@ -63,9 +63,10 @@
         
         // Setup defaults
         
-        _currentDayColor = [UIColor colorWithRed:80/255.0 green:200/255.0 blue:240/255.0 alpha:1.0];
+//        _currentDayColor = [UIColor colorWithRed:80/255.0 green:200/255.0 blue:240/255.0 alpha:1.0];
+        _currentDayColor = [UIColor blackColor];
         _selectedDayColor = [UIColor grayColor];
-        _separatorColor = [UIColor lightGrayColor];
+        //_separatorColor = [UIColor lightGrayColor];
         
         _separatorEdgeInsets = UIEdgeInsetsZero;
         _dayCellEdgeInsets = UIEdgeInsetsZero;
@@ -78,19 +79,22 @@
         
         _monthLabel = [[UILabel alloc] init];
         [_monthLabel setFont:[UIFont systemFontOfSize:22]];
-        [_monthLabel setTextColor:[UIColor blackColor]];
+//        [_monthLabel setTextColor:[UIColor blackColor]];
+        [_monthLabel setTextColor:[UIColor whiteColor]];
         [_monthLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_monthLabel];
         
         _backButton = [[UIButton alloc] init];
-        [_backButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [_backButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_backButton setTitle:@"Prev" forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(showPreviousMonth)
               forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_backButton];
         
         _forwardButton = [[UIButton alloc] init];
-        [_forwardButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//        [_forwardButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_forwardButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_forwardButton setTitle:@"Next" forState:UIControlStateNormal];
         [_forwardButton addTarget:self action:@selector(showNextMonth)
                  forControlEvents:UIControlEventTouchUpInside];
@@ -151,16 +155,16 @@
                                   50);
     
     // Layout header view
-    //サイドバーとの兼ね合いで、元々のコードより50ピクセル下げた。
-    [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2 +50),
+    //サイドバーとの兼ね合いで、元々のコードより80ピクセル下げた。
+    [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2 +80),
                                          previousMonthButtonSize.width, previousMonthButtonSize.height)];
     
     [[self monthLabel] setFrame:CGRectMake(roundf(headerSize.width / 2 - titleSize.width / 2),
-                                         roundf(headerSize.height / 2 - titleSize.height / 2+50),
+                                         roundf(headerSize.height / 2 - titleSize.height / 2+80),
                                          titleSize.width, titleSize.height)];
     
     [[self forwardButton] setFrame:CGRectMake(headerSize.width - 10 - nextMonthButtonSize.width,
-                                            roundf(headerSize.height / 2 - nextMonthButtonSize.height / 2+50),
+                                            roundf(headerSize.height / 2 - nextMonthButtonSize.height / 2+80),
                                             nextMonthButtonSize.width, nextMonthButtonSize.height)];
     
     // Calculate sizes and distances
@@ -347,7 +351,8 @@
         for (NSString *weekDayString in _weekDays) {
             UILabel *weekDayLabel = [[UILabel alloc] init];
             [weekDayLabel setFont:[UIFont systemFontOfSize:14]];
-            [weekDayLabel setTextColor:[UIColor grayColor]];
+//            [weekDayLabel setTextColor:[UIColor grayColor]];
+            [weekDayLabel setTextColor:[UIColor whiteColor]];
             [weekDayLabel setTextAlignment:NSTextAlignmentCenter];
             [weekDayLabel setText:weekDayString];
             [weekDayLabels addObject:weekDayLabel];
@@ -538,6 +543,7 @@
 }
 
 - (void)selectDayCellAtIndex:(NSInteger)index animated:(BOOL)animated {
+    
     //ボタンが選択された時に次のページに移動するようにデリケートメソッド追加
     [self.delegate buttonToRead];
     
@@ -570,23 +576,6 @@
         }
     }
 }
-
-/*
-//仮のボタン
-- (void)buttonToRead{
-    UIButton *dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    dateBtn.frame = CGRectMake(50, 60, 25, 25);
-    //[dateBtn setTitle:@"button" forState:UIControlStateNormal];
-    //[self.delegate addSubview:dateBtn];
-    [dateBtn addTarget:self action:@selector(buttonMethod) forControlEvents:UIControlEventTouchUpInside];
-}
-
-
-- (void)buttonMethod{
-    //[self.delegate performSegueWithIdentifier:@"calendarToRead" sender:self];
-}
-*/
-
 
 
 - (void)deselectDayCellAtIndex:(NSInteger)index animated:(BOOL)animated {
