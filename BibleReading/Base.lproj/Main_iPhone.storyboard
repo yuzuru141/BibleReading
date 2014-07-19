@@ -19,15 +19,39 @@
                     </view>
                     <connections>
                         <segue destination="FjA-Uo-8Th" kind="modal" identifier="toCalendarViewController" id="drU-lt-p9y"/>
+                        <segue destination="7HG-i0-A2y" kind="modal" identifier="toSettingViewController" id="xcy-j0-TRS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="344" y="-78"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="IjN-iZ-aXd">
+            <objects>
+                <viewController id="7HG-i0-A2y" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nqc-6c-YXo"/>
+                        <viewControllerLayoutGuide type="bottom" id="vug-eQ-8Zt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rrt-ZH-SDs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="settingToPlan" id="Km3-2x-44Q"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="settingToView" id="7vU-e7-8jJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8C-JW-Wc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-122" y="597"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="8NF-e6-Vsc">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="FjA-Uo-8Th" customClass="CalendarViewController" sceneMemberID="viewController">
+                <viewController id="FjA-Uo-8Th" customClass="CalendarViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D6H-UJ-2OE"/>
                         <viewControllerLayoutGuide type="bottom" id="b1N-3f-x5L"/>
@@ -37,10 +61,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="calendarToView" id="gae-vY-vLW"/>
+                        <segue destination="7HG-i0-A2y" kind="modal" identifier="calendarToSetting" id="zKL-Sr-3nQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lkg-Wv-Bq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="706" y="-59"/>
+            <point key="canvasLocation" x="816" y="609"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -48,4 +76,9 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="zKL-Sr-3nQ"/>
+        <segue reference="Km3-2x-44Q"/>
+        <segue reference="7vU-e7-8jJ"/>
+    </inferredMetricsTieBreakers>
 </document>

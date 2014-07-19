@@ -7,7 +7,7 @@
 //
 
 #import "CalendarViewController.h"
-#import "RDVExampleDayCell.h"
+
 
 @interface CalendarViewController (){
     UIButton *listBtn;
@@ -38,7 +38,7 @@
     
     [self setSideBar];
     
-    [self createCalendar];
+    
 
 }
 
@@ -48,19 +48,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-//石井追記
 - (void)viewWillAppear:(BOOL)animated{
     
     //ここでNavigationcontrollerの色を変えてください
@@ -72,7 +60,7 @@
 
 }
 
-//石井追記
+
 - (void)calendarView:(RDVCalendarView *)calendarView configureDayCell:(RDVCalendarDayCell *)dayCell
              atIndex:(NSInteger)index {
     RDVExampleDayCell *exampleDayCell = (RDVExampleDayCell *)dayCell;
@@ -80,11 +68,6 @@
         [[exampleDayCell notificationView] setHidden:NO];
     }
 }
-
-//石井追記
-//- (IBAction)return:(id)sender {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
 
 
 - (IBAction)viewListMenu:(id)sender{
@@ -145,7 +128,6 @@
 
 
 - (void)setSideBar{
-//    _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
     _planView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,50)];
     [self.view addSubview:_planView];
     
@@ -158,7 +140,23 @@
     [listBtn addTarget:self
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_planView addSubview:listBtn];
+    
+    [self createCalendar];
      
+}
+
+- (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+    switch (index) {
+        case 0:
+            [self performSegueWithIdentifier:@"calendarToView" sender:self];
+            break;
+        case 1:
+            [self setSideBar];
+            break;
+        case 2:
+            [self performSegueWithIdentifier:@"calendarToSetting" sender:self];
+            break;
+    }
 }
 
 @end
