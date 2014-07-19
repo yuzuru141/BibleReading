@@ -27,6 +27,9 @@
 		FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */; };
 		FE064E96197A47D10013BC97 /* image_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E94197A47D10013BC97 /* image_tk.png */; };
 		FE064E97197A47D10013BC97 /* video_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E95197A47D10013BC97 /* video_tk.png */; };
+		FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E98197A4D2C0013BC97 /* Calendar-Month.png */; };
+		FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E99197A4D2C0013BC97 /* Chats.png */; };
+		FE064E9D197A4D330013BC97 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E9C197A4D330013BC97 /* Gear.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		FE064E94197A47D10013BC97 /* image_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tk.png; sourceTree = "<group>"; };
 		FE064E95197A47D10013BC97 /* video_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_tk.png; sourceTree = "<group>"; };
+		FE064E98197A4D2C0013BC97 /* Calendar-Month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-Month.png"; sourceTree = "<group>"; };
+		FE064E99197A4D2C0013BC97 /* Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chats.png; sourceTree = "<group>"; };
+		FE064E9C197A4D330013BC97 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				FE064E94197A47D10013BC97 /* image_tk.png */,
+				FE064E98197A4D2C0013BC97 /* Calendar-Month.png */,
+				FE064E9C197A4D330013BC97 /* Gear.png */,
+				FE064E99197A4D2C0013BC97 /* Chats.png */,
 				FE064E95197A47D10013BC97 /* video_tk.png */,
 				FE064E8A197A42670013BC97 /* list_tk.png */,
 				FE064E8B197A42670013BC97 /* profile_tk.png */,
@@ -257,11 +266,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE064E96197A47D10013BC97 /* image_tk.png in Resources */,
+				FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */,
 				FE064E91197A42670013BC97 /* profile_tk.png in Resources */,
 				FE064E57197A371A0013BC97 /* Main_iPad.storyboard in Resources */,
 				FE064E5C197A371A0013BC97 /* Images.xcassets in Resources */,
 				FE064E97197A47D10013BC97 /* video_tk.png in Resources */,
+				FE064E9D197A4D330013BC97 /* Gear.png in Resources */,
 				FE064E90197A42670013BC97 /* list_tk.png in Resources */,
+				FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */,
 				FE064E54197A371A0013BC97 /* Main_iPhone.storyboard in Resources */,
 				FE064E4B197A371A0013BC97 /* InfoPlist.strings in Resources */,
 			);
