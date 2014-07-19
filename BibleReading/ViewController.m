@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property UIView *timeLineView;
 @property UIView *planView;
-@property UIView *settingView;
+@property UIView *MovieView;
 
 @end
 
@@ -100,19 +100,13 @@
      (id)[UIColor colorWithRed:0.99 green:0.76 blue:0.46 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:1.0 green:0.55 blue:0.0 alpha:1.0].CGColor, nil];
     [_planView.layer insertSublayer:pageGradient atIndex:0];
-    
-    //カレンダー作成
-    [self setCalender];
-    
-    
-    
     NSLog(@"2枚目");
 }
 
 
-- (void)createsettingView{
-    _settingView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
-    [self.view addSubview:_settingView];
+- (void)createMovieView{
+    _MovieView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
+    [self.view addSubview:_MovieView];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
@@ -122,7 +116,7 @@
     [listBtn setBackgroundImage:img forState:UIControlStateNormal];
     [listBtn addTarget:self
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingView addSubview:listBtn];
+    [_MovieView addSubview:listBtn];
     
 
     
@@ -132,7 +126,7 @@
     [NSArray arrayWithObjects:
      (id)[UIColor colorWithRed:0.64 green:0.91 blue:0.53 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:0.35 green:0.83 blue:0.15 alpha:1.0].CGColor, nil];
-    [_settingView.layer insertSublayer:pageGradient atIndex:0];
+    [_MovieView.layer insertSublayer:pageGradient atIndex:0];
     NSLog(@"3枚目");
 }
 
@@ -151,8 +145,8 @@
             if ([_planView isDescendantOfView:self.view]) {
                 _planView.hidden = YES;
             }
-            if ([_settingView isDescendantOfView:self.view]) {
-                _settingView.hidden = YES;
+            if ([_MovieView isDescendantOfView:self.view]) {
+                _MovieView.hidden = YES;
             }
             break;
         case 1:
@@ -166,74 +160,26 @@
             if ([_timeLineView isDescendantOfView:self.view]) {
                 _timeLineView.hidden = YES;
             }
-            if ([_settingView isDescendantOfView:self.view]) {
-                _settingView.hidden = YES;
+            if ([_MovieView isDescendantOfView:self.view]) {
+                _MovieView.hidden = YES;
             }
             break;
         case 2:
-            if (![_settingView isDescendantOfView:self.view]) {
-                [self createsettingView];
+            if (![_MovieView isDescendantOfView:self.view]) {
+                [self createMovieView];
             }
-            if (_settingView.hidden) {
-                _settingView.hidden = NO;
+            if (_MovieView.hidden) {
+                _MovieView.hidden = NO;
             }
             if ([_timeLineView isDescendantOfView:self.view]) {
                 _planView.hidden = YES;
             }
-            [self.view bringSubviewToFront:_settingView];
+            [self.view bringSubviewToFront:_MovieView];
             if ([_planView isDescendantOfView:self.view]) {
                 _planView.hidden = YES;
             }
     }
 }
 
-- (void)setCalender{
-    /*
-    [_returnButton setTitle:@"戻る" forState:UIControlStateNormal];
-    [_returnButton setTitleColor:[UIColor colorWithRed:0.969 green:0.557 blue:0.000 alpha:1.0] forState:UIControlStateNormal];
-    _returnButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-    */
-    
-    //iPhoneのシステム設定にしたがって日付と時刻を取得する
-    NSDate *now = [NSDate date]; //現在日付取得
-    NSCalendar *baseCalender = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //iPhoneの時刻と一致した値を取得
-    NSInteger flag = NSYearCalendarUnit
-    | NSMonthCalendarUnit
-    | NSDayCalendarUnit
-    | NSDayCalendarUnit
-    | NSWeekdayCalendarUnit
-    | NSHourCalendarUnit
-    | NSMinuteCalendarUnit;
-    
-    NSDateComponents *baseComponents = [baseCalender components:flag fromDate:now];
-    
-    NSString *str = [NSString stringWithFormat:@"%d年 %02d月 %02d日 %1d曜日 %02d:%02d",[baseComponents year],[baseComponents month],[baseComponents day],[baseComponents weekday],[baseComponents hour],[baseComponents minute]];
-    
-    NSLog(@"%@",str);  //曜日・・1〜7が日曜日〜土曜日
-    
-    
-    
-    //[[self.navigationController navigationBar] setTranslucent:NO];
-    
-    [[self calendarView] registerDayCellClass:[RDVExampleDayCell class]];
-    
-    UIBarButtonItem *todayButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Today", nil)
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:[self calendarView]
-                                                                   action:@selector(showCurrentMonth)];
-    [self.navigationItem setRightBarButtonItem:todayButton];
-    
-
-}
-
-- (void)calendarView:(RDVCalendarView *)calendarView configureDayCell:(RDVCalendarDayCell *)dayCell
-             atIndex:(NSInteger)index {
-    RDVExampleDayCell *exampleDayCell = (RDVExampleDayCell *)dayCell;
-    if (index % 5 == 0) {
-        [[exampleDayCell notificationView] setHidden:NO];
-    }
-
-}
 
 @end
