@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property UIView *planView;
+@property RDVCalendarView *calendar;
 
 @end
 
@@ -34,6 +35,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.calendar = [[RDVCalendarView alloc]init];
+    self.calendar.delegate = self;
     
     [self setSideBar];
     [self buttonToRead];
@@ -112,16 +116,10 @@
 
 
 
-//仮のボタン
+//デリゲートメソッド
 - (void)buttonToRead{
-    UIButton *dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    dateBtn.frame = CGRectMake(50, 60, 25, 25);
-    [dateBtn setTitle:@"button" forState:UIControlStateNormal];
-    [self.view addSubview:dateBtn];
-    [dateBtn addTarget:self action:@selector(buttonSelector) forControlEvents:UIControlEventTouchUpInside];
-}
-- (void)buttonSelector{
     [self performSegueWithIdentifier:@"calendarToRead" sender:self];
+
 }
 
 

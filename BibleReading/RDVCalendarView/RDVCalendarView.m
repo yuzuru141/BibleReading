@@ -151,7 +151,7 @@
                                   50);
     
     // Layout header view
-    
+    //サイドバーとの兼ね合いで、元々のコードより50ピクセル下げた。
     [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2 +50),
                                          previousMonthButtonSize.width, previousMonthButtonSize.height)];
     
@@ -538,6 +538,9 @@
 }
 
 - (void)selectDayCellAtIndex:(NSInteger)index animated:(BOOL)animated {
+    //ボタンが選択された時に次のページに移動するようにデリケートメソッド追加
+    [self.delegate buttonToRead];
+    
     if ([[self visibleCells] count] > index) {
         if ([[self delegate] respondsToSelector:@selector(calendarView:willSelectDate:)]) {
             [[self delegate] calendarView:self willSelectDate:[self dateForIndex:index]];
@@ -567,6 +570,24 @@
         }
     }
 }
+
+/*
+//仮のボタン
+- (void)buttonToRead{
+    UIButton *dateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    dateBtn.frame = CGRectMake(50, 60, 25, 25);
+    //[dateBtn setTitle:@"button" forState:UIControlStateNormal];
+    //[self.delegate addSubview:dateBtn];
+    [dateBtn addTarget:self action:@selector(buttonMethod) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+- (void)buttonMethod{
+    //[self.delegate performSegueWithIdentifier:@"calendarToRead" sender:self];
+}
+*/
+
+
 
 - (void)deselectDayCellAtIndex:(NSInteger)index animated:(BOOL)animated {
     if ([[self visibleCells] count] > index) {

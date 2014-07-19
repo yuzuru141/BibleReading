@@ -11,7 +11,7 @@
 #import "ViewController.h"
 #import "RDVExampleDayCell.h"
 
-@interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate>
+@interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate>
 
 
 
