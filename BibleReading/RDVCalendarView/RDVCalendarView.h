@@ -212,6 +212,11 @@ typedef NS_OPTIONS(NSInteger, RDVCalendarViewDayCellSeparatorType) {
 @optional
 #pragma mark - Managing Selections
 
+
+// デリゲートメソッドを追加
+- (void)buttonToRead;
+
+
 /**
  * Asks the delegate if the specified day cell should be selected.
  */
