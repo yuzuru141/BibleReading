@@ -22,6 +22,9 @@
 		FE064E65197A371A0013BC97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E44197A371A0013BC97 /* UIKit.framework */; };
 		FE064E6D197A371A0013BC97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE064E6B197A371A0013BC97 /* InfoPlist.strings */; };
 		FE064E6F197A371A0013BC97 /* BibleReadingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E6E197A371A0013BC97 /* BibleReadingTests.m */; };
+		FE064E90197A42670013BC97 /* list_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E8A197A42670013BC97 /* list_tk.png */; };
+		FE064E91197A42670013BC97 /* profile_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E8B197A42670013BC97 /* profile_tk.png */; };
+		FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,10 @@
 		FE064E6A197A371A0013BC97 /* BibleReadingTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BibleReadingTests-Info.plist"; sourceTree = "<group>"; };
 		FE064E6C197A371A0013BC97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FE064E6E197A371A0013BC97 /* BibleReadingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BibleReadingTests.m; sourceTree = "<group>"; };
+		FE064E8A197A42670013BC97 /* list_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_tk.png; sourceTree = "<group>"; };
+		FE064E8B197A42670013BC97 /* profile_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_tk.png; sourceTree = "<group>"; };
+		FE064E8E197A42670013BC97 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
+		FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +121,7 @@
 		FE064E46197A371A0013BC97 /* BibleReading */ = {
 			isa = PBXGroup;
 			children = (
+				FE064E89197A42670013BC97 /* souce */,
 				FE064E4F197A371A0013BC97 /* AppDelegate.h */,
 				FE064E50197A371A0013BC97 /* AppDelegate.m */,
 				FE064E52197A371A0013BC97 /* Main_iPhone.storyboard */,
@@ -153,6 +161,17 @@
 				FE064E6B197A371A0013BC97 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FE064E89197A42670013BC97 /* souce */ = {
+			isa = PBXGroup;
+			children = (
+				FE064E8A197A42670013BC97 /* list_tk.png */,
+				FE064E8B197A42670013BC97 /* profile_tk.png */,
+				FE064E8E197A42670013BC97 /* RNFrostedSidebar.h */,
+				FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */,
+			);
+			path = souce;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +250,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE064E91197A42670013BC97 /* profile_tk.png in Resources */,
 				FE064E57197A371A0013BC97 /* Main_iPad.storyboard in Resources */,
 				FE064E5C197A371A0013BC97 /* Images.xcassets in Resources */,
+				FE064E90197A42670013BC97 /* list_tk.png in Resources */,
 				FE064E54197A371A0013BC97 /* Main_iPhone.storyboard in Resources */,
 				FE064E4B197A371A0013BC97 /* InfoPlist.strings in Resources */,
 			);
@@ -254,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE064E5A197A371A0013BC97 /* ViewController.m in Sources */,
+				FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */,
 				FE064E51197A371A0013BC97 /* AppDelegate.m in Sources */,
 				FE064E4D197A371A0013BC97 /* main.m in Sources */,
 			);
@@ -470,6 +492,7 @@
 				FE064E74197A371A0013BC97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE064E75197A371A0013BC97 /* Build configuration list for PBXNativeTarget "BibleReadingTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +501,7 @@
 				FE064E77197A371A0013BC97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
