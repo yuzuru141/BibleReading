@@ -14,7 +14,7 @@
     UIButton *listBtn;
     UITextField *textfield;
     NSArray*       aItemList;
-    NSArray*       aItemList2;
+    NSArray*       aItemList2;  
     NSArray*       aItemList3;
     NSArray*       aItemList4;
     UIPickerView*  oPicker;
@@ -23,6 +23,8 @@
     NSString *pic1_str;
     NSString *pic2_str;
     NSString *pic3_str;
+    int selectNumber;
+    int selectNumber2;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -47,6 +49,7 @@
     // Do any additional setup after loading the view.
     
     [self setViewForFirst];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -277,15 +280,26 @@
 
 
 
-/*
-//選択完了時に呼ばれる
+
+//スイッチ文でDBから読み込むために選択項目をint型に変換する
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    //選択行を返す
-    NSInteger id = [pickerView selectedRowInComponent:0];
-    NSInteger id2 = [pickerView selectedRowInComponent:1];
-    labelPlan.text  = [NSString stringWithFormat:@"Your Plan :%@ %@",aItemList[id],aItemList2[id2]];
+    
+    if (pickerView.tag == 1) {
+        selectNumber = [pickerView selectedRowInComponent:0];
+        [self DBMethod];
+        return;
+    }
+    else if (pickerView.tag == 2){
+        selectNumber2 = [pickerView selectedRowInComponent:0];
+        [self DBMethod];
+        return;
+    }
+//    NSInteger id = [pickerView selectedRowInComponent:0];
+//    NSInteger id2 = [pickerView selectedRowInComponent:1];
+    
+    
 }
- */
+ 
 
 
 //ピッカーの文字を変更する
@@ -339,5 +353,27 @@
         return width-width/10*2;
     }
 }
+
+
+
+//DB操作
+- (void)DBMethod{
+    
+    self.database = [[DataBase alloc]init];
+    
+//    //DBコピーして作成
+//    [self.database createDB];
+    
+    //DB読み込み
+//    NSString *arg = @"bible_name";
+//    [self.database readDB:arg];
+    
+    //プラン決定後、ソートする。
+    [self.database selectPlan:selectNumber label:selectNumber2];
+            NSLog(@"selectNumber=%d",selectNumber);
+            NSLog(@"selectNumber2=%d",selectNumber2);
+    
+}
+
 
 @end

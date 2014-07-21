@@ -37,6 +37,14 @@
 		FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EAC197A5CD50013BC97 /* CalendarViewController.m */; };
 		FE63A295197A72D7003E3099 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A294197A72D7003E3099 /* SettingViewController.m */; };
 		FE63A298197A7AEC003E3099 /* ReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A297197A7AEC003E3099 /* ReadViewController.m */; };
+		FE63A2A5197CAF6F003E3099 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A29B197CAF6F003E3099 /* FMDatabase.m */; };
+		FE63A2A6197CAF6F003E3099 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A29D197CAF6F003E3099 /* FMDatabaseAdditions.m */; };
+		FE63A2A7197CAF6F003E3099 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A29F197CAF6F003E3099 /* FMDatabasePool.m */; };
+		FE63A2A8197CAF6F003E3099 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A2A1197CAF6F003E3099 /* FMDatabaseQueue.m */; };
+		FE63A2A9197CAF6F003E3099 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A2A4197CAF6F003E3099 /* FMResultSet.m */; };
+		FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A2AB197CAF9B003E3099 /* DataBase.m */; };
+		FE63A2AE197CB41F003E3099 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */; };
+		FE63A2B5197CDC8C003E3099 /* Bibile_Read_BaseDB.db in Resources */ = {isa = PBXBuildFile; fileRef = FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +101,21 @@
 		FE63A294197A72D7003E3099 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FE63A296197A7AEC003E3099 /* ReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadViewController.h; sourceTree = "<group>"; };
 		FE63A297197A7AEC003E3099 /* ReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadViewController.m; sourceTree = "<group>"; };
+		FE63A29A197CAF6F003E3099 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		FE63A29B197CAF6F003E3099 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		FE63A29C197CAF6F003E3099 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		FE63A29D197CAF6F003E3099 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		FE63A29E197CAF6F003E3099 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		FE63A29F197CAF6F003E3099 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		FE63A2A0197CAF6F003E3099 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		FE63A2A1197CAF6F003E3099 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		FE63A2A2197CAF6F003E3099 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		FE63A2A3197CAF6F003E3099 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		FE63A2A4197CAF6F003E3099 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		FE63A2AA197CAF9B003E3099 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
+		FE63A2AB197CAF9B003E3099 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
+		FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bibile_Read_BaseDB.db; path = BibleReading/Bibile_Read_BaseDB.db; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE63A2AE197CB41F003E3099 /* libsqlite3.0.dylib in Frameworks */,
 				FE064E43197A371A0013BC97 /* CoreGraphics.framework in Frameworks */,
 				FE064E45197A371A0013BC97 /* UIKit.framework in Frameworks */,
 				FE064E41197A371A0013BC97 /* Foundation.framework in Frameworks */,
@@ -122,6 +146,7 @@
 		FE064E34197A371A0013BC97 = {
 			isa = PBXGroup;
 			children = (
+				FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */,
 				FE064E46197A371A0013BC97 /* BibleReading */,
 				FE064E68197A371A0013BC97 /* BibleReadingTests */,
 				FE064E3F197A371A0013BC97 /* Frameworks */,
@@ -141,6 +166,7 @@
 		FE064E3F197A371A0013BC97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */,
 				FE064E40197A371A0013BC97 /* Foundation.framework */,
 				FE064E42197A371A0013BC97 /* CoreGraphics.framework */,
 				FE064E44197A371A0013BC97 /* UIKit.framework */,
@@ -152,6 +178,7 @@
 		FE064E46197A371A0013BC97 /* BibleReading */ = {
 			isa = PBXGroup;
 			children = (
+				FE63A299197CAF6F003E3099 /* fmdb */,
 				FE064E9E197A50240013BC97 /* RDVCalendarView */,
 				FE064E89197A42670013BC97 /* souce */,
 				FE064E4F197A371A0013BC97 /* AppDelegate.h */,
@@ -166,6 +193,8 @@
 				FE63A297197A7AEC003E3099 /* ReadViewController.m */,
 				FE63A293197A72D7003E3099 /* SettingViewController.h */,
 				FE63A294197A72D7003E3099 /* SettingViewController.m */,
+				FE63A2AA197CAF9B003E3099 /* DataBase.h */,
+				FE63A2AB197CAF9B003E3099 /* DataBase.m */,
 				FE064E5B197A371A0013BC97 /* Images.xcassets */,
 				FE064E47197A371A0013BC97 /* Supporting Files */,
 			);
@@ -230,6 +259,24 @@
 				FE064EA6197A50240013BC97 /* RDVExampleDayCell.m */,
 			);
 			path = RDVCalendarView;
+			sourceTree = "<group>";
+		};
+		FE63A299197CAF6F003E3099 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				FE63A29A197CAF6F003E3099 /* FMDatabase.h */,
+				FE63A29B197CAF6F003E3099 /* FMDatabase.m */,
+				FE63A29C197CAF6F003E3099 /* FMDatabaseAdditions.h */,
+				FE63A29D197CAF6F003E3099 /* FMDatabaseAdditions.m */,
+				FE63A29E197CAF6F003E3099 /* FMDatabasePool.h */,
+				FE63A29F197CAF6F003E3099 /* FMDatabasePool.m */,
+				FE63A2A0197CAF6F003E3099 /* FMDatabaseQueue.h */,
+				FE63A2A1197CAF6F003E3099 /* FMDatabaseQueue.m */,
+				FE63A2A2197CAF6F003E3099 /* FMDB.h */,
+				FE63A2A3197CAF6F003E3099 /* FMResultSet.h */,
+				FE63A2A4197CAF6F003E3099 /* FMResultSet.m */,
+			);
+			path = fmdb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE63A2B5197CDC8C003E3099 /* Bibile_Read_BaseDB.db in Resources */,
 				FE064E96197A47D10013BC97 /* image_tk.png in Resources */,
 				FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */,
 				FE064E91197A42670013BC97 /* profile_tk.png in Resources */,
@@ -340,12 +388,18 @@
 				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
 				FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */,
 				FE064E5A197A371A0013BC97 /* ViewController.m in Sources */,
+				FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */,
+				FE63A2A5197CAF6F003E3099 /* FMDatabase.m in Sources */,
 				FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */,
+				FE63A2A8197CAF6F003E3099 /* FMDatabaseQueue.m in Sources */,
+				FE63A2A9197CAF6F003E3099 /* FMResultSet.m in Sources */,
 				FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */,
 				FE63A298197A7AEC003E3099 /* ReadViewController.m in Sources */,
 				FE064EAA197A50240013BC97 /* RDVExampleDayCell.m in Sources */,
+				FE63A2A6197CAF6F003E3099 /* FMDatabaseAdditions.m in Sources */,
 				FE064EA8197A50240013BC97 /* RDVCalendarView.m in Sources */,
 				FE064E51197A371A0013BC97 /* AppDelegate.m in Sources */,
+				FE63A2A7197CAF6F003E3099 /* FMDatabasePool.m in Sources */,
 				FE064E4D197A371A0013BC97 /* main.m in Sources */,
 				FE63A295197A72D7003E3099 /* SettingViewController.m in Sources */,
 			);
