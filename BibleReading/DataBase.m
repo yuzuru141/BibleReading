@@ -103,7 +103,7 @@
     [db close];
 }
 
-- (void)selectPlan:(int)year label:(int)plan{
+-(NSMutableArray *)selectPlan:(int)year label:(int)plan{
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -165,15 +165,40 @@
             break;
     }
     
+    //容れ物の準備
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    //要素のいれものをつくる
+    NSMutableArray *idArray = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleName = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
+    
     FMResultSet *result = [db executeQuery:selectSql];
     while ( [result next] ) {
-        NSString *rId   = [result stringForColumn:@"id"];
+        
+        int rId   = [result intForColumn:@"id"];
+        [idArray addObject:[NSNumber numberWithInteger:rId]];
+        
         NSString *rName = [result stringForColumn:@"bible_name"];
-//        NSString *rArg = [result stringForColumn:[NSString stringWithFormat:@"%@",argument1]];
-        NSLog(@"%@, %@", rId , rName);
+        [bibleName addObject:rName];
+        
+        NSString *rNameJp = [result stringForColumn:@"bible_name_japanese"];
+        [bibleNameJp addObject:rNameJp];
+        
+        NSString *rNameCn = [result stringForColumn:@"bible_chinese"];
+        [bibleNameCn addObject:rNameCn];
+        
+//       NSLog(@"%d, %@, %@, %@", rId , rName,rNameJp,rNameCn);
+        
     }
     [db close];
     
+    [resultArray addObject:idArray];
+    [resultArray addObject:bibleName];
+    [resultArray addObject:bibleNameJp];
+    [resultArray addObject:bibleNameCn];
+    
+    return resultArray;
 }
 
 

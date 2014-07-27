@@ -26,6 +26,7 @@
     int selectNumber;
     int selectNumber2;
     UIDatePicker *datePicker;
+    NSDateFormatter *df;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -393,8 +394,8 @@
 - (void)datePicker_ValueChanged:(id)sender
 {
     datePicker = sender;
-    NSDateFormatter *df = [[NSDateFormatter alloc]init];
-    df.dateFormat = @"yyyy/MM/dd HH:mm";
+    df = [[NSDateFormatter alloc]init];
+    df.dateFormat = @"yyyy/MM/dd";
     NSLog(@"%@", [df stringFromDate:datePicker.date]);
 }
 
@@ -414,9 +415,29 @@
 //    [self.database readDB:arg];
     
     //プラン決定後、ソートする。
-    [self.database selectPlan:selectNumber label:selectNumber2];
-            NSLog(@"selectNumber=%d",selectNumber);
-            NSLog(@"selectNumber2=%d",selectNumber2);
+    NSMutableArray *results = [self.database selectPlan:selectNumber label:selectNumber2];
+    NSMutableArray *idArrays = [[NSMutableArray alloc]init];;
+    NSMutableArray *bibleName = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
+    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    
+    idArrays = results[0];
+    bibleName = results[1];
+    bibleNameJp = results[2];
+    bibleNameCn = results[3];
+
+    NSDateComponents *dateComp = [[NSDateComponents alloc] init];
+    
+    //選択した日付から配列に入れていく。この段階では全ての章に個別の日付が入ってしまうので、修正が必要。
+    for (int i=0; i<[idArrays count]; i++) {
+        [dateComp setDay:i];
+        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+        [dateArray addObject:date];
+        NSLog(@"date=%@",date);
+    }
+    
+    
     
 }
 

@@ -14,7 +14,7 @@
 
 - (void)createDB;
 - (void)readDB:(NSString*)argument1;
-- (void)selectPlan:(int)year label:(int)plan;
+-(NSMutableArray *)selectPlan:(int)year label:(int)plan;
 
 
 @end
