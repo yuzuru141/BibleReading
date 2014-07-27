@@ -25,6 +25,7 @@
     NSString *pic3_str;
     int selectNumber;
     int selectNumber2;
+    UIDatePicker *datePicker;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -131,14 +132,14 @@
 //ユーザ名入力
 - (void)writeUserName{
 
-    CGRect textRect = CGRectMake(width/10, height/6, width-width/10*2, 25);
+    CGRect textRect = CGRectMake(width/10, height/9, width-width/10*2, 18);
     textfield = [[UITextField alloc]initWithFrame:textRect];
     textfield.placeholder = @"please input user name";
     textfield.textColor = [UIColor whiteColor];
 //    textfield.backgroundColor = [UIColor whiteColor];
 //    textfield.alpha = 0.5;
 //    textfield.font = [UIFont fontWithName:@"STHeitiJ-Light" size:12];
-    textfield.font = [UIFont systemFontOfSize:20];
+    textfield.font = [UIFont systemFontOfSize:18];
     textfield.returnKeyType = UIReturnKeyDefault;
     textfield.delegate = self;
     [_settingView addSubview:textfield];
@@ -157,23 +158,33 @@
 //ラベル作成とピッカー読み込み
 - (void)setSchedule{
 
-    CGRect textRect = CGRectMake(width/10, height/6+50, width-width/10*2, 25);
+    CGRect textRect = CGRectMake(width/10, height/9+30, width-width/10*2, 18);
     UILabel *labelPlan = [[UILabel alloc]init];
     labelPlan = [[UILabel alloc]initWithFrame:textRect];
     labelPlan.text = @"Your Plan";
-    labelPlan.font = [UIFont systemFontOfSize:20];
+    labelPlan.font = [UIFont systemFontOfSize:18];
     labelPlan.textColor = [UIColor whiteColor];
     [_settingView addSubview:labelPlan];
     
-    CGRect textRect2 = CGRectMake(width/10, height/6*4+20, width-width/10*2, 25);
+    CGRect textRect2 = CGRectMake(width/10, height/9*5-20, width-width/10*2, 18);
     UILabel *notification = [[UILabel alloc]init];
     notification = [[UILabel alloc]initWithFrame:textRect2];
     notification.text = @"Notification";
-    notification.font = [UIFont systemFontOfSize:20];
+    notification.font = [UIFont systemFontOfSize:18];
     notification.textColor = [UIColor whiteColor];
     [_settingView addSubview:notification];
     
+    CGRect textRect3 = CGRectMake(width/10, height/9*7-30, width-width/10*2, 18);
+    UILabel *startDate = [[UILabel alloc]init];
+    startDate = [[UILabel alloc]initWithFrame:textRect3];
+    startDate.text = @"Start Date";
+    startDate.font = [UIFont systemFontOfSize:18];
+    startDate.textColor = [UIColor whiteColor];
+    [_settingView addSubview:startDate];
+    
     [self createPicker];
+    
+    [self datePickerMethod];
     
 }
 
@@ -183,34 +194,42 @@
     
     aItemList = [[NSArray alloc] initWithObjects:@"1year",@"2year",@"flexible",nil];
     oPicker = [[UIPickerView alloc] init];
-    oPicker.frame = CGRectMake(width/5, height/6+50, width-width/5*2, 25);
+    oPicker.frame = CGRectMake(width/5, height/9+30, width-width/5*2, 25);
     oPicker.showsSelectionIndicator = YES;
     oPicker.delegate = self;
     oPicker.dataSource = self;
     oPicker.tag = 1;
-//    CGAffineTransform t0 = CGAffineTransformMakeTranslation(oPicker.bounds.size.width/2, oPicker.bounds.size.height/2);
-//    CGAffineTransform s0 = CGAffineTransformMakeScale(0.7, 0.7);
-//    CGAffineTransform t1 = CGAffineTransformMakeTranslation(-oPicker.bounds.size.width/2, -oPicker.bounds.size.height/2);
-//    oPicker.transform = CGAffineTransformConcat(t0, CGAffineTransformConcat(s0, t1));
+    CGAffineTransform t0 = CGAffineTransformMakeTranslation(oPicker.bounds.size.width/2, oPicker.bounds.size.height/2);
+    CGAffineTransform s0 = CGAffineTransformMakeScale(0.7, 0.7);
+    CGAffineTransform t1 = CGAffineTransformMakeTranslation(-oPicker.bounds.size.width/2, -oPicker.bounds.size.height/2);
+    oPicker.transform = CGAffineTransformConcat(t0, CGAffineTransformConcat(s0, t1));
     [_settingView addSubview:oPicker];
     
     aItemList2 = [[NSArray alloc] initWithObjects:@"general",@"time ordering",@"recommend",nil];
     oPicker2 = [[UIPickerView alloc] init];
-    oPicker2.frame = CGRectMake(width/5, height/6+120, width-width/5*2, 25);
+    oPicker2.frame = CGRectMake(width/5, height/9+100, width-width/5*2, 25);
     oPicker2.showsSelectionIndicator = YES;
     oPicker2.delegate = self;
     oPicker2.dataSource = self;
     oPicker2.tag = 2;
+    CGAffineTransform t10 = CGAffineTransformMakeTranslation(oPicker.bounds.size.width/2, oPicker.bounds.size.height/2);
+    CGAffineTransform s10 = CGAffineTransformMakeScale(0.7, 0.7);
+    CGAffineTransform t11 = CGAffineTransformMakeTranslation(-oPicker.bounds.size.width/2, -oPicker.bounds.size.height/2);
+    oPicker2.transform = CGAffineTransformConcat(t10, CGAffineTransformConcat(s10, t11));
     [_settingView addSubview:oPicker2];
     
     aItemList3 = [[NSArray alloc] initWithObjects:@"--",@"00:",@"01:",@"02:",@"03:",@"04:",@"05:",@"06:",@"07:",@"08:",@"09:",@"10:",@"11:",@"12:",@"13:",@"14:",@"15:",@"16:",@"17:",@"18:",@"19:",@"20:",@"21:",@"22:",@"23:",nil];
     aItemList4 = [[NSArray alloc] initWithObjects:@"--",@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59",nil];
     oPicker3 = [[UIPickerView alloc] init];
-    oPicker3.frame = CGRectMake(width/5, height/6*4+10, width-width/5*2, 25);
+    oPicker3.frame = CGRectMake(width/5, height/9*5-20, width-width/5*2, 25);
     oPicker3.showsSelectionIndicator = YES;
     oPicker3.delegate = self;
     oPicker3.dataSource = self;
     oPicker3.tag = 3;
+    CGAffineTransform t20 = CGAffineTransformMakeTranslation(oPicker.bounds.size.width/2, oPicker.bounds.size.height/2);
+    CGAffineTransform s20 = CGAffineTransformMakeScale(0.7, 0.7);
+    CGAffineTransform t21 = CGAffineTransformMakeTranslation(-oPicker.bounds.size.width/2, -oPicker.bounds.size.height/2);
+    oPicker3.transform = CGAffineTransformConcat(t20, CGAffineTransformConcat(s20, t21));
     [_settingView addSubview:oPicker3];
     
 }
@@ -294,10 +313,6 @@
         [self DBMethod];
         return;
     }
-//    NSInteger id = [pickerView selectedRowInComponent:0];
-//    NSInteger id2 = [pickerView selectedRowInComponent:1];
-    
-    
 }
  
 
@@ -353,6 +368,36 @@
         return width-width/10*2;
     }
 }
+
+
+//datepicker
+- (void)datePickerMethod{
+    // イニシャライザ
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*7-30, width-width/10*2, 18)];
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    datePicker.tintColor = [UIColor whiteColor];
+    datePicker.minuteInterval = 10;
+    CGAffineTransform t30 = CGAffineTransformMakeTranslation(datePicker.bounds.size.width/2, datePicker.bounds.size.height/2);
+    CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);
+    CGAffineTransform t31 = CGAffineTransformMakeTranslation(-datePicker.bounds.size.width/2, -datePicker.bounds.size.height/2);
+    datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
+    [datePicker addTarget:self
+                   action:@selector(datePicker_ValueChanged:)
+         forControlEvents:UIControlEventValueChanged];
+    [_settingView addSubview:datePicker];
+    
+}
+
+//datepickerが選択されたとき
+- (void)datePicker_ValueChanged:(id)sender
+{
+    datePicker = sender;
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    df.dateFormat = @"yyyy/MM/dd HH:mm";
+    NSLog(@"%@", [df stringFromDate:datePicker.date]);
+}
+
 
 
 

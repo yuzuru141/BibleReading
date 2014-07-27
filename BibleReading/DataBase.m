@@ -176,153 +176,126 @@
     
 }
 
-//-(int)getIntegerDate{ //日付を取得してint型に変換
+
+
+////DBデータをIDの大きい順に配列に格納
+//-(NSMutableArray *)loadDBData{
 //    
-//    //日付取得
-//    NSString* date_str;
-//    NSDate *now = [NSDate date];
-//    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"YYYYMMdd"];
-//    date_str = [formatter stringFromDate:now]; //strに変換
+////    //ディレクトリのリストを取得する
+////    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+////    NSString *documentDirectry = paths[0];
+////    NSString *databaseFilePath = [documentDirectry stringByAppendingPathComponent:@"Database.db"];
+//    
+//    //DB接続
+//    NSString *databaseFilePath = [[self dataFolderPath] stringByAppendingPathComponent:@"Database.db"];
 //
-//    int result = [date_str integerValue];
+//    //データベース接続
+//    FMDatabase *database = [FMDatabase databaseWithPath:databaseFilePath];
 //
-//    return result;
+//    //容れ物の準備
+//    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+//    
+//    //データベースを開く
+//    [database open];
+//    
+//    //必要なデータを取り出す（ここでは、delete_flagが0のものすべて）    
+//    //sqlのさいごにORDER BY ID DESC　をいれるとIDの順番でソートできる
+//    
+////    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY date DESC;";
+//    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY ID DESC;";
+//    
+//    FMResultSet *results = [database executeQuery:sql];//DBの中身はresultsにはいるよ
 //
+//    //要素のいれものをつくる
+//    NSMutableArray *idarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *titlearray = [[NSMutableArray alloc]init];
+//    NSMutableArray *latarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *lonarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *datearray = [[NSMutableArray alloc]init];
+//    NSMutableArray *textarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *picsarray = [[NSMutableArray alloc]init];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
+//    NSMutableArray *piccountarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *wentflagarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *hourarray = [[NSMutableArray alloc]init];
+//    NSMutableArray *addressarray = [[NSMutableArray alloc]init];
+//    
+//
+//    //データ取得を行うループ
+//    while([results next]){ //結果が一行ずつ返されて、最後までいくとnextメソッドがnoを返す
+//
+//        int i = 0;
+//        
+//        //カラム名を指定して、カラム値を取得する。
+//        int db_id = [results intForColumn:@"id"];
+//        [idarray addObject:@(db_id)];
+//        
+//        NSString *db_title = [results stringForColumn:@"place_name"];
+//        [titlearray addObject:db_title];
+//        
+//        double lat = [results doubleForColumn:@"latitude"];
+//        [latarray addObject:@(lat)];
+//        double lon = [results doubleForColumn:@"longitude"];
+//        [lonarray addObject:@(lon)];
+//        
+//        int db_date = [results intForColumn:@"date"];
+//        [datearray addObject:@(db_date)];
+//        
+//        NSString *db_text = [results stringForColumn:@"text"];
+//        [textarray addObject:db_text];
+//        
+//        NSString *db_pics = [results stringForColumn:@"pics"];
+//        [picsarray addObject:db_pics];
+//        
+//        int db_piccount = [results intForColumn:@"picCount"];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
+//        [piccountarray addObject:@(db_piccount)];
+//        
+//        int wentflag = [results intForColumn:@"went_flag"];
+//        [wentflagarray addObject:@(wentflag)];
+//        
+//        int db_hour = [results intForColumn:@"hour"];
+//        [hourarray addObject:@(db_hour)];
+//        
+//        NSString *db_address = [results stringForColumn:@"address"];
+//        [addressarray addObject:db_address];
+//
+//        
+//        //        int deleteflag = [results intForColumn:@"delete_flag"];
+//        
+//        /*
+//        NSLog(@"check1 %d,%@,%f,%f,%@,%d,%@,%@,%d,%d,%@"
+//              ,db_id,db_title,lat,lon,db_weather,db_date,db_text,db_pics,wentflag,db_hour,db_address
+//              );//確認表示
+//        */
+//         //最終的にresltArrayに配列がそれぞれぼこっと入る感じで。
+//        i++;
+//
+//    }
+//    
+//
+//    [database close];
+//
+//    
+//
+//    
+//    /* データ受け渡し用にぜんぶまとめてぶっこむ */
+//
+//    [resultArray addObject:idarray];//0
+//    [resultArray addObject:titlearray];//1
+//    [resultArray addObject:latarray];//2
+//    [resultArray addObject:lonarray];//3
+//    [resultArray addObject:datearray];//4
+//    [resultArray addObject:textarray];//5
+//    [resultArray addObject:picsarray];//6
+//    [resultArray addObject:piccountarray];//7　天気カラムを削除し、写真の枚数カラムを追加した（石井）
+//    [resultArray addObject:wentflagarray];//8
+//    [resultArray addObject:hourarray]; //9
+//    [resultArray addObject:addressarray]; //10
+//    
+////    NSLog(@"check3 ====%@",resultArray);
+//    return resultArray;
+//    
 //
 //}
-
-//-(int)getIntegerHour{ //現在の時刻を取得してint型に変換
-//
-//    //日付取得
-//    NSString* date_str;
-//    NSDate *now = [NSDate date];
-//    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"HHmm"];
-//    date_str = [formatter stringFromDate:now]; //strに変換
-//    int result = [date_str integerValue];
-//    return result;
-//}
-
-
-//DBデータをIDの大きい順に配列に格納
--(NSMutableArray *)loadDBData{
-    
-//    //ディレクトリのリストを取得する
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentDirectry = paths[0];
-//    NSString *databaseFilePath = [documentDirectry stringByAppendingPathComponent:@"Database.db"];
-    
-    //DB接続
-    NSString *databaseFilePath = [[self dataFolderPath] stringByAppendingPathComponent:@"Database.db"];
-
-    //データベース接続
-    FMDatabase *database = [FMDatabase databaseWithPath:databaseFilePath];
-
-    //容れ物の準備
-    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
-    
-    //データベースを開く
-    [database open];
-    
-    //必要なデータを取り出す（ここでは、delete_flagが0のものすべて）    
-    //sqlのさいごにORDER BY ID DESC　をいれるとIDの順番でソートできる
-    
-//    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY date DESC;";
-    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY ID DESC;";
-    
-    FMResultSet *results = [database executeQuery:sql];//DBの中身はresultsにはいるよ
-
-    //要素のいれものをつくる
-    NSMutableArray *idarray = [[NSMutableArray alloc]init];
-    NSMutableArray *titlearray = [[NSMutableArray alloc]init];
-    NSMutableArray *latarray = [[NSMutableArray alloc]init];
-    NSMutableArray *lonarray = [[NSMutableArray alloc]init];
-    NSMutableArray *datearray = [[NSMutableArray alloc]init];
-    NSMutableArray *textarray = [[NSMutableArray alloc]init];
-    NSMutableArray *picsarray = [[NSMutableArray alloc]init];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
-    NSMutableArray *piccountarray = [[NSMutableArray alloc]init];
-    NSMutableArray *wentflagarray = [[NSMutableArray alloc]init];
-    NSMutableArray *hourarray = [[NSMutableArray alloc]init];
-    NSMutableArray *addressarray = [[NSMutableArray alloc]init];
-    
-
-    //データ取得を行うループ
-    while([results next]){ //結果が一行ずつ返されて、最後までいくとnextメソッドがnoを返す
-
-        int i = 0;
-        
-        //カラム名を指定して、カラム値を取得する。
-        int db_id = [results intForColumn:@"id"];
-        [idarray addObject:@(db_id)];
-        
-        NSString *db_title = [results stringForColumn:@"place_name"];
-        [titlearray addObject:db_title];
-        
-        double lat = [results doubleForColumn:@"latitude"];
-        [latarray addObject:@(lat)];
-        double lon = [results doubleForColumn:@"longitude"];
-        [lonarray addObject:@(lon)];
-        
-        int db_date = [results intForColumn:@"date"];
-        [datearray addObject:@(db_date)];
-        
-        NSString *db_text = [results stringForColumn:@"text"];
-        [textarray addObject:db_text];
-        
-        NSString *db_pics = [results stringForColumn:@"pics"];
-        [picsarray addObject:db_pics];
-        
-        int db_piccount = [results intForColumn:@"picCount"];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
-        [piccountarray addObject:@(db_piccount)];
-        
-        int wentflag = [results intForColumn:@"went_flag"];
-        [wentflagarray addObject:@(wentflag)];
-        
-        int db_hour = [results intForColumn:@"hour"];
-        [hourarray addObject:@(db_hour)];
-        
-        NSString *db_address = [results stringForColumn:@"address"];
-        [addressarray addObject:db_address];
-
-        
-        //        int deleteflag = [results intForColumn:@"delete_flag"];
-        
-        /*
-        NSLog(@"check1 %d,%@,%f,%f,%@,%d,%@,%@,%d,%d,%@"
-              ,db_id,db_title,lat,lon,db_weather,db_date,db_text,db_pics,wentflag,db_hour,db_address
-              );//確認表示
-        */
-         //最終的にresltArrayに配列がそれぞれぼこっと入る感じで。
-        i++;
-
-    }
-    
-
-    [database close];
-
-    
-
-    
-    /* データ受け渡し用にぜんぶまとめてぶっこむ */
-
-    [resultArray addObject:idarray];//0
-    [resultArray addObject:titlearray];//1
-    [resultArray addObject:latarray];//2
-    [resultArray addObject:lonarray];//3
-    [resultArray addObject:datearray];//4
-    [resultArray addObject:textarray];//5
-    [resultArray addObject:picsarray];//6
-    [resultArray addObject:piccountarray];//7　天気カラムを削除し、写真の枚数カラムを追加した（石井）
-    [resultArray addObject:wentflagarray];//8
-    [resultArray addObject:hourarray]; //9
-    [resultArray addObject:addressarray]; //10
-    
-//    NSLog(@"check3 ====%@",resultArray);
-    return resultArray;
-    
-
-}
 
 
 
