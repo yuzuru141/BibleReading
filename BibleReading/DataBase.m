@@ -172,6 +172,9 @@
     NSMutableArray *bibleName = [[NSMutableArray alloc]init];
     NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
     NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
+    NSMutableArray *oneYearGroup = [[NSMutableArray alloc]init];
+    NSMutableArray *twoYearGroup = [[NSMutableArray alloc]init];
+    NSMutableArray *general = [[NSMutableArray alloc]init];
     
     FMResultSet *result = [db executeQuery:selectSql];
     while ( [result next] ) {
@@ -188,7 +191,17 @@
         NSString *rNameCn = [result stringForColumn:@"bible_chinese"];
         [bibleNameCn addObject:rNameCn];
         
-//       NSLog(@"%d, %@, %@, %@", rId , rName,rNameJp,rNameCn);
+        int rOneYearGroup = [result intForColumn:@"one_year_group"];
+        [oneYearGroup addObject:[NSNumber numberWithInteger:rOneYearGroup]];
+        
+        int rTwoYearGroup = [result intForColumn:@"two_year_group"];
+        [twoYearGroup addObject:[NSNumber numberWithInteger:rTwoYearGroup]];
+        
+        int rGeneral = [result intForColumn:@"general"];
+        [general addObject:[NSNumber numberWithInteger:rGeneral]];
+
+        
+//     NSLog(@"%d", rTwoYearGroup);
         
     }
     [db close];
@@ -197,6 +210,9 @@
     [resultArray addObject:bibleName];
     [resultArray addObject:bibleNameJp];
     [resultArray addObject:bibleNameCn];
+    [resultArray addObject:oneYearGroup];
+    [resultArray addObject:twoYearGroup];
+    [resultArray addObject:general];
     
     return resultArray;
 }

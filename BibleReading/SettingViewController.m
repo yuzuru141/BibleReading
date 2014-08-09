@@ -420,24 +420,105 @@
     NSMutableArray *bibleName = [[NSMutableArray alloc]init];
     NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
     NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
+    NSMutableArray *general = [[NSMutableArray alloc]init];
+    NSMutableArray *oneYearGroup = [[NSMutableArray alloc]init];
+    NSMutableArray *twoYearGroup = [[NSMutableArray alloc]init];
     NSMutableArray *dateArray = [[NSMutableArray alloc]init];
     
     idArrays = results[0];
     bibleName = results[1];
     bibleNameJp = results[2];
     bibleNameCn = results[3];
+    oneYearGroup = results[4];
+    twoYearGroup = results[5];
+    general = results[6];
 
+    
     NSDateComponents *dateComp = [[NSDateComponents alloc] init];
+    
+    int yearGroup;
+    int generalInt = 0;
+    int generalIntMinus = 0;
+    int j = 0;
     
     //選択した日付から配列に入れていく。この段階では全ての章に個別の日付が入ってしまうので、修正が必要。
     for (int i=0; i<[idArrays count]; i++) {
-        [dateComp setDay:i];
-        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
-        [dateArray addObject:date];
-        NSLog(@"date=%@",date);
+        
+        if (selectNumber == 0) {
+            
+            yearGroup = [[oneYearGroup objectAtIndex:i]intValue];
+            NSLog(@"oneYearGroup=%d",yearGroup);
+            
+            if (i==0) {
+                [dateComp setDay:0];
+                NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                [dateArray addObject:date];
+                NSLog(@"date=%@",date);
+                j++;
+            }
+            else{
+                if (yearGroup == [[oneYearGroup objectAtIndex:i-1]intValue]) {
+                    generalInt =[[general objectAtIndex:i]intValue];
+                    generalIntMinus = [[general objectAtIndex:i-1]intValue];
+                    if (!(generalInt==generalIntMinus)) {
+                        [dateComp setDay:j];
+                        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                        [dateArray addObject:date];
+                        NSLog(@"date=%@",date);
+                        j++;
+                    }else{
+                        [dateComp setDay:j];
+                        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                        [dateArray addObject:date];
+                                            NSLog(@"date=%@",date);
+                    }
+                }else{
+                    [dateComp setDay:j];
+                    NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                    [dateArray addObject:date];
+                    NSLog(@"date=%@",date);
+                    j++;
+                }
+            }
+            
+        }else{
+            
+            yearGroup = [[twoYearGroup objectAtIndex:i]intValue];
+            NSLog(@"twoYearGroup=%d",yearGroup);
+            
+            if (i==0) {
+                [dateComp setDay:0];
+                NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                [dateArray addObject:date];
+                NSLog(@"date=%@",date);
+                j++;
+            }
+            else{
+                if (yearGroup == [[twoYearGroup objectAtIndex:i-1]intValue]) {
+                    generalInt =[[general objectAtIndex:i]intValue];
+                    generalIntMinus = [[general objectAtIndex:i-1]intValue];
+                    if (!(generalInt==generalIntMinus)) {
+                        [dateComp setDay:j];
+                        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                        [dateArray addObject:date];
+                        NSLog(@"date=%@",date);
+                        j++;
+                    }else{
+                        [dateComp setDay:j];
+                        NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                        [dateArray addObject:date];
+                        NSLog(@"date=%@",date);
+                    }
+                }else{
+                    [dateComp setDay:j];
+                    NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
+                    [dateArray addObject:date];
+                    NSLog(@"date=%@",date);
+                    j++;
+                }
+        }
+        }
     }
-    
-    
     
 }
 
