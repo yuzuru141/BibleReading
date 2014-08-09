@@ -27,6 +27,18 @@
     int selectNumber2;
     UIDatePicker *datePicker;
     NSDateFormatter *df;
+    NSMutableArray *results;
+    NSMutableArray *idArrays;
+    NSMutableArray *bibleName;
+    NSMutableArray *bibleNameJp;
+    NSMutableArray *bibleNameCn;
+    NSMutableArray *general;
+    NSMutableArray *oneYearGroup;
+    NSMutableArray *twoYearGroup;
+    NSMutableArray *dateArray;
+    NSMutableArray *capter;
+    NSMutableArray *verse;
+    int idCount;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -119,9 +131,11 @@
     switch (index) {
         case 0:
             [self performSegueWithIdentifier:@"settingToView" sender:self];
+            [self alertViewMethod];
             break;
         case 1:
             [self performSegueWithIdentifier:@"settingToPlan" sender:self];
+            [self alertViewMethod];
             break;
         case 2:
             [self setViewForFirst];
@@ -306,12 +320,10 @@
     
     if (pickerView.tag == 1) {
         selectNumber = [pickerView selectedRowInComponent:0];
-        [self DBMethod];
         return;
     }
     else if (pickerView.tag == 2){
         selectNumber2 = [pickerView selectedRowInComponent:0];
-        [self DBMethod];
         return;
     }
 }
@@ -400,30 +412,30 @@
 }
 
 
-
-
-//DB操作
-- (void)DBMethod{
+//DB作成と読み込み
+- (void)createAndSelectDB{
     
     self.database = [[DataBase alloc]init];
     
-//    //DBコピーして作成
-//    [self.database createDB];
+    //DBファイルがない場合は、DBコピーして作成
+    [self.database createDB];
     
     //DB読み込み
 //    NSString *arg = @"bible_name";
 //    [self.database readDB:arg];
     
     //プラン決定後、ソートする。
-    NSMutableArray *results = [self.database selectPlan:selectNumber label:selectNumber2];
-    NSMutableArray *idArrays = [[NSMutableArray alloc]init];;
-    NSMutableArray *bibleName = [[NSMutableArray alloc]init];
-    NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
-    NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
-    NSMutableArray *general = [[NSMutableArray alloc]init];
-    NSMutableArray *oneYearGroup = [[NSMutableArray alloc]init];
-    NSMutableArray *twoYearGroup = [[NSMutableArray alloc]init];
-    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    results = [self.database selectPlan:selectNumber label:selectNumber2];
+    idArrays = [[NSMutableArray alloc]init];;
+    bibleName = [[NSMutableArray alloc]init];
+    bibleNameJp = [[NSMutableArray alloc]init];
+    bibleNameCn = [[NSMutableArray alloc]init];
+    general = [[NSMutableArray alloc]init];
+    oneYearGroup = [[NSMutableArray alloc]init];
+    twoYearGroup = [[NSMutableArray alloc]init];
+    dateArray = [[NSMutableArray alloc]init];
+    capter = [[NSMutableArray alloc]init];
+    verse = [[NSMutableArray alloc]init];
     
     idArrays = results[0];
     bibleName = results[1];
@@ -432,6 +444,8 @@
     oneYearGroup = results[4];
     twoYearGroup = results[5];
     general = results[6];
+    capter = results[7];
+    verse = results[8];
 
     
     NSDateComponents *dateComp = [[NSDateComponents alloc] init];
@@ -440,9 +454,13 @@
     int generalInt = 0;
     int generalIntMinus = 0;
     int j = 0;
+    idCount = [idArrays count];
     
-    //選択した日付から配列に入れていく。この段階では全ての章に個別の日付が入ってしまうので、修正が必要。
-    for (int i=0; i<[idArrays count]; i++) {
+    //新しく自分用の聖書通読プランのテーブルを作成
+    [self.database createTable];
+    
+    //選択した日付から配列に入れていく。
+    for (int i=0; i<idCount; i++) {
         
         if (selectNumber == 0) {
             
@@ -453,7 +471,7 @@
                 [dateComp setDay:0];
                 NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                 [dateArray addObject:date];
-                NSLog(@"date=%@",date);
+                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                 j++;
             }
             else{
@@ -464,18 +482,21 @@
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                         NSLog(@"date=%@",date);
                         j++;
                     }else{
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
-                                            NSLog(@"date=%@",date);
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                        NSLog(@"date=%@",date);
                     }
                 }else{
                     [dateComp setDay:j];
                     NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                     [dateArray addObject:date];
+                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                     NSLog(@"date=%@",date);
                     j++;
                 }
@@ -490,6 +511,7 @@
                 [dateComp setDay:0];
                 NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                 [dateArray addObject:date];
+                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                 NSLog(@"date=%@",date);
                 j++;
             }
@@ -501,18 +523,21 @@
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                         NSLog(@"date=%@",date);
                         j++;
                     }else{
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                         NSLog(@"date=%@",date);
                     }
                 }else{
                     [dateComp setDay:j];
                     NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                     [dateArray addObject:date];
+                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
                     NSLog(@"date=%@",date);
                     j++;
                 }
@@ -522,5 +547,47 @@
     
 }
 
+
+//- (void)createMyplan{
+//    
+//    //新しく自分用の聖書通読プランのテーブルを作成
+//    [self.database createTable];
+//    
+//    //テーブルにデータを入れこむ
+//    int i;
+//    for (i=0; i<idCount; i++) {
+//            [self.database insertTable:<#(int)#> label1:<#(NSString *)#> label2:<#(NSString *)#> label3:<#(NSString *)#> label4:<#(int)#> label5:<#(int)#> label6:<#(NSDate *)#>];
+//    }
+//}
+
+
+
+
+
+//画面遷移時に設定確認
+- (void)alertViewMethod{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Setting is done. Your reading plan will be overwritten."
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"OK",nil];
+    [alert show];
+}
+
+//alertにOKが表示された時にDBを作成する
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"cancel");
+            break;
+        case 1:
+            [self createAndSelectDB];
+            NSLog(@"OK");
+            break;
+    }
+    
+}
 
 @end

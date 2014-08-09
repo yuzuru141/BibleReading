@@ -8,47 +8,14 @@
 
 #import "DataBase.h"
 @interface DataBase()
-@property NSInteger dataid;
-@property int dataCount;
 @end
 
 @implementation DataBase{
 
-//    FMDatabase *database;
-//    int dataid;
-    NSString *addressStr;
-
 }
 
 
-//- (void)makeDatabase{
-//
-//    
-//    //データ保存用のディレクトリを作成する
-//    if ([self makeDirForAppContents]) {
-//        //ディレクトリに対して「do not backup」属性をセット
-//        NSURL *dirUrl = [NSURL fileURLWithPath: [self dataFolderPath]];
-//        [self addSkipBackupAttributeToItemAtURL:dirUrl];
-//    }
-//    
-//    //DB接続
-//    NSString *databaseFilePath = [[self dataFolderPath] stringByAppendingPathComponent:@"Database.db"];
-//    
-//    //インスタンスの作成
-//    FMDatabase *database = [FMDatabase databaseWithPath:databaseFilePath];
-//    //データベースを開く
-//    [database open];
-//    
-//    
-//    /* テーブルの作成 */
-//    NSString *sql = @"CREATE TABLE Bible_read_Table(id INTEGER PRIMARY KEY ,place_name TEXT,latitude REAL, longitude REAL , date INTEGER , picCount INTEGER,text TEXT ,pics TEXT ,went_flag INTEGER , delete_flag INTEGER , hour INTEGER , address TEXT);";
-//
-//    [database executeUpdate:sql];
-//    
-//    [database close];
-//
-//}
-
+//DB作成
 - (void)createDB{
     
     //データ保存用のディレクトリを作成する
@@ -84,26 +51,28 @@
     
 }
 
-- (void)readDB:(NSString*)argument1{
-    
-    NSString *dbPath = [self connectDB];
-    
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    
-    [db open];
-    
-    // list up
-    NSString *selectSql = [NSString stringWithFormat:@"SELECT id, %@ FROM baseTable;",argument1];
-    FMResultSet *result = [db executeQuery:selectSql];
-    while ( [result next] ) {
-        NSString *rId   = [result stringForColumn:@"id"];
-        NSString *rArg = [result stringForColumn:[NSString stringWithFormat:@"%@",argument1]];
-        NSLog(@"%@, %@", rId , rArg);
-    }
-    [db close];
-}
+//- (void)readDB:(NSString*)argument1{
+//    
+//    NSString *dbPath = [self connectDB];
+//    
+//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+//    
+//    [db open];
+//    
+//    // list up
+//    NSString *selectSql = [NSString stringWithFormat:@"SELECT id, %@ FROM baseTable;",argument1];
+//    FMResultSet *result = [db executeQuery:selectSql];
+//    while ( [result next] ) {
+//        NSString *rId   = [result stringForColumn:@"id"];
+//        NSString *rArg = [result stringForColumn:[NSString stringWithFormat:@"%@",argument1]];
+//        NSLog(@"%@, %@", rId , rArg);
+//    }
+//    [db close];
+//}
 
--(NSMutableArray *)selectPlan:(int)year label:(int)plan{
+
+//聖書通読プランを選択する
+- (NSMutableArray *)selectPlan:(int)year label:(int)plan{
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -175,6 +144,8 @@
     NSMutableArray *oneYearGroup = [[NSMutableArray alloc]init];
     NSMutableArray *twoYearGroup = [[NSMutableArray alloc]init];
     NSMutableArray *general = [[NSMutableArray alloc]init];
+    NSMutableArray *capter = [[NSMutableArray alloc]init];
+    NSMutableArray *verse = [[NSMutableArray alloc]init];
     
     FMResultSet *result = [db executeQuery:selectSql];
     while ( [result next] ) {
@@ -199,9 +170,12 @@
         
         int rGeneral = [result intForColumn:@"general"];
         [general addObject:[NSNumber numberWithInteger:rGeneral]];
-
         
-//     NSLog(@"%d", rTwoYearGroup);
+        int rCapter = [result intForColumn:@"capter"];
+        [capter addObject:[NSNumber numberWithInteger:rCapter]];
+        
+        int rVerse = [result intForColumn:@"verse"];
+        [verse addObject:[NSNumber numberWithInteger:rVerse]];
         
     }
     [db close];
@@ -213,170 +187,58 @@
     [resultArray addObject:oneYearGroup];
     [resultArray addObject:twoYearGroup];
     [resultArray addObject:general];
+    [resultArray addObject:capter];
+    [resultArray addObject:verse];
     
     return resultArray;
 }
 
 
+//聖書通読用のテーブル作成
+- (void)createTable{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
 
-////DBデータをIDの大きい順に配列に格納
-//-(NSMutableArray *)loadDBData{
-//    
-////    //ディレクトリのリストを取得する
-////    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-////    NSString *documentDirectry = paths[0];
-////    NSString *databaseFilePath = [documentDirectry stringByAppendingPathComponent:@"Database.db"];
-//    
-//    //DB接続
-//    NSString *databaseFilePath = [[self dataFolderPath] stringByAppendingPathComponent:@"Database.db"];
-//
-//    //データベース接続
-//    FMDatabase *database = [FMDatabase databaseWithPath:databaseFilePath];
-//
-//    //容れ物の準備
-//    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
-//    
-//    //データベースを開く
-//    [database open];
-//    
-//    //必要なデータを取り出す（ここでは、delete_flagが0のものすべて）    
-//    //sqlのさいごにORDER BY ID DESC　をいれるとIDの順番でソートできる
-//    
-////    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY date DESC;";
-//    NSString *sql = @"SELECT * FROM testTable WHERE delete_flag = '0' ORDER BY ID DESC;";
-//    
-//    FMResultSet *results = [database executeQuery:sql];//DBの中身はresultsにはいるよ
-//
-//    //要素のいれものをつくる
-//    NSMutableArray *idarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *titlearray = [[NSMutableArray alloc]init];
-//    NSMutableArray *latarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *lonarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *datearray = [[NSMutableArray alloc]init];
-//    NSMutableArray *textarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *picsarray = [[NSMutableArray alloc]init];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
-//    NSMutableArray *piccountarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *wentflagarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *hourarray = [[NSMutableArray alloc]init];
-//    NSMutableArray *addressarray = [[NSMutableArray alloc]init];
-//    
-//
-//    //データ取得を行うループ
-//    while([results next]){ //結果が一行ずつ返されて、最後までいくとnextメソッドがnoを返す
-//
-//        int i = 0;
-//        
-//        //カラム名を指定して、カラム値を取得する。
-//        int db_id = [results intForColumn:@"id"];
-//        [idarray addObject:@(db_id)];
-//        
-//        NSString *db_title = [results stringForColumn:@"place_name"];
-//        [titlearray addObject:db_title];
-//        
-//        double lat = [results doubleForColumn:@"latitude"];
-//        [latarray addObject:@(lat)];
-//        double lon = [results doubleForColumn:@"longitude"];
-//        [lonarray addObject:@(lon)];
-//        
-//        int db_date = [results intForColumn:@"date"];
-//        [datearray addObject:@(db_date)];
-//        
-//        NSString *db_text = [results stringForColumn:@"text"];
-//        [textarray addObject:db_text];
-//        
-//        NSString *db_pics = [results stringForColumn:@"pics"];
-//        [picsarray addObject:db_pics];
-//        
-//        int db_piccount = [results intForColumn:@"picCount"];//天気カラムを削除し、写真の枚数カラムを追加した（石井）
-//        [piccountarray addObject:@(db_piccount)];
-//        
-//        int wentflag = [results intForColumn:@"went_flag"];
-//        [wentflagarray addObject:@(wentflag)];
-//        
-//        int db_hour = [results intForColumn:@"hour"];
-//        [hourarray addObject:@(db_hour)];
-//        
-//        NSString *db_address = [results stringForColumn:@"address"];
-//        [addressarray addObject:db_address];
-//
-//        
-//        //        int deleteflag = [results intForColumn:@"delete_flag"];
-//        
-//        /*
-//        NSLog(@"check1 %d,%@,%f,%f,%@,%d,%@,%@,%d,%d,%@"
-//              ,db_id,db_title,lat,lon,db_weather,db_date,db_text,db_pics,wentflag,db_hour,db_address
-//              );//確認表示
-//        */
-//         //最終的にresltArrayに配列がそれぞれぼこっと入る感じで。
-//        i++;
-//
-//    }
-//    
-//
-//    [database close];
-//
-//    
-//
-//    
-//    /* データ受け渡し用にぜんぶまとめてぶっこむ */
-//
-//    [resultArray addObject:idarray];//0
-//    [resultArray addObject:titlearray];//1
-//    [resultArray addObject:latarray];//2
-//    [resultArray addObject:lonarray];//3
-//    [resultArray addObject:datearray];//4
-//    [resultArray addObject:textarray];//5
-//    [resultArray addObject:picsarray];//6
-//    [resultArray addObject:piccountarray];//7　天気カラムを削除し、写真の枚数カラムを追加した（石井）
-//    [resultArray addObject:wentflagarray];//8
-//    [resultArray addObject:hourarray]; //9
-//    [resultArray addObject:addressarray]; //10
-//    
-////    NSLog(@"check3 ====%@",resultArray);
-//    return resultArray;
-//    
-//
-//}
+    NSString *sql = @"CREATE TABLE myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse INTEGER, date INTEGER, readOrNot INTEGER);";
+    
+    [db executeUpdate:sql];
+
+    [db close];
+}
 
 
-
-
-//-(void)saveData{ //通しナンバーを保存
-//
-//    NSUserDefaults *savedata = [NSUserDefaults standardUserDefaults];
-//    [savedata setInteger:_dataid forKey:@"dataid"];//INTEGER型
-//    [savedata synchronize];
-//
-//}
-
-//-(int)loadData{ //通しナンバーの読み込み
-//    
-//    NSUserDefaults *savedata = [NSUserDefaults standardUserDefaults];
-//    _dataid = [savedata integerForKey:@"dataid"];
-//    return  _dataid;
-//}
-
-
-
-//
-////削除フラグ建てるメソッド
-//- (void)DeleteFlag:(int)number{
-//    
-//    //DB接続
-//    NSString *databaseFilePath = [[self dataFolderPath] stringByAppendingPathComponent:@"Database.db"];
-//    FMDatabase *database = [FMDatabase databaseWithPath:databaseFilePath];
-//    [database open];
-//
-//    
-//    //データのupdate
-//    NSString *update_sqlDeleteFlag = [NSString stringWithFormat:@"update testTable set delete_flag = 1 where id = %d",number];
-//    
-//    [database executeUpdate:update_sqlDeleteFlag];
-//    [database close];
-//        
-//}
-
-
+//聖書通読用のテーブルに初期値を投入
+- (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(int)VERSE label6:(NSDate*)DATE{
+    
+    //日付をint型に変換
+    NSString* date_str;
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMdd"];
+    date_str = [formatter stringFromDate:DATE]; //strに変換
+    int dateInt = [date_str integerValue];
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    
+    NSString *insert_sql = @"INSERT INTO myReadingTable(id, bible_name, bible_name_japanese, bible_chinese, capter, verse, date, readOrNot) VALUES (?,?,?,?,?,?,?,?)";
+    
+    [db executeUpdate:insert_sql ,
+     [NSNumber numberWithInteger:ID],
+     BIBBLE_NAME,
+     BIBBLE_NAME_JAPANESE,
+     BIBBLE_NAME_CHINESE,
+     [NSNumber numberWithDouble:CAPTER],
+     [NSNumber numberWithDouble:VERSE],
+     [NSNumber numberWithInteger:dateInt] ,
+     //読んでいないのでreadOrNotの初期値は0
+     [NSNumber numberWithInteger:0]];
+    [db close];
+}
 
 
 
