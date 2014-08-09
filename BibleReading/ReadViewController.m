@@ -19,6 +19,9 @@
     NSMutableArray *bibleNameCn;
     NSMutableArray *capter;
     NSMutableArray *verse;
+    UIWebView *webView;
+    UISwitch *sw;
+    BOOL read;
 }
 @property UIView *settingView;
 
@@ -40,6 +43,9 @@
     [super viewDidLoad];
     
     [self selectedDate];
+    
+    //仮に作成
+    read = 0;
     
     [self setViewForFirst];
     
@@ -82,26 +88,6 @@
     capter = resultArray[4];
     verse = resultArray[5];
     
-    int i;
-//    for (i=0; i<[resultArray[4] count]; i++) {
-//        
-//        NSLog(@"idArray count=%d",[resultArray[4] count]);
-//        NSLog(@"chapter=%d",[[resultArray[4] objectAtIndex:i]integerValue]);
-//        
-//    }
-//    
-//    for (i=0; i<[capter count]; i++) {
-//        
-//        NSLog(@"idArray count=%d",[capter count]);
-//        NSLog(@"chapter=%d",[[capter objectAtIndex:i]integerValue]);
-//        
-//    }
-// 
-    for (i=0; i<[idArray count]; i++) {
-        
-                NSLog(@"idArray count=%d",[idArray count]);
-                NSLog(@"chapter=%d",[[capter objectAtIndex:i]integerValue]);
-    }
 }
 
 - (void)setViewForFirst{
@@ -136,11 +122,11 @@
     
     //戻るボタンの作成
     backBtn = [[UIButton alloc]
-               initWithFrame:CGRectMake(15, 25, 50, 32)];
-    [backBtn setTitle:@"back" forState:UIControlStateNormal];
+               initWithFrame:CGRectMake(15, 25, 100, 32)];
+    [backBtn setTitle:@"toCalender" forState:UIControlStateNormal];
     [backBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [backBtn addTarget:self
-                action:@selector(toBack:) forControlEvents:UIControlEventTouchUpInside];
+                action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:backBtn];
     
     //聖書ラベルの作成
@@ -191,8 +177,9 @@
     //読んだかどうかチェックボックス作成
      for (i=0; i<[idArray count]; i++) {
          CGRect readRect = CGRectMake(width/8*6, 65+i*40, width-40, 15);
-         UISwitch *sw = [[UISwitch alloc] initWithFrame:readRect];
+         sw = [[UISwitch alloc] initWithFrame:readRect];
          sw.on = NO;
+         sw.tag = i;
          sw.onTintColor = [UIColor blackColor];
          // 値が変更された時にhogeメソッドを呼び出す
          [sw addTarget:self action:@selector(readOrNotSwitch:) forControlEvents:UIControlEventValueChanged];
@@ -202,17 +189,81 @@
 
 
 //読んだかどうかスイッチで呼ばれるメソッド
-- (IBAction)readOrNotSwitch:(id)sender{
+- (IBAction)readOrNotSwitch:(UISwitch*)sender{
+    
+    if (read == 0) {
     //www.jw.orgから聖書をモーダルビューで表示
+    switch (sender.tag) {
+        case 0:
+            [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]integerValue]];
+            break;
+        case 1:
+            [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]integerValue]];
+            break;
+        case 2:
+            [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]integerValue]];
+            break;
+        case 3:
+            [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]integerValue]];
+            break;
+        case 4:
+            [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]integerValue]];
+            break;
+        case 5:
+            [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]integerValue]];
+            break;
+        case 6:
+            [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]integerValue]];
+            break;
+        case 7:
+            [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]integerValue]];
+            break;
+        case 8:
+            [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]integerValue]];
+            break;
+        case 9:
+            [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]integerValue]];
+            break;
+        default:
+            break;
+    }
+        read = 1;
+    }else{
+        read = 0;
+    }
+}
+
+//jw.orgから聖書を読み込む
+- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+    
+    webView = [[UIWebView alloc]initWithFrame:CGRectMake(0,60,self.view.bounds.size.width,self.view.bounds.size.height)];
+    NSString *urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+    [_settingView addSubview:webView];
+    
+    //戻るボタンの作成
+    UIButton *backBtn2 = [[UIButton alloc]
+               initWithFrame:CGRectMake(120, 25, 50, 32)];
+    [backBtn2 setTitle:@"toDate" forState:UIControlStateNormal];
+    [backBtn2.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [backBtn2 addTarget:self
+                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingView addSubview:backBtn2];
     
 }
 
 
 //バックボタンの動作
-- (IBAction)toBack:(id)sender{
+- (IBAction)toCalender:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+//webView削除
+- (IBAction)deleteWebView:(id)sender{
+        [webView removeFromSuperview];
+}
 
 
 @end
