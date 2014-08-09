@@ -39,6 +39,8 @@ typedef NS_OPTIONS(NSInteger, RDVCalendarViewDayCellSeparatorType) {
 
 #pragma mark - Managing the Delegate
 
+@property (atomic, strong) NSDateComponents *selectedDay;
+
 /**
  * The object that acts as the delegate of the receiving calendar view.
  */
@@ -215,7 +217,6 @@ typedef NS_OPTIONS(NSInteger, RDVCalendarViewDayCellSeparatorType) {
 
 // デリゲートメソッドを追加
 - (void)buttonToRead;
-
 
 /**
  * Asks the delegate if the specified day cell should be selected.

@@ -16,6 +16,8 @@
 //- (void)readDB:(NSString*)argument1;
 - (NSMutableArray *)selectPlan:(int)year label:(int)plan;
 - (void)createTable;
+- (void)deleteDataInTable;
 - (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(int)VERSE label6:(NSDate*)DATE;
+- (NSMutableArray*)dbLoadByDate:(int)DATE;
 
 @end

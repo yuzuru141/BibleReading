@@ -43,7 +43,6 @@
     UIInterfaceOrientation _orientation;
 }
 
-@property (atomic, strong) NSDateComponents *selectedDay;
 @property (atomic, strong, readwrite) NSDateComponents *month;
 @property (atomic, strong) NSDateComponents *currentDay;
 @property (atomic, strong) NSDate *firstDay;
@@ -544,9 +543,6 @@
 
 - (void)selectDayCellAtIndex:(NSInteger)index animated:(BOOL)animated {
     
-    //ボタンが選択された時に次のページに移動するようにデリケートメソッド追加
-    [self.delegate buttonToRead];
-    
     if ([[self visibleCells] count] > index) {
         if ([[self delegate] respondsToSelector:@selector(calendarView:willSelectDate:)]) {
             [[self delegate] calendarView:self willSelectDate:[self dateForIndex:index]];
@@ -575,6 +571,23 @@
             [[self delegate] calendarView:self didSelectCellAtIndex:index];
         }
     }
+    
+    
+    //NSdateをint型に変換してNSUserdefaultsに保存
+    NSCalendar* cal = [NSCalendar currentCalendar];
+    NSDate* dt = [cal dateFromComponents:self.selectedDay];
+    NSString* date_str;
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYYMMdd"];
+    date_str = [formatter stringFromDate:dt]; //strに変換
+    int dateInt = [date_str integerValue];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:dateInt forKey:@"DATE"];
+    
+//    NSLog(@"calenderDateClass=%d",dateInt);
+    
+    //ボタンが選択された時に次のページに移動するようにデリケートメソッド追加
+    [self.delegate buttonToRead];
 }
 
 
@@ -753,5 +766,8 @@
         }
     }
 }
+
+
+
 
 @end

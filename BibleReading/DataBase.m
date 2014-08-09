@@ -202,10 +202,26 @@
     
     [db open];
 
-    NSString *sql = @"CREATE TABLE myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse INTEGER, date INTEGER, readOrNot INTEGER);";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse INTEGER, date INTEGER, readOrNot INTEGER);";
     
     [db executeUpdate:sql];
 
+    [db close];
+}
+
+
+//初期値を投入する前にDataを削除する
+- (void)deleteDataInTable{
+ 
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    [db open];
+    
+    NSString *sql = @"DELETE FROM myReadingTable";
+    
+    [db executeUpdate:sql];
+    
     [db close];
 }
 
@@ -219,6 +235,7 @@
     [formatter setDateFormat:@"YYYYMMdd"];
     date_str = [formatter stringFromDate:DATE]; //strに変換
     int dateInt = [date_str integerValue];
+//    NSLog(@"dateInt=%d",dateInt);
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -240,7 +257,59 @@
     [db close];
 }
 
+//日付からDBを読み込む
+- (NSMutableArray*)dbLoadByDate:(int)DATE{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *idArray = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleName = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameJp = [[NSMutableArray alloc]init];
+    NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
+    NSMutableArray *capter = [[NSMutableArray alloc]init];
+    NSMutableArray *verse = [[NSMutableArray alloc]init];
 
+    [db open];
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",DATE];
+    FMResultSet *result = [db executeQuery:sql];
+    
+    while ([result next]) {
+        
+        int rId   = [result intForColumn:@"id"];
+        [idArray addObject:[NSNumber numberWithInteger:rId]];
+        
+        NSString *rName = [result stringForColumn:@"bible_name"];
+        [bibleName addObject:rName];
+        
+        NSString *rNameJp = [result stringForColumn:@"bible_name_japanese"];
+        [bibleNameJp addObject:rNameJp];
+        
+        NSString *rNameCn = [result stringForColumn:@"bible_chinese"];
+        [bibleNameCn addObject:rNameCn];
+        
+        int rCapter = [result intForColumn:@"capter"];
+        [capter addObject:[NSNumber numberWithInteger:rCapter]];
+        
+        int rVerse = [result intForColumn:@"verse"];
+        [verse addObject:[NSNumber numberWithInteger:rVerse]];
+
+
+    }
+    
+    [db close];
+
+    [resultArray addObject:idArray];
+    [resultArray addObject:bibleName];
+    [resultArray addObject:bibleNameJp];
+    [resultArray addObject:bibleNameCn];
+    [resultArray addObject:capter];
+    [resultArray addObject:verse];
+    
+    return resultArray;
+}
 
 
 //DB接続
@@ -298,7 +367,7 @@
     NSString *documentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     //追加するディレクトリ名を指定
     NSString *dataFolderPath = [documentsPath stringByAppendingPathComponent:@"DataFolder"];
-    NSLog(@"dataFolderPass=%@",dataFolderPath);
+//    NSLog(@"dataFolderPass=%@",dataFolderPath);
     return dataFolderPath;
 }
 

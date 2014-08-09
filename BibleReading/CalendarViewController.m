@@ -109,8 +109,7 @@
 
 //デリゲートメソッド
 - (void)buttonToRead{
-    [self performSegueWithIdentifier:@"calendarToRead" sender:self];
-
+    [self performSegueWithIdentifier:@"calendarToRead" sender:self];    
 }
 
 

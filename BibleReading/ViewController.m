@@ -70,8 +70,7 @@
      (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
     [_timeLineView.layer insertSublayer:pageGradient atIndex:0];
-     
-    NSLog(@"1枚目");
+
 }
 
 

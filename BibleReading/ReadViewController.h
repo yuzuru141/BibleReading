@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataBase.h"
+
 
 @interface ReadViewController : UIViewController
+
+@property DataBase *database;
+
 
 @end
