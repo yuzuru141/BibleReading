@@ -472,34 +472,34 @@
                 [dateComp setDay:0];
                 NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                 [dateArray addObject:date];
-                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
-                j++;
+                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
+//                NSLog(@"date=%@",date);
             }
             else{
                 if (yearGroup == [[oneYearGroup objectAtIndex:i-1]intValue]) {
                     generalInt =[[general objectAtIndex:i]intValue];
                     generalIntMinus = [[general objectAtIndex:i-1]intValue];
                     if (!(generalInt==generalIntMinus)) {
+                        j++;
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
-                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                        NSLog(@"date=%@",date);
-                        j++;
                     }else{
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
-                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                        NSLog(@"date=%@",date);
                     }
                 }else{
+                    j++;
                     [dateComp setDay:j];
                     NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                     [dateArray addObject:date];
-                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                    NSLog(@"date=%@",date);
-                    j++;
                 }
             }
             
@@ -511,35 +511,34 @@
                 [dateComp setDay:0];
                 NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                 [dateArray addObject:date];
-                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                NSLog(@"date=%@",date);
-                j++;
             }
             else{
                 if (yearGroup == [[twoYearGroup objectAtIndex:i-1]intValue]) {
                     generalInt =[[general objectAtIndex:i]intValue];
                     generalIntMinus = [[general objectAtIndex:i-1]intValue];
                     if (!(generalInt==generalIntMinus)) {
+                        j++;
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
-                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                        NSLog(@"date=%@",date);
-                        j++;
                     }else{
                         [dateComp setDay:j];
                         NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                         [dateArray addObject:date];
-                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
+                        [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
 //                        NSLog(@"date=%@",date);
                     }
                 }else{
+                    j++;
                     [dateComp setDay:j];
                     NSDate *date = [[NSCalendar currentCalendar] dateByAddingComponents:dateComp toDate:datePicker.date options:0];
                     [dateArray addObject:date];
-                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[[verse objectAtIndex:i]intValue] label6:date];
-//                    NSLog(@"date=%@",date);
-                    j++;
+                    [self.database insertTable:i label1:[bibleName objectAtIndex:i] label2:[bibleNameJp objectAtIndex:i] label3:[bibleNameCn objectAtIndex:i] label4:[[capter objectAtIndex:i]intValue] label5:[verse objectAtIndex:i] label6:date];
+                    NSLog(@"date=%@",date);
                 }
         }
         }

@@ -174,8 +174,8 @@
         int rCapter = [result intForColumn:@"capter"];
         [capter addObject:[NSNumber numberWithInteger:rCapter]];
         
-        int rVerse = [result intForColumn:@"verse"];
-        [verse addObject:[NSNumber numberWithInteger:rVerse]];
+        NSString *rVerse = [result stringForColumn:@"verse"];
+        [verse addObject:rVerse];
         
     }
     [db close];
@@ -202,7 +202,7 @@
     
     [db open];
 
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse INTEGER, date INTEGER, readOrNot INTEGER);";
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse TEXT, date INTEGER, readOrNot INTEGER);";
     
     [db executeUpdate:sql];
 
@@ -227,7 +227,7 @@
 
 
 //聖書通読用のテーブルに初期値を投入
-- (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(int)VERSE label6:(NSDate*)DATE{
+- (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(NSString*)VERSE label6:(NSDate*)DATE{
     
     //日付をint型に変換
     NSString* date_str;
@@ -236,6 +236,7 @@
     date_str = [formatter stringFromDate:DATE]; //strに変換
     int dateInt = [date_str integerValue];
 //    NSLog(@"dateInt=%d",dateInt);
+//    NSLog(@"chapter=%d",CAPTER);
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -250,7 +251,7 @@
      BIBBLE_NAME_JAPANESE,
      BIBBLE_NAME_CHINESE,
      [NSNumber numberWithDouble:CAPTER],
-     [NSNumber numberWithDouble:VERSE],
+     VERSE,
      [NSNumber numberWithInteger:dateInt] ,
      //読んでいないのでreadOrNotの初期値は0
      [NSNumber numberWithInteger:0]];
@@ -292,10 +293,10 @@
         
         int rCapter = [result intForColumn:@"capter"];
         [capter addObject:[NSNumber numberWithInteger:rCapter]];
+//        NSLog(@"rChapter=%d",rCapter);
         
-        int rVerse = [result intForColumn:@"verse"];
-        [verse addObject:[NSNumber numberWithInteger:rVerse]];
-
+        NSString *rVerse = [result stringForColumn:@"verse"];
+        [verse addObject:rVerse];
 
     }
     
