@@ -116,9 +116,9 @@
 
 - (IBAction)viewListMenu:(id)sender{
     NSArray *images = @[
-                        [UIImage imageNamed:@"Chats.png"],
                         [UIImage imageNamed:@"Calendar-Month.png"],
                         [UIImage imageNamed:@"Gear.png"],
+                        [UIImage imageNamed:@"Chat.png"],
                         ];
     
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images];
@@ -130,15 +130,15 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
-            [self performSegueWithIdentifier:@"settingToView" sender:self];
-            [self alertViewMethod];
-            break;
-        case 1:
             [self performSegueWithIdentifier:@"settingToPlan" sender:self];
             [self alertViewMethod];
             break;
-        case 2:
+        case 1:
             [self setViewForFirst];
+            break;
+        case 2:
+            [self performSegueWithIdentifier:@"settingToView" sender:self];
+            [self alertViewMethod];
             break;
     }
 }

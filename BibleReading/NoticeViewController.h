@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
 
-@interface ViewController : UIViewController<RNFrostedSidebarDelegate>
+@interface NoticeViewController : UIViewController<RNFrostedSidebarDelegate>
 
 @end

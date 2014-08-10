@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RDVCalendarViewController.h"
-#import "ViewController.h"
+#import "NoticeViewController.h"
 #import "RDVExampleDayCell.h"
 
 @interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate>

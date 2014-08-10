@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 YuZ. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "NoticeViewController.h"
 
-@interface ViewController (){
+@interface NoticeViewController (){
         UIButton *listBtn;
 }
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation ViewController
+@implementation NoticeViewController
 
 - (void)viewDidLoad
 {
@@ -38,9 +38,9 @@
 
 - (IBAction)viewListMenu:(id)sender{
     NSArray *images = @[
-                        [UIImage imageNamed:@"Chats.png"],
                         [UIImage imageNamed:@"Calendar-Month.png"],
                         [UIImage imageNamed:@"Gear.png"],
+                        [UIImage imageNamed:@"Chat.png"],
                         ];
     
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images];
@@ -78,13 +78,13 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
-            [self createtimeLineView];
-            break;
-        case 1:
             [self performSegueWithIdentifier:@"toCalendarViewController" sender:self];
             break;
-        case 2:
+        case 1:
             [self performSegueWithIdentifier:@"toSettingViewController" sender:self];
+            break;
+        case 2:
+            [self createtimeLineView];
             break;
     }
 }

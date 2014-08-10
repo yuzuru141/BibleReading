@@ -15,7 +15,7 @@
 		FE064E51197A371A0013BC97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E50197A371A0013BC97 /* AppDelegate.m */; };
 		FE064E54197A371A0013BC97 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE064E52197A371A0013BC97 /* Main_iPhone.storyboard */; };
 		FE064E57197A371A0013BC97 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE064E55197A371A0013BC97 /* Main_iPad.storyboard */; };
-		FE064E5A197A371A0013BC97 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E59197A371A0013BC97 /* ViewController.m */; };
+		FE064E5A197A371A0013BC97 /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E59197A371A0013BC97 /* NoticeViewController.m */; };
 		FE064E5C197A371A0013BC97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE064E5B197A371A0013BC97 /* Images.xcassets */; };
 		FE064E63197A371A0013BC97 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E62197A371A0013BC97 /* XCTest.framework */; };
 		FE064E64197A371A0013BC97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E40197A371A0013BC97 /* Foundation.framework */; };
@@ -45,6 +45,7 @@
 		FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FE63A2AB197CAF9B003E3099 /* DataBase.m */; };
 		FE63A2AE197CB41F003E3099 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */; };
 		FE63A2B5197CDC8C003E3099 /* Bibile_Read_BaseDB.db in Resources */ = {isa = PBXBuildFile; fileRef = FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */; };
+		FE8C7B9F19970FEA00122385 /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8C7B9E19970FEA00122385 /* Chat.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +71,8 @@
 		FE064E50197A371A0013BC97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FE064E53197A371A0013BC97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		FE064E56197A371A0013BC97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		FE064E58197A371A0013BC97 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FE064E59197A371A0013BC97 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FE064E58197A371A0013BC97 /* NoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
+		FE064E59197A371A0013BC97 /* NoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeViewController.m; sourceTree = "<group>"; };
 		FE064E5B197A371A0013BC97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE064E61197A371A0013BC97 /* BibleReadingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BibleReadingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE064E62197A371A0013BC97 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -116,6 +117,7 @@
 		FE63A2AB197CAF9B003E3099 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
 		FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bibile_Read_BaseDB.db; path = BibleReading/Bibile_Read_BaseDB.db; sourceTree = "<group>"; };
+		FE8C7B9E19970FEA00122385 /* Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chat.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +187,14 @@
 				FE064E50197A371A0013BC97 /* AppDelegate.m */,
 				FE064E52197A371A0013BC97 /* Main_iPhone.storyboard */,
 				FE064E55197A371A0013BC97 /* Main_iPad.storyboard */,
-				FE064E58197A371A0013BC97 /* ViewController.h */,
-				FE064E59197A371A0013BC97 /* ViewController.m */,
 				FE064EAB197A5CD50013BC97 /* CalendarViewController.h */,
 				FE064EAC197A5CD50013BC97 /* CalendarViewController.m */,
 				FE63A296197A7AEC003E3099 /* ReadViewController.h */,
 				FE63A297197A7AEC003E3099 /* ReadViewController.m */,
 				FE63A293197A72D7003E3099 /* SettingViewController.h */,
 				FE63A294197A72D7003E3099 /* SettingViewController.m */,
+				FE064E58197A371A0013BC97 /* NoticeViewController.h */,
+				FE064E59197A371A0013BC97 /* NoticeViewController.m */,
 				FE63A2AA197CAF9B003E3099 /* DataBase.h */,
 				FE63A2AB197CAF9B003E3099 /* DataBase.m */,
 				FE064E5B197A371A0013BC97 /* Images.xcassets */,
@@ -233,6 +235,7 @@
 		FE064E89197A42670013BC97 /* souce */ = {
 			isa = PBXGroup;
 			children = (
+				FE8C7B9E19970FEA00122385 /* Chat.png */,
 				FE064E94197A47D10013BC97 /* image_tk.png */,
 				FE064E98197A4D2C0013BC97 /* Calendar-Month.png */,
 				FE064E9C197A4D330013BC97 /* Gear.png */,
@@ -363,6 +366,7 @@
 				FE064E5C197A371A0013BC97 /* Images.xcassets in Resources */,
 				FE064E97197A47D10013BC97 /* video_tk.png in Resources */,
 				FE064E9D197A4D330013BC97 /* Gear.png in Resources */,
+				FE8C7B9F19970FEA00122385 /* Chat.png in Resources */,
 				FE064E90197A42670013BC97 /* list_tk.png in Resources */,
 				FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */,
 				FE064E54197A371A0013BC97 /* Main_iPhone.storyboard in Resources */,
@@ -387,7 +391,7 @@
 			files = (
 				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
 				FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */,
-				FE064E5A197A371A0013BC97 /* ViewController.m in Sources */,
+				FE064E5A197A371A0013BC97 /* NoticeViewController.m in Sources */,
 				FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */,
 				FE63A2A5197CAF6F003E3099 /* FMDatabase.m in Sources */,
 				FE064EA9197A50240013BC97 /* RDVCalendarViewController.m in Sources */,

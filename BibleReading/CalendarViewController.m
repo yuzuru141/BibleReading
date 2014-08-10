@@ -35,6 +35,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self firstLoad];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)firstLoad{
     
     self.calendar = [[RDVCalendarView alloc]init];
     self.calendar.delegate = self;
@@ -44,19 +54,12 @@
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 - (IBAction)viewListMenu:(id)sender{
     NSArray *images = @[
-                        [UIImage imageNamed:@"Chats.png"],
                         [UIImage imageNamed:@"Calendar-Month.png"],
                         [UIImage imageNamed:@"Gear.png"],
+                        [UIImage imageNamed:@"Chat.png"],
                         ];
     
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images];
@@ -94,13 +97,14 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
-            [self performSegueWithIdentifier:@"calendarToView" sender:self];
-            break;
-        case 1:
+            
             [self setSideBar];
             break;
-        case 2:
+        case 1:
             [self performSegueWithIdentifier:@"calendarToSetting" sender:self];
+            break;
+        case 2:
+            [self performSegueWithIdentifier:@"calendarToView" sender:self];
             break;
     }
 }
