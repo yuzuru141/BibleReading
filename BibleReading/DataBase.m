@@ -271,6 +271,7 @@
     NSMutableArray *bibleNameCn = [[NSMutableArray alloc]init];
     NSMutableArray *capter = [[NSMutableArray alloc]init];
     NSMutableArray *verse = [[NSMutableArray alloc]init];
+    NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
 
     [db open];
     
@@ -298,6 +299,8 @@
         NSString *rVerse = [result stringForColumn:@"verse"];
         [verse addObject:rVerse];
 
+        int rReadOrNot = [result intForColumn:@"readOrNot"];
+        [readOrNot addObject:[NSNumber numberWithInteger:rReadOrNot]];
     }
     
     [db close];
@@ -308,9 +311,70 @@
     [resultArray addObject:bibleNameCn];
     [resultArray addObject:capter];
     [resultArray addObject:verse];
+    [resultArray addObject:readOrNot];
     
     return resultArray;
 }
+
+
+//DBへ読んだ情報をアップデート
+- (void)dbUpdateReadOrNot:(int)ID{
+ 
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    NSString *update_readOrNot = [NSString stringWithFormat:@"update myReadingTable set readOrNot =1 where id = %d",ID];
+    
+    [db open];
+    [db executeUpdate:update_readOrNot];
+    [db close];
+    
+    NSLog(@"readOrNotアップデートされました");
+}
+
+//DBへ読んでいない情報へアップデート
+- (void)dbDeleteReadOrNot:(int)ID{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    NSString *update_readOrNot = [NSString stringWithFormat:@"update myReadingTable set readOrNot =0 where id = %d",ID];
+    
+    [db open];
+    [db executeUpdate:update_readOrNot];
+    [db close];
+    
+    NSLog(@"readOrNotデリートされました");
+}
+
+
+//個別のReadOrNotをアップデート
+- (NSMutableArray*)dbLoadReadOrNot:(int)ID{
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+
+    NSLog(@"ID=%d",ID);
+    
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
+
+    [db open];
+    
+    NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where id = %d",ID];
+    FMResultSet *result = [db executeQuery:sql];
+    
+    while ([result next]) {
+        
+        int rReadOrNot = [result intForColumn:@"readOrNot"];
+        [readOrNot addObject:[NSNumber numberWithInteger:rReadOrNot]];
+    }
+    
+    [db close];
+    [resultArray addObject:readOrNot];
+    NSLog(@"readOrNot=%d",[[readOrNot objectAtIndex:0]integerValue]);
+    return resultArray;
+}
+
 
 
 //DB接続

@@ -19,9 +19,9 @@
     NSMutableArray *bibleNameCn;
     NSMutableArray *capter;
     NSMutableArray *verse;
+    NSMutableArray *readOrNot;
     UIWebView *webView;
     UISwitch *sw;
-    BOOL read;
 }
 @property UIView *settingView;
 
@@ -43,9 +43,6 @@
     [super viewDidLoad];
     
     [self selectedDate];
-    
-    //仮に作成
-    read = 0;
     
     [self setViewForFirst];
     
@@ -78,6 +75,7 @@
     bibleNameCn = [[NSMutableArray alloc]init];
     capter = [[NSMutableArray alloc]init];
     verse = [[NSMutableArray alloc]init];
+    readOrNot = [[NSMutableArray alloc]init];
     
     resultArray = [self.database dbLoadByDate:intDate];
 
@@ -87,7 +85,7 @@
     bibleNameCn = resultArray[3];
     capter = resultArray[4];
     verse = resultArray[5];
-    
+    readOrNot = resultArray[6];
 }
 
 - (void)setViewForFirst{
@@ -145,9 +143,6 @@
     //章ラベルの作成
     for (i=0; i<[idArray count]; i++) {
         
-        NSLog(@"idArray count=%d",[idArray count]);
-        NSLog(@"chapter=%d",[[capter objectAtIndex:i]integerValue]);
-        
         CGRect chapterRect = CGRectMake(width/8*3, 70+i*40, width-40, 15);
         UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
         chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
@@ -156,7 +151,6 @@
         [_settingView addSubview:chaperLabel];
 
     }
-    
     
     //節ラベルの作成
     for (i=0; i<[idArray count]; i++) {
@@ -178,10 +172,16 @@
      for (i=0; i<[idArray count]; i++) {
          CGRect readRect = CGRectMake(width/8*6, 65+i*40, width-40, 15);
          sw = [[UISwitch alloc] initWithFrame:readRect];
-         sw.on = NO;
          sw.tag = i;
          sw.onTintColor = [UIColor blackColor];
-         // 値が変更された時にhogeメソッドを呼び出す
+        
+         if ([[readOrNot objectAtIndex:i]integerValue]==0) {
+                      sw.on = NO;
+         }else{
+                      sw.on = YES;
+         }
+         
+         // 値が変更された時にメソッドを呼び出す
          [sw addTarget:self action:@selector(readOrNotSwitch:) forControlEvents:UIControlEventValueChanged];
          [_settingView addSubview:sw];
      }
@@ -191,45 +191,123 @@
 //読んだかどうかスイッチで呼ばれるメソッド
 - (IBAction)readOrNotSwitch:(UISwitch*)sender{
     
-    if (read == 0) {
     //www.jw.orgから聖書をモーダルビューで表示
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *readOrNotIndivisualArray = [[NSMutableArray alloc]init];
     switch (sender.tag) {
         case 0:
-            [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]integerValue]];
+            //DBからUIswitchの最新状態を確認し、動作すればそれもDBに保存する。
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:0]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:0 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:0]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:0]integerValue]];
+            }else{
+                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:0]integerValue]];
+            }
             break;
         case 1:
-            [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:1]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:1 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:1]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:1]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:1]integerValue]];
+            }
             break;
         case 2:
-            [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:2]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:2 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:2]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:2]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:2]integerValue]];
+            }
             break;
         case 3:
-            [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:3]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:3 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:3]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:3]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:3]integerValue]];
+            }
             break;
         case 4:
-            [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:4]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:4 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:4]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:4]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:4]integerValue]];
+            }
             break;
         case 5:
-            [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:5]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:5 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:5]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:5]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:5]integerValue]];
+            }
             break;
         case 6:
-            [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:6]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:6 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:6]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:6]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:6]integerValue]];
+            }
             break;
         case 7:
-            [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:7]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:7 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:7]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:7]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:7]integerValue]];
+            }
             break;
         case 8:
-            [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:8]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:8 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:8]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:8]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:8]integerValue]];
+            }
             break;
         case 9:
-            [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]integerValue]];
+            resultArray = [self.database dbLoadReadOrNot:[[idArray objectAtIndex:9]integerValue]];
+            readOrNotIndivisualArray = resultArray[0];
+            [readOrNot replaceObjectAtIndex:9 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
+            if ([[readOrNot objectAtIndex:9]integerValue] == 0) {
+                [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]integerValue]];
+                [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:9]integerValue]];
+            }else{
+                [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:9]integerValue]];
+            }
             break;
         default:
             break;
-    }
-        read = 1;
-    }else{
-        read = 0;
     }
 }
 
