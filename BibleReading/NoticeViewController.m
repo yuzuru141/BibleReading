@@ -10,10 +10,15 @@
 
 @interface NoticeViewController (){
         UIButton *listBtn;
+        CGFloat width;
+        CGFloat height;
+        NSArray* aItemList3;
+        NSArray* aItemList4;
+        UIPickerView* oPicker3;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
-@property UIView *timeLineView;
+@property UIView *settingView;
 
 @end
 
@@ -24,10 +29,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self createtimeLineView];
+    [self setViewForFirst];
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+        [self userSelectRow];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,9 +56,21 @@
     [callout show];
 }
 
-- (void)createtimeLineView{
-    _timeLineView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
-    [self.view addSubview:_timeLineView];
+- (void)setViewForFirst{
+    
+    //スクリーンサイズの取得
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    width = screenSize.size.width;
+    height = screenSize.size.height;
+    
+    [self createsettingView];
+    [self setSchedule];
+
+}
+
+- (void)createsettingView{
+    _settingView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
+    [self.view addSubview:_settingView];
     
     self.optionIndices = [NSMutableIndexSet indexSetWithIndex:1];
     
@@ -60,7 +80,7 @@
     [listBtn setBackgroundImage:img forState:UIControlStateNormal];
     [listBtn addTarget:self
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
-    [_timeLineView addSubview:listBtn];
+    [_settingView addSubview:listBtn];
     
     
     CAGradientLayer *pageGradient = [CAGradientLayer layer];
@@ -69,7 +89,7 @@
     [NSArray arrayWithObjects:
      (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
      (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
-    [_timeLineView.layer insertSublayer:pageGradient atIndex:0];
+    [_settingView.layer insertSublayer:pageGradient atIndex:0];
 
 }
 
@@ -84,9 +104,226 @@
             [self performSegueWithIdentifier:@"toSettingViewController" sender:self];
             break;
         case 2:
-            [self createtimeLineView];
+            [self createsettingView];
             break;
     }
+}
+
+//ラベル作成とピッカー読み込み
+- (void)setSchedule{
+    
+    CGRect textRect2 = CGRectMake(width/10, height/4, width-width/10*2, 18);
+    UILabel *notification = [[UILabel alloc]init];
+    notification = [[UILabel alloc]initWithFrame:textRect2];
+    notification.text = @"Notification Setting";
+    notification.font = [UIFont systemFontOfSize:18];
+    notification.textColor = [UIColor whiteColor];
+    [_settingView addSubview:notification];
+    
+    [self createPicker];
+    
+}
+
+
+//ピッカー作成
+- (void)createPicker {
+    
+    aItemList3 = [[NSArray alloc] initWithObjects:@"--",@"00:",@"01:",@"02:",@"03:",@"04:",@"05:",@"06:",@"07:",@"08:",@"09:",@"10:",@"11:",@"12:",@"13:",@"14:",@"15:",@"16:",@"17:",@"18:",@"19:",@"20:",@"21:",@"22:",@"23:",nil];
+    aItemList4 = [[NSArray alloc] initWithObjects:@"--",@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59",nil];
+    oPicker3 = [[UIPickerView alloc] init];
+    oPicker3.frame = CGRectMake(width/5, height/4, width-width/5*2, 25);
+    oPicker3.showsSelectionIndicator = YES;
+    oPicker3.delegate = self;
+    oPicker3.dataSource = self;
+    oPicker3.tag = 3;
+
+    [_settingView addSubview:oPicker3];
+    
+}
+
+
+//ピッカーの表示項目を選択
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+        switch (component) {
+            case 0: // 1列目
+                return [NSString stringWithFormat:@"%@", [aItemList3 objectAtIndex:row]];
+                break;
+            case 1: // 2列目
+                return [NSString stringWithFormat:@"%@", [aItemList4 objectAtIndex:row]];
+                break;
+            default:
+                return 0;
+                break;
+        
+    }
+}
+
+
+//区切りの数（コンポーネント）
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+        return 2;
+}
+
+
+//ピッカーの項目数を選択
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+        switch (component) {
+            case 0: // 1列目
+                return [aItemList3 count];
+                break;
+            case 1: // 2列目
+                return [aItemList4 count];
+                break;
+            default:
+                return 0;
+                break;
+        
+        
+    }
+}
+
+
+//ピッカーの文字を変更する
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [UIFont boldSystemFontOfSize: 20];
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentLeft;
+    
+        switch (component) {
+            case 0: // 1列目
+                label.text = [aItemList3 objectAtIndex:row];
+                break;
+            case 1: // 2列目
+                label.text = [aItemList4 objectAtIndex:row];
+                break;
+            default:
+                return 0;
+                break;
+        
+    }
+	return label;
+}
+
+
+
+//ピッカーの幅の調整
+- (CGFloat)pickerView:(UIPickerView *)pickerView
+    widthForComponent:(NSInteger)component
+{
+        switch (component) {
+            case 0: // 1列目
+                return 30.0;
+                break;
+            case 1: // 2列目
+                return width-width/10*2+30;
+                break;
+            default:
+                return 0;
+                break;
+        }
+}
+
+//以前にユーザが設定した時間を読み込む
+-(void)userSelectRow{
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    int hour = [defaults integerForKey:@"notificationTimeHour"];
+    NSString *hourString = [NSString stringWithFormat:@"%d",hour];
+    NSLog(@"hourString=%@",hourString);
+    int selectHour = 0;
+    int i;
+    for (i=0; i<[aItemList3 count]; i++) {
+        if ([aItemList3 objectAtIndex:i]==hourString) {
+            selectHour = i;
+            NSLog(@"selectHour=%d",selectHour);
+        }
+    }
+    
+    int minutes = [defaults integerForKey:@"notificationTimeMinute"];
+    NSString *minutesString = [NSString stringWithFormat:@"%d",minutes];
+    NSLog(@"minutesString=%@",minutesString);
+    int selectMinutes =0;
+    for (i=0; i<[aItemList4 count]; i++) {
+        if ([aItemList4 objectAtIndex:i]==minutesString) {
+            selectMinutes = i;
+            NSLog(@"selectMinutes=%d",selectMinutes);
+        }
+    }
+    
+    
+    
+    
+    //NSuserdefaultsから取得した情報をpickerの初期値に反映されることが必要
+    [oPicker3 selectRow:selectHour inComponent:0 animated:NO]; //１列目を一行目にセット
+    [oPicker3 selectRow:selectMinutes inComponent:1 animated:NO]; //２列目を二行目にセット
+    
+    
+    
+}
+
+
+//ユーザが選択した通知する時間を抜き出す
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    int selectNumber;
+    selectNumber = [pickerView selectedRowInComponent:0];
+    int hour;
+    hour = [[aItemList3 objectAtIndex:selectNumber]intValue];
+    NSLog(@"hour=%d", hour);
+    
+    int selectNumber2;
+    selectNumber2 = [pickerView selectedRowInComponent:1];
+    int minutes;
+    minutes = [[aItemList4 objectAtIndex:selectNumber2]intValue];
+    NSLog(@"minutes=%d", minutes);
+    
+    [self LocalNotificationStart:hour label1:minutes];
+    
+    return;
+}
+
+
+//バックグラウンド状態の時に通知する
+-(void)LocalNotificationStart:(int)noticeHour label1:(int)noticeMinutes{
+    
+    //一度全ての通知をキャンセルさせる
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    //現在時刻から取得した時間にユーザが選択した通知時刻をセットする
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComp = [[NSDateComponents alloc] init];
+    dateComp = [currentCalendar components:(NSYearCalendarUnit | NSMonthCalendarUnit
+                                   | NSDayCalendarUnit | NSHourCalendarUnit
+                                   | NSMinuteCalendarUnit | NSSecondCalendarUnit)
+                         fromDate:[NSDate date]];
+    dateComp.hour = noticeHour;
+    NSLog(@"dateComp.hour=%d",dateComp.hour);
+    dateComp.minute = noticeMinutes;
+    NSLog(@"dateComp.minutes=%d",dateComp.minute);
+    
+    //NSuserdefaultsへ保存
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:dateComp.hour forKey:@"notificationTimeHour"];
+    [defaults setInteger:dateComp.minute forKey:@"notificationTimeMinute"];
+    [defaults synchronize];
+    
+    //アラートを作成
+    NSDate *notificationDate = [currentCalendar dateFromComponents:dateComp];
+    UILocalNotification *notification = [[UILocalNotification alloc]init];
+    notification.fireDate = notificationDate;
+    notification.repeatInterval = NSDayCalendarUnit;
+    notification.shouldGroupAccessibilityChildren = YES;
+    notification.alertBody = [NSString stringWithFormat:@"reading time"];
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication]presentLocalNotificationNow:notification];
+    
 }
 
 @end

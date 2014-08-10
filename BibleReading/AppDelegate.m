@@ -13,6 +13,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //通知
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (notification)
+    {
+        application.applicationIconBadgeNumber = notification.applicationIconBadgeNumber -1;
+    }
+    NSLog(@"確認%@",notification);
+    
     return YES;
 }
 							
