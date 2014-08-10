@@ -38,6 +38,8 @@
     [self firstLoad];
 }
 
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -97,7 +99,9 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
-            
+//            for (UIView* subview in self.view.subviews) {
+//                [subview removeFromSuperview];
+//            }
             [self setSideBar];
             break;
         case 1:
