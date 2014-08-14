@@ -30,12 +30,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [self setViewForFirst];
+   
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-        [self userSelectRow];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -136,8 +134,9 @@
     oPicker3.delegate = self;
     oPicker3.dataSource = self;
     oPicker3.tag = 3;
-
+    [self userSelectRow];
     [_settingView addSubview:oPicker3];
+
     
 }
 
@@ -232,36 +231,11 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     int hour = [defaults integerForKey:@"notificationTimeHour"];
-    NSString *hourString = [NSString stringWithFormat:@"%d",hour];
-    NSLog(@"hourString=%@",hourString);
-    int selectHour = 0;
-    int i;
-    for (i=0; i<[aItemList3 count]; i++) {
-        if ([aItemList3 objectAtIndex:i]==hourString) {
-            selectHour = i;
-            NSLog(@"selectHour=%d",selectHour);
-        }
-    }
-    
     int minutes = [defaults integerForKey:@"notificationTimeMinute"];
-    NSString *minutesString = [NSString stringWithFormat:@"%d",minutes];
-    NSLog(@"minutesString=%@",minutesString);
-    int selectMinutes =0;
-    for (i=0; i<[aItemList4 count]; i++) {
-        if ([aItemList4 objectAtIndex:i]==minutesString) {
-            selectMinutes = i;
-            NSLog(@"selectMinutes=%d",selectMinutes);
-        }
-    }
-    
-    
-    
-    
-    //NSuserdefaultsから取得した情報をpickerの初期値に反映されることが必要
-    [oPicker3 selectRow:selectHour inComponent:0 animated:NO]; //１列目を一行目にセット
-    [oPicker3 selectRow:selectMinutes inComponent:1 animated:NO]; //２列目を二行目にセット
-    
-    
+
+    //NSuserdefaultsから取得した情報をpickerの初期値に反映。
+    [oPicker3 selectRow:hour+1 inComponent:0 animated:NO]; //１列目を一行目にセット
+    [oPicker3 selectRow:minutes+1 inComponent:1 animated:NO]; //２列目を二行目にセット
     
 }
 
@@ -287,7 +261,7 @@
 }
 
 
-//バックグラウンド状態の時に通知する
+//バックグラウンド状態の時に通知する。実際にテストが必要。
 -(void)LocalNotificationStart:(int)noticeHour label1:(int)noticeMinutes{
     
     //一度全ての通知をキャンセルさせる
