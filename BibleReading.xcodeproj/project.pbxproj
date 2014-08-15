@@ -544,6 +544,7 @@
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "94C0DE4E-5608-4013-B585-63A120613856";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -557,6 +558,7 @@
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "94C0DE4E-5608-4013-B585-63A120613856";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

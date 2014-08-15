@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoticeViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (retain,nonatomic) NoticeViewController *NoticeViewConview;
 
 @end

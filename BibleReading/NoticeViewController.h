@@ -11,4 +11,6 @@
 
 @interface NoticeViewController : UIViewController<RNFrostedSidebarDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
+-(void)LocalNotificationStart;
+
 @end

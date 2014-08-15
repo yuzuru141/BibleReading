@@ -255,48 +255,60 @@
     minutes = [[aItemList4 objectAtIndex:selectNumber2]intValue];
     NSLog(@"minutes=%d", minutes);
     
-    [self LocalNotificationStart:hour label1:minutes];
+    //NSuserdefaultsへ保存
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:hour forKey:@"notificationTimeHour"];
+    [defaults setInteger:minutes forKey:@"notificationTimeMinute"];
+    [defaults synchronize];
+    
+//    [self LocalNotificationStart:hour label1:minutes];
     
     return;
 }
 
 
 //バックグラウンド状態の時に通知する。実際にテストが必要。
--(void)LocalNotificationStart:(int)noticeHour label1:(int)noticeMinutes{
+-(void)LocalNotificationStart{
     
-    //一度全ての通知をキャンセルさせる
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    //NSuserdefaultsから設定した時間を読み込む
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    int hour = [defaults integerForKey:@"notificationTimeHour"];
+    int minutes = [defaults integerForKey:@"notificationTimeMinute"];
+
     
     //現在時刻から取得した時間にユーザが選択した通知時刻をセットする
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSCalendar *currentCalendar =  [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComp = [[NSDateComponents alloc] init];
     dateComp = [currentCalendar components:(NSYearCalendarUnit | NSMonthCalendarUnit
                                    | NSDayCalendarUnit | NSHourCalendarUnit
                                    | NSMinuteCalendarUnit | NSSecondCalendarUnit)
                          fromDate:[NSDate date]];
-    dateComp.hour = noticeHour;
-    NSLog(@"dateComp.hour=%d",dateComp.hour);
-    dateComp.minute = noticeMinutes;
-    NSLog(@"dateComp.minutes=%d",dateComp.minute);
-    
-    //NSuserdefaultsへ保存
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:dateComp.hour forKey:@"notificationTimeHour"];
-    [defaults setInteger:dateComp.minute forKey:@"notificationTimeMinute"];
-    [defaults synchronize];
+    dateComp.hour = hour;
+    dateComp.minute = minutes;
+    dateComp.second = 0;
     
     //アラートを作成
     NSDate *notificationDate = [currentCalendar dateFromComponents:dateComp];
+    //通知時間 < 現在時 なら設定しない
+    if ([notificationDate timeIntervalSinceNow] <= 0) {
+        return;
+    }
+    NSLog(@"notificationDate=%@",[notificationDate descriptionWithLocale:[NSLocale currentLocale]]);;
+    
+    //一度全ての通知をキャンセルさせる
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
     UILocalNotification *notification = [[UILocalNotification alloc]init];
     notification.fireDate = notificationDate;
-    notification.repeatInterval = NSDayCalendarUnit;
+    notification.repeatInterval = NSCalendarUnitDay;
     notification.shouldGroupAccessibilityChildren = YES;
     notification.alertBody = [NSString stringWithFormat:@"reading time"];
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.applicationIconBadgeNumber = 1;
-    [[UIApplication sharedApplication]presentLocalNotificationNow:notification];
+    [[UIApplication sharedApplication]scheduleLocalNotification:notification];
+    
+   
     
 }
 
