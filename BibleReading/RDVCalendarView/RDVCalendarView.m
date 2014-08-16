@@ -25,6 +25,11 @@
 #import "RDVCalendarDayCell.h"
 
 @interface RDVCalendarView () {
+    NSString *countryCode;
+    NSString *countryCodeEn;
+    NSString *countryCodeJa;
+    NSString *countryCodeCn;
+    
     NSMutableArray *_visibleCells;
     NSMutableArray *_dayCells;
     
@@ -54,6 +59,14 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        //デバイスの言語設定を読む
+        countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
+        NSLog(@"countryCode=%@",countryCode);
+        countryCodeEn = @"en";
+        countryCodeJa = @"ja";
+        countryCodeCn = @"zh-Hans";
+        
         _dayCells = [[NSMutableArray alloc] initWithCapacity:31];
         _visibleCells = [[NSMutableArray alloc] initWithCapacity:31];
         
@@ -63,7 +76,7 @@
         // Setup defaults
         
 //        _currentDayColor = [UIColor colorWithRed:80/255.0 green:200/255.0 blue:240/255.0 alpha:1.0];
-        _currentDayColor = [UIColor blackColor];
+        _currentDayColor = [UIColor whiteColor];
         _selectedDayColor = [UIColor grayColor];
         //_separatorColor = [UIColor lightGrayColor];
         
@@ -78,23 +91,25 @@
         
         _monthLabel = [[UILabel alloc] init];
         [_monthLabel setFont:[UIFont systemFontOfSize:22]];
-//        [_monthLabel setTextColor:[UIColor blackColor]];
-        [_monthLabel setTextColor:[UIColor whiteColor]];
+        [_monthLabel setTextColor:[UIColor blackColor]];
+//        [_monthLabel setTextColor:[UIColor whiteColor]];
         [_monthLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_monthLabel];
         
         _backButton = [[UIButton alloc] init];
-//        [_backButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_backButton setTitle:@"Prev" forState:UIControlStateNormal];
+        [_backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_backButton setTitle:NSLocalizedString(@"Prev", nil) forState:UIControlStateNormal];
+//        [_backButton setTitle:@"Prev" forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(showPreviousMonth)
               forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_backButton];
         
         _forwardButton = [[UIButton alloc] init];
-//        [_forwardButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [_forwardButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_forwardButton setTitle:@"Next" forState:UIControlStateNormal];
+        [_forwardButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [_forwardButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_forwardButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
+//        [_forwardButton setTitle:@"Next" forState:UIControlStateNormal];
         [_forwardButton addTarget:self action:@selector(showNextMonth)
                  forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_forwardButton];
@@ -327,6 +342,13 @@
     
     // We need an NSDateFormatter to have access to the localized weekday strings
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    if ([countryCode isEqualToString: countryCodeEn]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]];
+    }
     
     NSArray *weekSymbols = [formatter shortWeekdaySymbols];
     
@@ -350,8 +372,8 @@
         for (NSString *weekDayString in _weekDays) {
             UILabel *weekDayLabel = [[UILabel alloc] init];
             [weekDayLabel setFont:[UIFont systemFontOfSize:14]];
-//            [weekDayLabel setTextColor:[UIColor grayColor]];
-            [weekDayLabel setTextColor:[UIColor whiteColor]];
+            [weekDayLabel setTextColor:[UIColor blackColor]];
+//            [weekDayLabel setTextColor:[UIColor whiteColor]];
             [weekDayLabel setTextAlignment:NSTextAlignmentCenter];
             [weekDayLabel setText:weekDayString];
             [weekDayLabels addObject:weekDayLabel];
@@ -371,6 +393,13 @@
 
 - (void)updateMonthLabelMonth:(NSDateComponents*)month {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    if ([countryCode isEqualToString: countryCodeEn]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]];
+    }
     formatter.dateFormat = @"MMMM yyyy";
     
     NSDate *date = [month.calendar dateFromComponents:month];

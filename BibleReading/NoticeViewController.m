@@ -113,7 +113,7 @@
     CGRect textRect2 = CGRectMake(width/10, height/4, width-width/10*2, 18);
     UILabel *notification = [[UILabel alloc]init];
     notification = [[UILabel alloc]initWithFrame:textRect2];
-    notification.text = @"Notification Setting";
+    notification.text = NSLocalizedString(@"Notification Setting", nil);
     notification.font = [UIFont systemFontOfSize:18];
     notification.textColor = [UIColor whiteColor];
     [_settingView addSubview:notification];
@@ -319,7 +319,7 @@
         notification.fireDate = notificationDate;
         notification.repeatInterval = NSCalendarUnitDay;
         notification.shouldGroupAccessibilityChildren = YES;
-        notification.alertBody = [NSString stringWithFormat:@"reading time"];
+        notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"reading time", nil)];
         notification.timeZone = [NSTimeZone defaultTimeZone];
         notification.soundName = UILocalNotificationDefaultSoundName;
         notification.applicationIconBadgeNumber = 1;

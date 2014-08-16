@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  BibleReading
+
+  Created by 石井嗣 on 2014/08/16.
+  Copyright (c) 2014年 YuZ. All rights reserved.
+*/
+
+"Prev" = "Prev";
+"Next" = "Next";
+"Your Plan" = "Your Plan";
+"Start Date" = "Start Date";
+"1year" = "1year schedule";
+"2year" = "2year schedule";
+"general" = "general";
+"time ordering" = "time ordering";
+"recommend" = "recommend";
+"Notification Setting" = "Notification Setting";
+"reading time" = "reading time";
+"alert" = "Setting is done. Would you like to overwrite this setting?";
+"Cancel" = "Cancel";

@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+//中国語アプリ名
+CFBundleDisplayName = "jw阅读圣经";

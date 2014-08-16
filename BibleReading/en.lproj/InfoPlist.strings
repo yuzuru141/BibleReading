@@ -1,2 +1,4 @@
 /* Localized versions of Info.plist keys */
 
+//英語アプリ名
+CFBundleDisplayName = "jBibleReading";

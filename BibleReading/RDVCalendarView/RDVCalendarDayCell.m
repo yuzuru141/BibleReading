@@ -52,9 +52,9 @@
         [self addSubview:_contentView];
         
         _textLabel = [[UILabel alloc] init];
-//        [_textLabel setTextColor:[UIColor blackColor]];
-        [_textLabel setTextColor:[UIColor whiteColor]];
-        [_textLabel setHighlightedTextColor:[UIColor whiteColor]];
+        [_textLabel setTextColor:[UIColor blackColor]];
+        [_textLabel setTextColor:[UIColor blackColor]];
+//        [_textLabel setHighlightedTextColor:[UIColor whiteColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
         [_textLabel setFont:[UIFont systemFontOfSize:20]];
         [_contentView addSubview:_textLabel];

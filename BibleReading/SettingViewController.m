@@ -9,6 +9,10 @@
 #import "SettingViewController.h"
 
 @interface SettingViewController (){
+    NSString *countryCode;
+    NSString *countryCodeEn;
+    NSString *countryCodeJa;
+    NSString *countryCodeCn;
     CGFloat width;
     CGFloat height;
     UIButton *listBtn;
@@ -74,6 +78,13 @@
 
 
 - (void)setViewForFirst{
+    
+    //デバイスの言語設定を読む
+    countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSLog(@"countryCode=%@",countryCode);
+    countryCodeEn = @"en";
+    countryCodeJa = @"ja";
+    countryCodeCn = @"zh-Hans";
     
     //スクリーンサイズの取得
     CGRect screenSize = [[UIScreen mainScreen] bounds];
@@ -176,7 +187,7 @@
     CGRect textRect = CGRectMake(width/10, height/9+30, width-width/10*2, 18);
     UILabel *labelPlan = [[UILabel alloc]init];
     labelPlan = [[UILabel alloc]initWithFrame:textRect];
-    labelPlan.text = @"Your Plan";
+    labelPlan.text = NSLocalizedString(@"Your Plan", nil);
     labelPlan.font = [UIFont systemFontOfSize:18];
     labelPlan.textColor = [UIColor whiteColor];
     [_settingView addSubview:labelPlan];
@@ -192,7 +203,7 @@
     CGRect textRect3 = CGRectMake(width/10, height/9*5, width-width/10*2, 18);
     UILabel *startDate = [[UILabel alloc]init];
     startDate = [[UILabel alloc]initWithFrame:textRect3];
-    startDate.text = @"Start Date";
+    startDate.text = NSLocalizedString(@"Start Date", nil);
     startDate.font = [UIFont systemFontOfSize:18];
     startDate.textColor = [UIColor whiteColor];
     [_settingView addSubview:startDate];
@@ -207,7 +218,7 @@
 //ピッカー作成
 - (void)createPicker {
     
-    aItemList = [[NSArray alloc] initWithObjects:@"1year",@"2year",nil];
+    aItemList = [[NSArray alloc] initWithObjects:NSLocalizedString(@"1year", nil), NSLocalizedString(@"2year", nil) ,nil];
     oPicker = [[UIPickerView alloc] init];
     oPicker.frame = CGRectMake(width/5, height/9+30, width-width/5*2, 25);
     oPicker.showsSelectionIndicator = YES;
@@ -220,7 +231,7 @@
     oPicker.transform = CGAffineTransformConcat(t0, CGAffineTransformConcat(s0, t1));
     [_settingView addSubview:oPicker];
     
-    aItemList2 = [[NSArray alloc] initWithObjects:@"general",@"time ordering",@"recommend",nil];
+    aItemList2 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"general", nil) ,NSLocalizedString(@"time ordering", nil) ,NSLocalizedString(@"recommend", nil) ,nil];
     oPicker2 = [[UIPickerView alloc] init];
     oPicker2.frame = CGRectMake(width/5, height/9+100, width-width/5*2, 25);
     oPicker2.showsSelectionIndicator = YES;
@@ -395,6 +406,15 @@
     CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);
     CGAffineTransform t31 = CGAffineTransformMakeTranslation(-datePicker.bounds.size.width/2, -datePicker.bounds.size.height/2);
     datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
+    
+    if ([countryCode isEqualToString: countryCodeEn]) {
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"];
+    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
+    }
+    
     [datePicker addTarget:self
                    action:@selector(datePicker_ValueChanged:)
          forControlEvents:UIControlEventValueChanged];
@@ -407,7 +427,13 @@
 {
     datePicker = sender;
     df = [[NSDateFormatter alloc]init];
-    df.dateFormat = @"yyyy/MM/dd";
+    if ([countryCode isEqualToString: countryCodeEn]) {
+        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]];
+    }
     NSLog(@"%@", [df stringFromDate:datePicker.date]);
 }
 
@@ -546,10 +572,10 @@
 
 //画面遷移時に設定確認
 - (void)alertViewMethod{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Setting is done. Your reading plan will be overwritten."
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alert", nil)
                                                     message:nil
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancel"
+                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                           otherButtonTitles:@"OK",nil];
     [alert show];
 }
