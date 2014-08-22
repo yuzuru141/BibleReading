@@ -23,4 +23,7 @@
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
 
+//一時的な関数
+//- (void)overWrite;
+
 @end

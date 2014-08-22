@@ -406,6 +406,7 @@
     CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);
     CGAffineTransform t31 = CGAffineTransformMakeTranslation(-datePicker.bounds.size.width/2, -datePicker.bounds.size.height/2);
     datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
+    datePicker.backgroundColor = [UIColor whiteColor];
     
     if ([countryCode isEqualToString: countryCodeEn]) {
         datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
