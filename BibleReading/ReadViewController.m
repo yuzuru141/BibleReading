@@ -138,7 +138,7 @@
     int i;
     for (i=0; i<[idArray count]; i++) {
         
-        CGRect bibleNameRect = CGRectMake(width/8, 70+i*40, width-40, 15);
+        CGRect bibleNameRect = CGRectMake(width/9, 70+i*40, width-40, 15);
         UILabel *bibleLabel = [[UILabel alloc]initWithFrame:bibleNameRect];
         if ([countryCode isEqualToString: countryCodeEn]) {
             bibleLabel.text = [bibleName objectAtIndex:i];
@@ -159,7 +159,7 @@
     //章ラベルの作成
     for (i=0; i<[idArray count]; i++) {
         
-        CGRect chapterRect = CGRectMake(width/8*3, 70+i*40, width-40, 15);
+        CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 15);
         UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
         chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
         chaperLabel.textColor = [UIColor whiteColor];
@@ -173,8 +173,8 @@
         
         NSString *verseString = [verse objectAtIndex:i];
         //節情報があるところだけラベル表示する
-        if (![verseString length]==0) {
-        CGRect verseRect = CGRectMake(width/8*4, 70+i*40, width-40, 15);
+        if ([verseString length]>1) {
+        CGRect verseRect = CGRectMake(width/9*5, 70+i*40, width-40, 15);
         UILabel *verseLabel = [[UILabel alloc]initWithFrame:verseRect];
         verseLabel.text = [NSString stringWithFormat:@": %@",[verse objectAtIndex:i]];
         verseLabel.textColor = [UIColor whiteColor];
@@ -186,7 +186,7 @@
     
     //読んだかどうかチェックボックス作成
      for (i=0; i<[idArray count]; i++) {
-         CGRect readRect = CGRectMake(width/8*6, 65+i*40, width-40, 15);
+         CGRect readRect = CGRectMake(width/9*7, 65+i*40, width-40, 15);
          sw = [[UISwitch alloc] initWithFrame:readRect];
          sw.tag = i;
          sw.onTintColor = [UIColor blackColor];

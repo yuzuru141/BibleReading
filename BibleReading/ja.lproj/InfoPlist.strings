@@ -1,4 +1,4 @@
 /* Localized versions of Info.plist keys */
 
 //日本語アプリ名
-CFBundleDisplayName = "jw聖書通読";
+CFBundleDisplayName = "jBibleReading";
