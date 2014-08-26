@@ -159,13 +159,15 @@
     //章ラベルの作成
     for (i=0; i<[idArray count]; i++) {
         
+        //章があるところだけラベル表示する
+        if (![[capter objectAtIndex:i]intValue]==0) {
         CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 15);
         UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
         chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
         chaperLabel.textColor = [UIColor whiteColor];
         chaperLabel.font = [UIFont systemFontOfSize:15];
         [_settingView addSubview:chaperLabel];
-
+        }
     }
     
     //節ラベルの作成
