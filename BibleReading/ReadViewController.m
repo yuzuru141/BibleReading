@@ -209,7 +209,7 @@
 //読んだかどうかスイッチで呼ばれるメソッド
 - (IBAction)readOrNotSwitch:(UISwitch*)sender{
     
-    //www.jw.orgから聖書をモーダルビューで表示
+    //www.jw.orgから聖書をWEBビューで表示
     NSMutableArray *resultArray = [[NSMutableArray alloc]init];
     NSMutableArray *readOrNotIndivisualArray = [[NSMutableArray alloc]init];
     switch (sender.tag) {
@@ -407,7 +407,17 @@
             urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+
+    NSHTTPURLResponse* resp;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+    
+    //通信エラーであれば、警告を出す
+        if (resp.statusCode != 200){
+            [self alertViewMethod];
+            return;
+        }
+
     [webView loadRequest:request];
     [_settingView addSubview:webView];
     
@@ -420,6 +430,18 @@
                 action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:backBtn2];
     
+}
+
+
+
+//読み込み失敗時に呼ばれる関数
+- (void)alertViewMethod{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"networkConncetionError", nil)
+                                                    message:nil
+                                                   delegate:self
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK",nil];
+    [alert show];
 }
 
 

@@ -19,3 +19,4 @@
 "reading time" = "通読タイムです";
 "alert" = "設定完了しました。リーディングプランを上書きしますか？";
 "Cancel" = "キャンセル";
+"networkConncetionError" = "インターネットへ\n接続できません。";

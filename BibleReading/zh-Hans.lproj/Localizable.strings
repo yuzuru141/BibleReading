@@ -19,3 +19,4 @@
 "reading time" = "阅读时间";
 "alert" = "设置完了。要重写规划吗？";
 "Cancel" = "取消";
+"networkConncetionError" = "无法连接到网络";
