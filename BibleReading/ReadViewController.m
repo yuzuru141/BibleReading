@@ -16,7 +16,8 @@
     int intDate;
     CGFloat width;
     CGFloat height;
-    UIButton *backBtn;
+    UIButton *backCalender;
+    UIButton *backDate;
     NSMutableArray *idArray;
     NSMutableArray *bibleName;
     NSMutableArray *bibleNameJp;
@@ -26,7 +27,10 @@
     NSMutableArray *readOrNot;
     UIWebView *webView;
     UISwitch *sw;
+    BOOL toDate;
 }
+
+
 @property UIView *settingView;
 
 @end
@@ -129,13 +133,13 @@
     [_settingView.layer insertSublayer:pageGradient atIndex:0];
     
     //戻るボタンの作成
-    backBtn = [[UIButton alloc]
-               initWithFrame:CGRectMake(15, 25, 100, 32)];
-    [backBtn setTitle:@"toCalender" forState:UIControlStateNormal];
-    [backBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [backBtn addTarget:self
+    backCalender = [[UIButton alloc]
+               initWithFrame:CGRectMake(width/18, 25, 150, 32)];
+    [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
+    [backCalender.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [backCalender addTarget:self
                 action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingView addSubview:backBtn];
+    [_settingView addSubview:backCalender];
     
     //聖書ラベルの作成
     int i;
@@ -425,13 +429,19 @@
     [_settingView addSubview:webView];
     
     //戻るボタンの作成
-    UIButton *backBtn2 = [[UIButton alloc]
-               initWithFrame:CGRectMake(120, 25, 50, 32)];
-    [backBtn2 setTitle:@"toDate" forState:UIControlStateNormal];
-    [backBtn2.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [backBtn2 addTarget:self
+    backDate = [[UIButton alloc]
+               initWithFrame:CGRectMake(width/18*9, 25, 150, 32)];
+    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
+    [backDate.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [backDate addTarget:self
                 action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingView addSubview:backBtn2];
+    [_settingView addSubview:backDate];
+    
+    //toDateボタンを表示する
+    toDate = YES;
+    if (toDate==YES) {
+        backDate.hidden = NO;
+    }
     
 }
 
@@ -474,6 +484,11 @@
 //webView削除
 - (IBAction)deleteWebView:(id)sender{
         [webView removeFromSuperview];
+    //戻るボタンを消す
+    toDate = NO;
+    if (toDate==NO) {
+        backDate.hidden = YES;
+    }
 }
 
 

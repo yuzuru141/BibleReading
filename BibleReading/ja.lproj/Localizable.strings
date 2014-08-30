@@ -17,7 +17,9 @@
 "recommend" = "おすすめ";
 "Notification Setting" = "通知設定";
 "reading time" = "通読タイムです";
-"alert" = "設定完了しました。リーディングプランを上書きしますか？";
+"alert" = "設定完了しました。\nリーディングプランを\n上書きしますか？";
 "Cancel" = "キャンセル";
 "networkConncetionError" = "インターネットへ\n接続できません。";
 "alertForFirst" = "最初にリーディングプランを\n設定してください。";
+"toDate" = "日付へ戻る";
+"toCalender" = "カレンダーへ戻る";

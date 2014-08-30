@@ -21,3 +21,5 @@
 "Cancel" = "取消";
 "networkConncetionError" = "无法连接到网络";
 "alertForFirst" = "首先要设置阅读规划";
+"toDate" = "向当日返回";
+"toCalender" = "向日曆返回";
