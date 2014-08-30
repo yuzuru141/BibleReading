@@ -13,6 +13,5 @@
 
 @interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate>
 
-
-
 @end
+

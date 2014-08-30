@@ -47,6 +47,7 @@
 		FE63A2B5197CDC8C003E3099 /* Bibile_Read_BaseDB.db in Resources */ = {isa = PBXBuildFile; fileRef = FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */; };
 		FE77F2C3199F6C3500BD8F02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE77F2C5199F6C3500BD8F02 /* Localizable.strings */; };
 		FE8C7B9F19970FEA00122385 /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8C7B9E19970FEA00122385 /* Chat.png */; };
+		FE9F512019ADC0DB009DFD87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE774BE319ADB58300ECAB00 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		FE63A2AB197CAF9B003E3099 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
 		FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		FE63A2B4197CDC8C003E3099 /* Bibile_Read_BaseDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bibile_Read_BaseDB.db; path = BibleReading/Bibile_Read_BaseDB.db; sourceTree = "<group>"; };
+		FE774BE319ADB58300ECAB00 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FE77F2C4199F6C3500BD8F02 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FE77F2C6199F6CB500BD8F02 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		FE77F2C7199F6CB500BD8F02 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPad.strings; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE9F512019ADC0DB009DFD87 /* QuartzCore.framework in Frameworks */,
 				FE63A2AE197CB41F003E3099 /* libsqlite3.0.dylib in Frameworks */,
 				FE064E43197A371A0013BC97 /* CoreGraphics.framework in Frameworks */,
 				FE064E45197A371A0013BC97 /* UIKit.framework in Frameworks */,
@@ -180,6 +183,7 @@
 		FE064E3F197A371A0013BC97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE774BE319ADB58300ECAB00 /* QuartzCore.framework */,
 				FE63A2AD197CB41F003E3099 /* libsqlite3.0.dylib */,
 				FE064E40197A371A0013BC97 /* Foundation.framework */,
 				FE064E42197A371A0013BC97 /* CoreGraphics.framework */,

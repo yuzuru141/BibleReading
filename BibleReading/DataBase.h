@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabase.h"
 
-
 @interface DataBase : NSObject
 
 - (void)createDB;

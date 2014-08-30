@@ -371,7 +371,7 @@
     
     [db close];
     [resultArray addObject:readOrNot];
-    NSLog(@"readOrNot=%d",[[readOrNot objectAtIndex:0]integerValue]);
+    NSLog(@"readOrNot=%d",[[readOrNot objectAtIndex:0]intValue]);
     return resultArray;
 }
 

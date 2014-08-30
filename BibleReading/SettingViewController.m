@@ -79,6 +79,7 @@
 
 - (void)setViewForFirst{
     
+    
     //デバイスの言語設定を読む
     countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
     NSLog(@"countryCode=%@",countryCode);
@@ -94,7 +95,6 @@
     [self createsettingView];
 //    [self writeUserName];
     [self setSchedule];
-    
     
 }
 
@@ -141,8 +141,8 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
-            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
             [self alertViewMethod];
+            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
             break;
         case 1:
             [self setViewForFirst];
@@ -438,6 +438,16 @@
 }
 
 
+//creatAndSelectDBメソッドを使う際もユーザが操作できるようにマルチスレッドにする
+- (void)multilevelThreadMethod{
+    
+    [NSThread
+     detachNewThreadSelector:@selector(createAndSelectDB)
+     toTarget:self
+     withObject:nil];
+
+}
+
 //DB作成と読み込み
 - (void)createAndSelectDB{
     
@@ -580,7 +590,6 @@
         }
         }
     }
-    
 }
 
 
@@ -605,11 +614,17 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             NSLog(@"cancel");
             break;
         case 1:
-            [self createAndSelectDB];
+            [self multilevelThreadMethod];
             NSLog(@"OK");
             break;
     }
     
 }
+
+
+
+
+
+
 
 @end

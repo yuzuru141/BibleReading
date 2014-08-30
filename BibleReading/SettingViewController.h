@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
 #import "DataBase.h"
+#import <QuartzCore/QuartzCore.h>
+#import "CalendarViewController.h"
 
 @interface SettingViewController : UIViewController<RNFrostedSidebarDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 

@@ -8,17 +8,17 @@
 
 #import "CalendarViewController.h"
 
-
 @interface CalendarViewController (){
     UIButton *listBtn;
 }
-
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
 @property UIView *planView;
 @property RDVCalendarView *calendar;
 
 @end
+
+
 
 @implementation CalendarViewController
 
@@ -40,6 +40,7 @@
 
 
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -53,6 +54,8 @@
     
     [self setSideBar];
     [self buttonToRead];
+    
+    
 
 }
 
@@ -113,15 +116,10 @@
     }
 }
 
-
-
-
-
 //デリゲートメソッド
 - (void)buttonToRead{
     [self performSegueWithIdentifier:@"calendarToRead" sender:self];    
 }
-
 
 
 @end
