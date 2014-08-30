@@ -14,6 +14,16 @@
 
 }
 
+//全く新規でDatafolderがあるかないか確認する
+- (BOOL)existDataFolderOrNot{
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *baseDir = [self dataFolderPath];
+    
+    BOOL exists = [fileManager fileExistsAtPath:baseDir];
+    return exists;
+}
+
 
 //DB作成
 - (void)createDB{
@@ -449,27 +459,7 @@
     }
     return success;
 }
-//
-//
-//- (void)overWrite{
-//    NSString *dbPath = [self connectDB];
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    
-//    [db open];
-//    
-//    NSString *sql = [NSString stringWithFormat:@"select * from baseTable where bible_name_japanese = 'ヨシュア'"];
-////     NSString *sql = [NSString stringWithFormat:@"update baseTable set bible_name_japanese = 'ヨシュア' where bible_name_japanese = 'ヨシュア記'"];
-////         NSString *sql = [NSString stringWithFormat:@"update baseTable set bible_name_japanese = 'ヨシュア' where id = 192"];
-//    FMResultSet *result = [db executeQuery:sql];
-//    
-//    while ([result next]) {
-//        NSLog(@"bible_name_japanese=%d",[result intForColumn:@"id"]);
-////        NSLog(@"bible_name_japanese=%@",[result stringForColumn:@"bible_name_japanese"]);
-//    }
-//    
-//    [db close];
-//    return;
-//}
+
 
 
 @end

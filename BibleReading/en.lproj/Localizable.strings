@@ -20,3 +20,4 @@
 "alert" = "Setting is done. Would you like to overwrite this setting?";
 "Cancel" = "Cancel";
 "networkConncetionError" = "Network Conncetion Error";
+"alertForFirst" = "in the beginning,\nplease set your reading plan.";

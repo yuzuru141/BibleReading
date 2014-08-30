@@ -62,6 +62,9 @@
 //カレンダーで選択した日付を読み込む
 - (void)selectedDate{
     
+    //リーディングプランを設定していない時はアラートを出す。
+    [self alertForFirst];
+    
     //デバイスの言語設定を読む
     countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
     NSLog(@"countryCode=%@",countryCode);
@@ -442,6 +445,24 @@
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"OK",nil];
     [alert show];
+}
+
+
+//リーディングプランを全く設定していない場合は、設定するようにアラートを出す
+- (void)alertForFirst{
+    
+    self.database = [[DataBase alloc]init];
+    
+    BOOL exist = [self.database existDataFolderOrNot];
+    
+    if (!exist) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alertForFirst", nil)
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK",nil];
+        [alert show];
+    }
 }
 
 

@@ -54,8 +54,6 @@
     
     [self setSideBar];
     [self buttonToRead];
-    
-    
 
 }
 
@@ -115,6 +113,7 @@
             break;
     }
 }
+
 
 //デリゲートメソッド
 - (void)buttonToRead{

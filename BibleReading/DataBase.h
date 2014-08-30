@@ -11,6 +11,7 @@
 
 @interface DataBase : NSObject
 
+- (BOOL)existDataFolderOrNot;
 - (void)createDB;
 //- (void)readDB:(NSString*)argument1;
 - (NSMutableArray *)selectPlan:(int)year label:(int)plan;
@@ -21,8 +22,5 @@
 - (void)dbUpdateReadOrNot:(int)ID;
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
-
-//一時的な関数
-//- (void)overWrite;
 
 @end
