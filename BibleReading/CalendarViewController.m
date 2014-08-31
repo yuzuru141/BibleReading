@@ -85,16 +85,27 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_planView addSubview:listBtn];
     
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
+    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
     
+//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+//    pageGradient.frame = self.view.bounds;
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
+//     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
     
-    [self.view.layer insertSublayer:pageGradient atIndex:0];
-     
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:1 green:1 blue:0.878 alpha:1.0].CGColor,
+//     (id)[UIColor colorWithRed:1 green:1 blue:0.878 alpha:1.0].CGColor, nil];
+    
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:0 green:210 blue:17 alpha:0.5].CGColor,
+//     (id)[UIColor colorWithRed:234 green:210 blue:173 alpha:1.0].CGColor, nil];
+    
+//    [self.view.layer insertSublayer:pageGradient atIndex:0];
+    
 }
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {

@@ -113,15 +113,15 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:listBtn];
     
+    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
     
-    
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
-    [_settingView.layer insertSublayer:pageGradient atIndex:0];
+//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+//    pageGradient.frame = self.view.bounds;
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
+//     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
+//    [_settingView.layer insertSublayer:pageGradient atIndex:0];
     
 }
 
@@ -188,8 +188,8 @@
     UILabel *labelPlan = [[UILabel alloc]init];
     labelPlan = [[UILabel alloc]initWithFrame:textRect];
     labelPlan.text = NSLocalizedString(@"Your Plan", nil);
-    labelPlan.font = [UIFont systemFontOfSize:18];
-    labelPlan.textColor = [UIColor whiteColor];
+    labelPlan.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    labelPlan.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:labelPlan];
     
 //    CGRect textRect2 = CGRectMake(width/10, height/9*5-20, width-width/10*2, 18);
@@ -204,8 +204,8 @@
     UILabel *startDate = [[UILabel alloc]init];
     startDate = [[UILabel alloc]initWithFrame:textRect3];
     startDate.text = NSLocalizedString(@"Start Date", nil);
-    startDate.font = [UIFont systemFontOfSize:18];
-    startDate.textColor = [UIColor whiteColor];
+    startDate.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    startDate.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:startDate];
     
     [self createPicker];
@@ -345,8 +345,8 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont boldSystemFontOfSize: 20];
-    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentLeft;
     
     if (pickerView.tag == 1) {
@@ -397,10 +397,10 @@
 //datepicker
 - (void)datePickerMethod{
     // イニシャライザ
-    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*5, width-width/10*2, 18)];
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*5+10, width-width/10*2, 18)];
     datePicker.datePickerMode = UIDatePickerModeDate;
     
-    datePicker.tintColor = [UIColor whiteColor];
+    datePicker.tintColor = [UIColor blackColor];
     datePicker.minuteInterval = 10;
     CGAffineTransform t30 = CGAffineTransformMakeTranslation(datePicker.bounds.size.width/2, datePicker.bounds.size.height/2);
     CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);

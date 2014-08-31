@@ -78,14 +78,15 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:listBtn];
     
+    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
     
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
-    [_settingView.layer insertSublayer:pageGradient atIndex:0];
+//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+//    pageGradient.frame = self.view.bounds;
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
+//     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
+//    [_settingView.layer insertSublayer:pageGradient atIndex:0];
 
 }
 
@@ -108,12 +109,12 @@
 //ラベル作成とピッカー読み込み
 - (void)setSchedule{
     
-    CGRect textRect2 = CGRectMake(width/10, height/4, width-width/10*2, 18);
+    CGRect textRect2 = CGRectMake(width/10, height/9+30, width-width/10*2, 18);
     UILabel *notification = [[UILabel alloc]init];
     notification = [[UILabel alloc]initWithFrame:textRect2];
     notification.text = NSLocalizedString(@"Notification Setting", nil);
-    notification.font = [UIFont systemFontOfSize:18];
-    notification.textColor = [UIColor whiteColor];
+    notification.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    notification.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:notification];
     
     [self createPicker];
@@ -127,14 +128,14 @@
     aItemList3 = [[NSArray alloc] initWithObjects:@"--",@"00:",@"01:",@"02:",@"03:",@"04:",@"05:",@"06:",@"07:",@"08:",@"09:",@"10:",@"11:",@"12:",@"13:",@"14:",@"15:",@"16:",@"17:",@"18:",@"19:",@"20:",@"21:",@"22:",@"23:",nil];
     aItemList4 = [[NSArray alloc] initWithObjects:@"--",@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59",nil];
     oPicker3 = [[UIPickerView alloc] init];
-    oPicker3.frame = CGRectMake(width/5, height/4, width-width/5*2, 25);
+    oPicker3.frame = CGRectMake(width/5, height/9*2, width-width/5*2, 50);
     oPicker3.showsSelectionIndicator = YES;
     oPicker3.delegate = self;
     oPicker3.dataSource = self;
     oPicker3.tag = 3;
+
     [self userSelectRow];
     [_settingView addSubview:oPicker3];
-
     
 }
 
@@ -186,8 +187,8 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont boldSystemFontOfSize: 20];
-    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentLeft;
     
         switch (component) {

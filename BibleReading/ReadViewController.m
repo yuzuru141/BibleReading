@@ -124,19 +124,22 @@
     _settingView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
     [self.view addSubview:_settingView];
     
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.view.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
-     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
-    [_settingView.layer insertSublayer:pageGradient atIndex:0];
+    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
+    
+//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+//    pageGradient.frame = self.view.bounds;
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
+//     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
+//    [_settingView.layer insertSublayer:pageGradient atIndex:0];
     
     //戻るボタンの作成
     backCalender = [[UIButton alloc]
-               initWithFrame:CGRectMake(width/18, 25, 150, 32)];
+               initWithFrame:CGRectMake(0, 25, 100, 32)];
     [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
-    [backCalender.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backCalender addTarget:self
                 action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:backCalender];
@@ -157,8 +160,8 @@
             bibleLabel.text = [bibleNameCn objectAtIndex:i];
             NSLog(@"countryCodeCn=%@",countryCodeCn);
         }
-        bibleLabel.textColor = [UIColor whiteColor];
-        bibleLabel.font = [UIFont systemFontOfSize:15];
+        bibleLabel.textColor = [UIColor blackColor];
+        bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
         [_settingView addSubview:bibleLabel];
         
     }
@@ -171,8 +174,8 @@
         CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 15);
         UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
         chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
-        chaperLabel.textColor = [UIColor whiteColor];
-        chaperLabel.font = [UIFont systemFontOfSize:15];
+        chaperLabel.textColor = [UIColor blackColor];
+        chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
         [_settingView addSubview:chaperLabel];
         }
     }
@@ -186,8 +189,8 @@
         CGRect verseRect = CGRectMake(width/9*5, 70+i*40, width-40, 15);
         UILabel *verseLabel = [[UILabel alloc]initWithFrame:verseRect];
         verseLabel.text = [NSString stringWithFormat:@": %@",[verse objectAtIndex:i]];
-        verseLabel.textColor = [UIColor whiteColor];
-        verseLabel.font = [UIFont systemFontOfSize:15];
+        verseLabel.textColor = [UIColor blackColor];
+        verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
         [_settingView addSubview:verseLabel];
         }
         
@@ -430,9 +433,10 @@
     
     //戻るボタンの作成
     backDate = [[UIButton alloc]
-               initWithFrame:CGRectMake(width/18*9, 25, 150, 32)];
+               initWithFrame:CGRectMake(70, 25, 100, 32)];
     [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
-    [backDate.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backDate addTarget:self
                 action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:backDate];

@@ -51,12 +51,15 @@
         [_contentView setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_contentView];
         
+        
+        //日付の色
         _textLabel = [[UILabel alloc] init];
         [_textLabel setTextColor:[UIColor blackColor]];
-        [_textLabel setTextColor:[UIColor blackColor]];
+//        [_textLabel setTextColor:[UIColor blackColor]];
 //        [_textLabel setHighlightedTextColor:[UIColor whiteColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
-        [_textLabel setFont:[UIFont systemFontOfSize:20]];
+//        [_textLabel setFont:[UIFont systemFontOfSize:20]];
+        [_textLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
         [_contentView addSubview:_textLabel];
     }
     return self;
