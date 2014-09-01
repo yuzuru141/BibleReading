@@ -41,10 +41,14 @@
         _backgroundView = [[UIView alloc] init];
         [_backgroundView setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:_backgroundView];
+        //セルの角を丸くする
+        _backgroundView.layer.cornerRadius =10;
         
         _selectedBackgroundView = [[UIView alloc] init];
         [_selectedBackgroundView setBackgroundColor:[UIColor lightGrayColor]];
         [_selectedBackgroundView setAlpha:0];
+        //セルの角を丸くする
+        _selectedBackgroundView.layer.cornerRadius =10;
         [self addSubview:_selectedBackgroundView];
         
         _contentView = [[UIView alloc] init];
