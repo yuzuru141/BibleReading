@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, RDVCalendarDayCellSelectionStyle) {
  * Returns the label used for the main textual content of the day cell. (read-only)
  */
 @property (nonatomic, readonly) UILabel *textLabel;
+@property (nonatomic, readonly) UILabel *textLabel2;
 
 /**
  * Returns the content view of the day cell object. (read-only)

@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "DataBase.h"
 
 @class RDVCalendarDayCell;
 
@@ -38,6 +39,8 @@ typedef NS_OPTIONS(NSInteger, RDVCalendarViewDayCellSeparatorType) {
 @interface RDVCalendarView : UIView
 
 #pragma mark - Managing the Delegate
+
+@property DataBase *database;
 
 @property (atomic, strong) NSDateComponents *selectedDay;
 

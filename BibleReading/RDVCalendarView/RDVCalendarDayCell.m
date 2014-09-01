@@ -59,12 +59,22 @@
         //日付の色
         _textLabel = [[UILabel alloc] init];
         [_textLabel setTextColor:[UIColor blackColor]];
-//        [_textLabel setTextColor:[UIColor blackColor]];
 //        [_textLabel setHighlightedTextColor:[UIColor whiteColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
 //        [_textLabel setFont:[UIFont systemFontOfSize:20]];
         [_textLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
         [_contentView addSubview:_textLabel];
+        
+        
+        //読み終わった日付はグレー色にする
+        _textLabel2 =[[UILabel alloc] init];
+        [_textLabel2 setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
+        [_textLabel2 setBackgroundColor:[UIColor clearColor]];
+        [_textLabel2 setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
+        [_contentView addSubview:_textLabel2];
+        
+        
+        
     }
     return self;
 }
@@ -76,6 +86,7 @@
 - (void)layoutSubviews {
     CGSize frameSize = self.frame.size;
     CGSize titleSize = [[self textLabel] sizeThatFits:CGSizeMake(frameSize.width, frameSize.height)];
+    CGSize titleSize2 = [[self textLabel2] sizeThatFits:CGSizeMake(frameSize.width, frameSize.height)];
     
     [[self backgroundView] setFrame:self.bounds];
     [[self selectedBackgroundView] setFrame:self.bounds];
@@ -84,6 +95,9 @@
     [[self textLabel] setFrame:CGRectMake(roundf(frameSize.width / 2 - titleSize.width / 2),
                                            roundf(frameSize.height / 2 - titleSize.height / 2),
                                            titleSize.width, titleSize.height)];
+    [[self textLabel2] setFrame:CGRectMake(roundf(frameSize.width / 2 - titleSize2.width / 2),
+                                          roundf(frameSize.height / 2 - titleSize2.height / 2),
+                                          titleSize2.width, titleSize2.height)];
 }
 
 #pragma mark - Selection
@@ -179,6 +193,7 @@
     [self setHighlighted:NO];
     
     [[self textLabel] setText:@""];
+    [[self textLabel2] setText:@""];
 }
 
 @end

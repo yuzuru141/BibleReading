@@ -386,6 +386,28 @@
 }
 
 
+//プランの章を全て読み終わった日付を確認する
+- (NSMutableArray*)checkDate:(int)DATE{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+//    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *readOrNotArray = [[NSMutableArray alloc]init];
+//    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    
+    NSString *selectDate = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",DATE];
+    
+    [db open];
+    FMResultSet *result = [db executeQuery:selectDate];
+    
+    while ([result next]) {
+        int rReadOrNot = [result intForColumn:@"readOrNot"];
+        [readOrNotArray addObject:[NSNumber numberWithInteger:rReadOrNot]];
+    }
+    [db close];
+    return readOrNotArray;
+}
 
 //DB接続
 - (NSString *)connectDB{
@@ -397,7 +419,7 @@
 }
 
 
-//DB削除メソッド。必要な時以外、絶対に使用しないこと！！（石井）
+//DB削除メソッド。必要な時以外、絶対に使用しないこと！！
 - (void)dbDelete{
     
     //DB接続

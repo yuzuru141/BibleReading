@@ -22,5 +22,6 @@
 - (void)dbUpdateReadOrNot:(int)ID;
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
+- (NSMutableArray*)checkDate:(int)DATE;
 
 @end
