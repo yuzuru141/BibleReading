@@ -482,7 +482,8 @@
 
 //バックボタンの動作
 - (IBAction)toCalender:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"readToCalender" sender:self];
 }
 
 //webView削除

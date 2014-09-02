@@ -524,40 +524,46 @@
     if (![[self visibleCells] containsObject:dayCell]) {
         [dayCell prepareForReuse];
         
-        
-        //章が全て読み終わっているかどうか確認する
         self.database = [[DataBase alloc]init];
-        NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
-        NSString *dateString;
-        if ([self month].month>9) {
-            dateString = [NSString stringWithFormat:@"%d%d",[self month].year,[self month].month];
-        }else{
-            dateString = [NSString stringWithFormat:@"%d0%d",[self month].year,[self month].month];
-        }
+//        BOOL exist = [self.database existDataFolderOrNot];
+//        
+//        if (exist) {
+//            
+//        //章が全て読み終わっているかどうか確認する
+//        NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
+//        NSString *dateString;
+//        if ([self month].month>9) {
+//            dateString = [NSString stringWithFormat:@"%d%d",[self month].year,[self month].month];
+//        }else{
+//            dateString = [NSString stringWithFormat:@"%d0%d",[self month].year,[self month].month];
+//        }
+//        
+//        if ((index+1)>9) {
+//            dateString = [NSString stringWithFormat:@"%@%d",dateString,index+1];
+//        }else{
+//            dateString = [NSString stringWithFormat:@"%@0%d",dateString,index+1];
+//        }
+//        
+//        int dateInt = dateString.intValue;
+//        readOrNot =[self.database checkDate:dateInt];
+//        
+//        NSString *readOrNotString;
+//        
+//        for (int i=0; i<[readOrNot count]; i++) {
+//            readOrNotString = [readOrNot objectAtIndex:i];
+//            if (readOrNotString.intValue == 0) {
+//                [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
+//            }else{
+//                [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%d", index + 1]];
+//                }
+//            }
+//            
+//        }else{
         
-        if ((index+1)>9) {
-            dateString = [NSString stringWithFormat:@"%@%d",dateString,index+1];
-        }else{
-            dateString = [NSString stringWithFormat:@"%@0%d",dateString,index+1];
-        }
-        
-        int dateInt = dateString.intValue;
-        readOrNot =[self.database checkDate:dateInt];
-        
-        NSString *readOrNotString;
-        
-        for (int i=0; i<[readOrNot count]; i++) {
-            readOrNotString = [readOrNot objectAtIndex:i];
-            if (readOrNotString.intValue == 0) {
-                [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
-            }else{
-                [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%d", index + 1]];
-            }
-        }
-        
-        
-        
-        
+        //初回は全てのカレンダー文字を黒にする
+        [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
+            
+//        }
         
         if (index + 1 == [self currentDay].day &&
             [self month].month == [self currentDay].month &&
