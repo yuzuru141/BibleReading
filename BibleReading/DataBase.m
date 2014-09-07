@@ -61,24 +61,6 @@
     
 }
 
-//- (void)readDB:(NSString*)argument1{
-//    
-//    NSString *dbPath = [self connectDB];
-//    
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    
-//    [db open];
-//    
-//    // list up
-//    NSString *selectSql = [NSString stringWithFormat:@"SELECT id, %@ FROM baseTable;",argument1];
-//    FMResultSet *result = [db executeQuery:selectSql];
-//    while ( [result next] ) {
-//        NSString *rId   = [result stringForColumn:@"id"];
-//        NSString *rArg = [result stringForColumn:[NSString stringWithFormat:@"%@",argument1]];
-//        NSLog(@"%@, %@", rId , rArg);
-//    }
-//    [db close];
-//}
 
 
 //聖書通読プランを選択する
@@ -239,14 +221,13 @@
 //聖書通読用のテーブルに初期値を投入
 - (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(NSString*)VERSE label6:(NSDate*)DATE{
     
-    //日付をint型に変換
-    NSString* date_str;
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYYMMdd"];
-    date_str = [formatter stringFromDate:DATE]; //strに変換
-    int dateInt = [date_str integerValue];
-//    NSLog(@"dateInt=%d",dateInt);
-//    NSLog(@"chapter=%d",CAPTER);
+    [formatter setLocale:[NSLocale systemLocale]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [formatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    int dateInt = [formatter stringFromDate:DATE].intValue;
+    NSLog(@"dateInt=%d",dateInt);
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -267,6 +248,7 @@
      [NSNumber numberWithInteger:0]];
     [db close];
 }
+
 
 //日付からDBを読み込む
 - (NSMutableArray*)dbLoadByDate:(int)DATE{
@@ -304,7 +286,6 @@
         
         int rCapter = [result intForColumn:@"capter"];
         [capter addObject:[NSNumber numberWithInteger:rCapter]];
-//        NSLog(@"rChapter=%d",rCapter);
         
         NSString *rVerse = [result stringForColumn:@"verse"];
         [verse addObject:rVerse];
@@ -360,6 +341,7 @@
 
 //個別のReadOrNotをアップデート
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID{
+    
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
 
@@ -392,22 +374,30 @@
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     
-//    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
     NSMutableArray *readOrNotArray = [[NSMutableArray alloc]init];
-//    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
     
     NSString *selectDate = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",DATE];
+    NSLog(@"selectDate=%@",selectDate);
     
     [db open];
-    FMResultSet *result = [db executeQuery:selectDate];
+    FMResultSet *result = [[FMResultSet alloc]init];
+    result = [db executeQuery:selectDate];
+    
+    
+    int rReadOrNot;
     
     while ([result next]) {
-        int rReadOrNot = [result intForColumn:@"readOrNot"];
+        rReadOrNot = [result intForColumn:@"readOrNot"];
         [readOrNotArray addObject:[NSNumber numberWithInteger:rReadOrNot]];
+        int rDate= [result intForColumn:@"date"];
+        NSLog(@"rDate=%d",rDate);
     }
     [db close];
-    return readOrNotArray;
+    [resultArray addObject:readOrNotArray];
+    return resultArray;
 }
+
 
 //DB接続
 - (NSString *)connectDB{

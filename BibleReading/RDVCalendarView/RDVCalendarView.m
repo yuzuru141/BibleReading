@@ -137,7 +137,6 @@
         _month.day = 1;
         
         [self updateMonthLabelMonth:_month];
-        
         [self updateMonthViewMonth:_month];
         
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
@@ -489,7 +488,6 @@
                                  fromDate:selectedDate];
         self.month.day = 1;
         [self updateMonthLabelMonth:self.month];
-        
         [self updateMonthViewMonth:self.month];
     }
 }
@@ -524,41 +522,58 @@
     if (![[self visibleCells] containsObject:dayCell]) {
         [dayCell prepareForReuse];
         
-        
-        //章が全て読み終わっているかどうか確認する
         self.database = [[DataBase alloc]init];
-        NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
-        NSString *dateString;
-        if ([self month].month>9) {
-            dateString = [NSString stringWithFormat:@"%d%d",[self month].year,[self month].month];
-        }else{
-            dateString = [NSString stringWithFormat:@"%d0%d",[self month].year,[self month].month];
-        }
+        BOOL exist = [self.database existDataFolderOrNot];
         
-        if ((index+1)>9) {
-            dateString = [NSString stringWithFormat:@"%@%d",dateString,index+1];
-        }else{
-            dateString = [NSString stringWithFormat:@"%@0%d",dateString,index+1];
-        }
+        if (exist) {
+            
+        //章が全て読み終わっているかどうか確認する
+            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+            [dateComponents setYear:[[self month] year]];
+            [dateComponents setMonth:[[self month] month]];
+            [dateComponents setDay:(index + 1)];
+            NSDate *date = [[self calendar] dateFromComponents:dateComponents];
+            
+            NSCalendar *calendar = [self calendar];
+            NSDateComponents *selectedDateComponents = [calendar components:NSYearCalendarUnit|
+                                                        NSMonthCalendarUnit|
+                                                        NSDayCalendarUnit
+                                                                   fromDate:date];
         
-        int dateInt = dateString.intValue;
-        readOrNot =[self.database checkDate:dateInt];
-        
-        NSString *readOrNotString;
-        
-        for (int i=0; i<[readOrNot count]; i++) {
-            readOrNotString = [readOrNot objectAtIndex:i];
-            if (readOrNotString.intValue == 0) {
-                [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
+            NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+            NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
+            NSString *dateString;
+            if (selectedDateComponents.month>9) {
+                dateString = [NSString stringWithFormat:@"%d%d",selectedDateComponents.year,selectedDateComponents.month];
             }else{
-                [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%d", index + 1]];
+                dateString = [NSString stringWithFormat:@"%d0%d",selectedDateComponents.year,selectedDateComponents.month];
             }
+            
+            if ((index+1)>9) {
+                dateString = [NSString stringWithFormat:@"%@%d",dateString,index+1];
+            }else{
+                dateString = [NSString stringWithFormat:@"%@0%d",dateString,index+1];
+            }
+        
+            int dateInt = dateString.intValue;
+            NSLog(@"dateInt=%d",dateInt);
+            resultArray =[self.database checkDate:dateInt];
+            readOrNot = resultArray[0];
+            NSString *readOrNotString;
+            int i;
+            for (i=0; i<[readOrNot count]; i++) {
+                readOrNotString = [readOrNot objectAtIndex:i];
+                if (readOrNotString.intValue == 0) {
+                    [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
+                }else{
+                    [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%d", index + 1]];
+                }
+            }
+        }else{
+        //初回は全てのカレンダー文字を黒にする
+        [dayCell.textLabel setText:[NSString stringWithFormat:@"%d", index + 1]];
         }
-        
-        
-        
-        
-        
+    
         if (index + 1 == [self currentDay].day &&
             [self month].month == [self currentDay].month &&
             [self month].year == [self currentDay].year) {
@@ -594,9 +609,7 @@
     [dateComponents setYear:[[self month] year]];
     [dateComponents setMonth:[[self month] month]];
     [dateComponents setDay:(index + 1)];
-    
     NSDate *date = [[self calendar] dateFromComponents:dateComponents];
-    
     return date;
 }
 
@@ -646,13 +659,11 @@
     NSDate* dt = [cal dateFromComponents:self.selectedDay];
     NSString* date_str;
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYYMMdd"];
+    [formatter setDateFormat:@"yyyyMMdd"];
     date_str = [formatter stringFromDate:dt]; //strに変換
     int dateInt = [date_str integerValue];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:dateInt forKey:@"DATE"];
-    
-//    NSLog(@"calenderDateClass=%d",dateInt);
     
     //ボタンが選択された時に次のページに移動するようにデリケートメソッド追加
     [self.delegate buttonToRead];

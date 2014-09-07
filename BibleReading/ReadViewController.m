@@ -126,14 +126,6 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
     
-//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-//    pageGradient.frame = self.view.bounds;
-//    pageGradient.colors =
-//    [NSArray arrayWithObjects:
-//     (id)[UIColor colorWithRed:0.10 green:0.84 blue:0.99 alpha:1.0].CGColor,
-//     (id)[UIColor colorWithRed:0.11 green:0.30 blue:0.94 alpha:1.0].CGColor, nil];
-//    [_settingView.layer insertSublayer:pageGradient atIndex:0];
-    
     //戻るボタンの作成
     backCalender = [[UIButton alloc]
                initWithFrame:CGRectMake(0, 25, 100, 32)];
@@ -479,10 +471,23 @@
     }
 }
 
+// 常に回転させない
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
+// 縦のみサポート
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 
 //バックボタンの動作
 - (IBAction)toCalender:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self performSegueWithIdentifier:@"readToCalender" sender:self];
 }
 
 //webView削除

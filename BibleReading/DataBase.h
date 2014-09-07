@@ -13,7 +13,6 @@
 
 - (BOOL)existDataFolderOrNot;
 - (void)createDB;
-//- (void)readDB:(NSString*)argument1;
 - (NSMutableArray *)selectPlan:(int)year label:(int)plan;
 - (void)createTable;
 - (void)deleteDataInTable;
@@ -23,5 +22,6 @@
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
 - (NSMutableArray*)checkDate:(int)DATE;
+
 
 @end

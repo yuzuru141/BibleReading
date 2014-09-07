@@ -84,6 +84,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="readToCalender" id="qLM-2c-gmZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRG-3K-ul2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,8 +99,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gae-vY-vLW"/>
-        <segue reference="drU-lt-p9y"/>
         <segue reference="zKL-Sr-3nQ"/>
+        <segue reference="qLM-2c-gmZ"/>
+        <segue reference="gae-vY-vLW"/>
     </inferredMetricsTieBreakers>
 </document>
