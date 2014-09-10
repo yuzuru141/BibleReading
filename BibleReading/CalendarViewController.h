@@ -10,9 +10,14 @@
 #import "RDVCalendarViewController.h"
 #import "NoticeViewController.h"
 #import "RDVExampleDayCell.h"
+#import "DataBase.h"
+#import "BNIndicator.h"
+#import "BNIndicatorView.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate>
+@interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate,UIWebViewDelegate>
 
+@property DataBase *database;
 
 @end
 

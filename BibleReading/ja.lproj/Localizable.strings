@@ -17,9 +17,10 @@
 "recommend" = "おすすめ";
 "Notification Setting" = "通知設定";
 "reading time" = "通読タイムです";
-"alert" = "設定完了しました。\nリーディングプランを\n上書きしますか？";
+"Setting is done. Would you like to overwrite this setting?" = "設定完了しました。\nリーディングプランを\n上書きしますか？";
 "Cancel" = "キャンセル";
 "networkConncetionError" = "インターネットへ\n接続できません。";
-"alertForFirst" = "最初にリーディングプランを\n設定してください。";
+"Please set your reading plan" = "最初にリーディングプランを\n設定してください。";
 "toDate" = "< 日付";
 "toCalender" = "< カレンダー";
+"Would you like to see operating instructions movie?" = "初めに操作動画を見ますか？";

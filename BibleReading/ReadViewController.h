@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DataBase.h"
+#import "BNIndicator.h"
+#import "BNIndicatorView.h"
+#import <QuartzCore/QuartzCore.h>
 
-
-@interface ReadViewController : UIViewController
+@interface ReadViewController : UIViewController<UIWebViewDelegate>
 
 @property DataBase *database;
 

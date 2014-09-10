@@ -17,9 +17,10 @@
 "recommend" = "recommend";
 "Notification Setting" = "Notification Setting";
 "reading time" = "reading time";
-"alert" = "Setting is done. Would you like to overwrite this setting?";
+"Setting is done. Would you like to overwrite this setting?" = "Setting is done. Would you like to overwrite this setting?";
 "Cancel" = "Cancel";
 "networkConncetionError" = "Network Conncetion Error";
-"alertForFirst" = "in the beginning,\nplease set your reading plan.";
+"Please set your reading plan" = "in the beginning,\nplease set your reading plan.";
 "toDate" = "< Date";
 "toCalender" = "< Calender";
+"Would you like to see operating instructions movie?" = "The first, Would you like to see operating instructions movie?";

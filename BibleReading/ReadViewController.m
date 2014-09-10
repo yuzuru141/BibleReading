@@ -25,7 +25,7 @@
     NSMutableArray *capter;
     NSMutableArray *verse;
     NSMutableArray *readOrNot;
-    UIWebView *webView;
+    UIWebView *webViewJWORG;
     UISwitch *sw;
     BOOL toDate;
 }
@@ -395,7 +395,11 @@
 //jw.orgから聖書を読み込む
 - (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
     
-    webView = [[UIWebView alloc]initWithFrame:CGRectMake(0,60,self.view.bounds.size.width,self.view.bounds.size.height)];
+    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,60,self.view.bounds.size.width,self.view.bounds.size.height)];
+    
+    webViewJWORG.delegate = self;
+    
+    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
     
     NSString *urlString;
     
@@ -420,8 +424,8 @@
             return;
         }
 
-    [webView loadRequest:request];
-    [_settingView addSubview:webView];
+    [webViewJWORG loadRequest:request];
+    [_settingView addSubview:webViewJWORG];
     
     //戻るボタンの作成
     backDate = [[UIButton alloc]
@@ -462,7 +466,7 @@
     BOOL exist = [self.database existDataFolderOrNot];
     
     if (!exist) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alertForFirst", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please set your reading plan", nil)
                                                         message:nil
                                                        delegate:self
                                               cancelButtonTitle:nil
@@ -470,6 +474,13 @@
         [alert show];
     }
 }
+
+
+// ページ読込完了時にインジケータを非表示にする
+-(void)webViewDidFinishLoad:(UIWebView*)webView{
+    [BNIndicator hideForView:webViewJWORG];
+}
+
 
 // 常に回転させない
 - (BOOL)shouldAutorotate
@@ -492,7 +503,7 @@
 
 //webView削除
 - (IBAction)deleteWebView:(id)sender{
-        [webView removeFromSuperview];
+        [webViewJWORG removeFromSuperview];
     //戻るボタンを消す
     toDate = NO;
     if (toDate==NO) {

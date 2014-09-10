@@ -48,6 +48,8 @@
 		FE77F2C3199F6C3500BD8F02 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE77F2C5199F6C3500BD8F02 /* Localizable.strings */; };
 		FE8C7B9F19970FEA00122385 /* Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = FE8C7B9E19970FEA00122385 /* Chat.png */; };
 		FE9F512019ADC0DB009DFD87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE774BE319ADB58300ECAB00 /* QuartzCore.framework */; };
+		FECF79A919C02BB100B78A10 /* BNIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FECF79A619C02BB100B78A10 /* BNIndicator.m */; };
+		FECF79AA19C02BB100B78A10 /* BNIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = FECF79A819C02BB100B78A10 /* BNIndicatorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,10 @@
 		FE77F2CE199F6CD400BD8F02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FE77F2CF199F6CD400BD8F02 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		FE8C7B9E19970FEA00122385 /* Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chat.png; sourceTree = "<group>"; };
+		FECF79A519C02BB100B78A10 /* BNIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNIndicator.h; sourceTree = "<group>"; };
+		FECF79A619C02BB100B78A10 /* BNIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNIndicator.m; sourceTree = "<group>"; };
+		FECF79A719C02BB100B78A10 /* BNIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNIndicatorView.h; sourceTree = "<group>"; };
+		FECF79A819C02BB100B78A10 /* BNIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNIndicatorView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +202,7 @@
 		FE064E46197A371A0013BC97 /* BibleReading */ = {
 			isa = PBXGroup;
 			children = (
+				FECF79A419C02BB100B78A10 /* BNIndicator */,
 				FE63A299197CAF6F003E3099 /* fmdb */,
 				FE064E9E197A50240013BC97 /* RDVCalendarView */,
 				FE064E89197A42670013BC97 /* souce */,
@@ -297,6 +304,17 @@
 				FE63A2A4197CAF6F003E3099 /* FMResultSet.m */,
 			);
 			path = fmdb;
+			sourceTree = "<group>";
+		};
+		FECF79A419C02BB100B78A10 /* BNIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				FECF79A519C02BB100B78A10 /* BNIndicator.h */,
+				FECF79A619C02BB100B78A10 /* BNIndicator.m */,
+				FECF79A719C02BB100B78A10 /* BNIndicatorView.h */,
+				FECF79A819C02BB100B78A10 /* BNIndicatorView.m */,
+			);
+			path = BNIndicator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,7 +427,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FECF79AA19C02BB100B78A10 /* BNIndicatorView.m in Sources */,
 				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
+				FECF79A919C02BB100B78A10 /* BNIndicator.m in Sources */,
 				FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */,
 				FE064E5A197A371A0013BC97 /* NoticeViewController.m in Sources */,
 				FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */,
