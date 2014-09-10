@@ -17,9 +17,10 @@
 "recommend" = "推薦";
 "Notification Setting" = "通知设置";
 "reading time" = "阅读时间";
-"alert" = "设置完了。要重写规划吗？";
+"Setting is done. Would you like to overwrite this setting?" = "设置完了。要重写规划吗？";
 "Cancel" = "取消";
 "networkConncetionError" = "无法连接到网络";
-"alertForFirst" = "首先要设置阅读规划";
+"Please set your reading plan" = "首先要设置阅读规划";
 "toDate" = "< 当日";
 "toCalender" = "< 日曆";
+"Would you like to see operating instructions movie?" = "首先你想看设置动画吗?";

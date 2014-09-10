@@ -10,6 +10,7 @@
 
 @interface CalendarViewController (){
     UIButton *listBtn;
+    UIWebView *youtubeView;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -54,6 +55,7 @@
     
     [self setSideBar];
     [self buttonToRead];
+    [self checkFirst];
 
 }
 
@@ -103,6 +105,70 @@
             break;
     }
 }
+
+
+- (void)checkFirst{
+    
+    self.database = [[DataBase alloc]init];
+    BOOL exist = [self.database existDataFolderOrNot];
+     
+    if (!exist) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Would you like to see operating instructions movie?", nil)
+                                                         message:nil
+                                                        delegate:self
+                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                               otherButtonTitles:@"OK",nil];
+         [alert show];
+     }
+    
+}
+
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (buttonIndex) {
+            
+        case 0:
+            break;
+        
+        case 1:
+            youtubeView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+            youtubeView.delegate = self;
+            youtubeView.scalesPageToFit = YES;
+            [BNIndicator showForView:youtubeView withMessage:@"Loading"];
+            NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/embed/SGc2S87uPp4?feature=player_detailpage&rel=0"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [youtubeView loadRequest:request];
+            
+            [self.view addSubview:youtubeView];
+            
+            //戻るボタンの作成
+            UIButton *backCalender = [[UIButton alloc]
+                            initWithFrame:CGRectMake(0, 25, 100, 32)];
+            [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
+            [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+            [backCalender addTarget:self
+                             action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
+            [youtubeView addSubview:backCalender];
+            break;
+    }
+}
+
+
+// ページ読込完了時にインジケータを非表示にする
+-(void)webViewDidFinishLoad:(UIWebView*)webView{
+    [BNIndicator hideForView:youtubeView];
+}
+
+
+//webView削除
+- (IBAction)deleteWebView:(id)sender{
+    [youtubeView removeFromSuperview];
+//    [controllerForWeb dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 // 常に回転させない
 - (BOOL)shouldAutorotate

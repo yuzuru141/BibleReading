@@ -587,7 +587,7 @@
 
 //画面遷移時に設定確認
 - (void)alertViewMethod{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"alert", nil)
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Setting is done. Would you like to overwrite this setting?", nil)
                                                     message:nil
                                                    delegate:self
                                           cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
