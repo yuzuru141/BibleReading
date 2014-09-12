@@ -175,11 +175,15 @@
 //ラベル作成とピッカー読み込み
 - (void)setSchedule{
 
-    CGRect textRect = CGRectMake(width/10, height/9+30, width-width/10*2, 18);
+    CGRect textRect = CGRectMake(width/10, height/9+30, width-width/10*2, 35);
     UILabel *labelPlan = [[UILabel alloc]init];
     labelPlan = [[UILabel alloc]initWithFrame:textRect];
     labelPlan.text = NSLocalizedString(@"Your Plan", nil);
-    labelPlan.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        labelPlan.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    }else{
+        labelPlan.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:35];
+    }
     labelPlan.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:labelPlan];
     
@@ -191,11 +195,15 @@
 //    notification.textColor = [UIColor whiteColor];
 //    [_settingView addSubview:notification];
     
-    CGRect textRect3 = CGRectMake(width/10, height/9*5, width-width/10*2, 18);
+    CGRect textRect3 = CGRectMake(width/10, height/9*5, width-width/10*2, 35);
     UILabel *startDate = [[UILabel alloc]init];
     startDate = [[UILabel alloc]initWithFrame:textRect3];
     startDate.text = NSLocalizedString(@"Start Date", nil);
-    startDate.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        startDate.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    }else{
+        startDate.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:35];
+    }
     startDate.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:startDate];
     
@@ -211,7 +219,7 @@
     
     aItemList = [[NSArray alloc] initWithObjects:NSLocalizedString(@"1year", nil), NSLocalizedString(@"2year", nil) ,nil];
     oPicker = [[UIPickerView alloc] init];
-    oPicker.frame = CGRectMake(width/5, height/9+30, width-width/5*2, 25);
+    oPicker.frame = CGRectMake(width/5, height/9+30, width-width/5*2, 35);
     oPicker.showsSelectionIndicator = YES;
     oPicker.delegate = self;
     oPicker.dataSource = self;
@@ -224,7 +232,11 @@
     
     aItemList2 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"general", nil) ,NSLocalizedString(@"time ordering", nil) ,NSLocalizedString(@"recommend", nil) ,nil];
     oPicker2 = [[UIPickerView alloc] init];
-    oPicker2.frame = CGRectMake(width/5, height/9+100, width-width/5*2, 25);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        oPicker2.frame = CGRectMake(width/5, height/9+100, width-width/5*2, 35);
+    }else{
+        oPicker2.frame = CGRectMake(width/5, height/5+100, width-width/5*2, 35);
+    }
     oPicker2.showsSelectionIndicator = YES;
     oPicker2.delegate = self;
     oPicker2.dataSource = self;
@@ -336,7 +348,11 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    }else{
+        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:35];
+    }
     label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentLeft;
     
@@ -385,18 +401,28 @@
 }
 
 
+//ピッカーの高さを設定する
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 50;
+}
+
+
 //datepicker
 - (void)datePickerMethod{
     // イニシャライザ
-    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*5+10, width-width/10*2, 18)];
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*5+10, width-width/10*2, 35)];
     datePicker.datePickerMode = UIDatePickerModeDate;
     
     datePicker.tintColor = [UIColor blackColor];
     datePicker.minuteInterval = 10;
-    CGAffineTransform t30 = CGAffineTransformMakeTranslation(datePicker.bounds.size.width/2, datePicker.bounds.size.height/2);
-    CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);
-    CGAffineTransform t31 = CGAffineTransformMakeTranslation(-datePicker.bounds.size.width/2, -datePicker.bounds.size.height/2);
-    datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
+    
+    //iphoneの時はサイズを小さくする
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        CGAffineTransform t30 = CGAffineTransformMakeTranslation(datePicker.bounds.size.width/2, datePicker.bounds.size.height/2);
+        CGAffineTransform s30 = CGAffineTransformMakeScale(0.7, 0.7);
+        CGAffineTransform t31 = CGAffineTransformMakeTranslation(-datePicker.bounds.size.width/2, -datePicker.bounds.size.height/2);
+        datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
+    }
     
     if ([countryCode isEqualToString: countryCodeEn]) {
         datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];

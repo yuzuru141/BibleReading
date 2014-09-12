@@ -101,11 +101,15 @@
 //ラベル作成とピッカー読み込み
 - (void)setSchedule{
     
-    CGRect textRect2 = CGRectMake(width/10, height/9+30, width-width/10*2, 18);
+    CGRect textRect2 = CGRectMake(width/10, height/9+30, width-width/10*2, 35);
     UILabel *notification = [[UILabel alloc]init];
     notification = [[UILabel alloc]initWithFrame:textRect2];
     notification.text = NSLocalizedString(@"Notification Setting", nil);
-    notification.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        notification.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:18];
+    }else{
+        notification.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:35];
+    }
     notification.textColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
     [_settingView addSubview:notification];
     
@@ -149,6 +153,10 @@
     }
 }
 
+//ピッカーの高さを設定する
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 100;
+}
 
 //区切りの数（コンポーネント）
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -179,7 +187,11 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] init];
-    label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
+    }else{
+        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:35];
+    }
     label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentLeft;
     
@@ -206,7 +218,7 @@
 {
         switch (component) {
             case 0: // 1列目
-                return 30.0;
+                return 70.0;
                 break;
             case 1: // 2列目
                 return width-width/10*2+30;

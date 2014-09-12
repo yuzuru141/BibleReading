@@ -62,7 +62,11 @@
 //        [_textLabel setHighlightedTextColor:[UIColor whiteColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
 //        [_textLabel setFont:[UIFont systemFontOfSize:20]];
-        [_textLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            [_textLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
+        }else{
+            [_textLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:40]];
+        }
         [_contentView addSubview:_textLabel];
         
         
@@ -70,7 +74,11 @@
         _textLabel2 =[[UILabel alloc] init];
         [_textLabel2 setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
         [_textLabel2 setBackgroundColor:[UIColor clearColor]];
-        [_textLabel2 setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            [_textLabel2 setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:20]];
+        }else{
+            [_textLabel2 setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:40]];
+        }
         [_contentView addSubview:_textLabel2];
         
         
