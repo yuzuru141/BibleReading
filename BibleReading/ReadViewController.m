@@ -131,6 +131,11 @@
                initWithFrame:CGRectMake(0, 25, 100, 32)];
     [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
     [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+//        [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+//    }else{
+//        [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
+//    }
     [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backCalender addTarget:self
                 action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
@@ -140,7 +145,7 @@
     int i;
     for (i=0; i<[idArray count]; i++) {
         
-        CGRect bibleNameRect = CGRectMake(width/9, 70+i*40, width-40, 15);
+        CGRect bibleNameRect = CGRectMake(width/9, 70+i*40, width-40, 30);
         UILabel *bibleLabel = [[UILabel alloc]initWithFrame:bibleNameRect];
         if ([countryCode isEqualToString: countryCodeEn]) {
             bibleLabel.text = [bibleName objectAtIndex:i];
@@ -153,7 +158,11 @@
             NSLog(@"countryCodeCn=%@",countryCodeCn);
         }
         bibleLabel.textColor = [UIColor blackColor];
-        bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        }else{
+            bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+        }
         [_settingView addSubview:bibleLabel];
         
     }
@@ -163,11 +172,15 @@
         
         //章があるところだけラベル表示する
         if (![[capter objectAtIndex:i]intValue]==0) {
-        CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 15);
+        CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 30);
         UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
         chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
         chaperLabel.textColor = [UIColor blackColor];
-        chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        }else{
+            chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+        }
         [_settingView addSubview:chaperLabel];
         }
     }
@@ -178,11 +191,15 @@
         NSString *verseString = [verse objectAtIndex:i];
         //節情報があるところだけラベル表示する
         if ([verseString length]>1) {
-        CGRect verseRect = CGRectMake(width/9*5, 70+i*40, width-40, 15);
+        CGRect verseRect = CGRectMake(width/9*5, 70+i*40, width-40, 30);
         UILabel *verseLabel = [[UILabel alloc]initWithFrame:verseRect];
         verseLabel.text = [NSString stringWithFormat:@": %@",[verse objectAtIndex:i]];
         verseLabel.textColor = [UIColor blackColor];
-        verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        }else{
+            verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+        }
         [_settingView addSubview:verseLabel];
         }
         
@@ -190,7 +207,12 @@
     
     //読んだかどうかチェックボックス作成
      for (i=0; i<[idArray count]; i++) {
-         CGRect readRect = CGRectMake(width/9*7, 65+i*40, width-40, 15);
+         CGRect readRect;
+         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+             readRect = CGRectMake(width/9*7, 65+i*40, width-40, 15);
+         }else{
+             readRect = CGRectMake(width/9*7, 65+i*40, width-40, 30);
+         }
          sw = [[UISwitch alloc] initWithFrame:readRect];
          sw.tag = i;
          sw.onTintColor = [UIColor blackColor];
@@ -432,6 +454,11 @@
                initWithFrame:CGRectMake(70, 25, 100, 32)];
     [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
     [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+//        [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+//    }else{
+//        [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
+//    }
     [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backDate addTarget:self
                 action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
