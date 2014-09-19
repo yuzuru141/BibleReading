@@ -97,7 +97,7 @@
             [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:22]];
         }
         else{
-            [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:45]];
+            [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:40]];
         }
         
 //        [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:22]];
@@ -113,7 +113,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             _backButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:17];
         }else{
-            _backButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:35];
+            _backButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:25];
         }
 //        [_backButton setTitle:@"Prev" forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(showPreviousMonth)
@@ -127,7 +127,7 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             _forwardButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:17];
         }else{
-            _forwardButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:35];
+            _forwardButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:25];
         }
 //        [_forwardButton setTitle:@"Next" forState:UIControlStateNormal];
         [_forwardButton addTarget:self action:@selector(showNextMonth)
@@ -188,12 +188,12 @@
                                   50);
     
     // Layout header view
-    //サイドバーとの兼ね合いで、元々のコードより80ピクセル下げた。
+    //サイドバーとの兼ね合いで、backButtonとforwardButtonを元々のコードより80ピクセル下げた。
     [[self backButton] setFrame:CGRectMake(10, roundf(headerSize.height / 2 - previousMonthButtonSize.height / 2 +80),
                                          previousMonthButtonSize.width, previousMonthButtonSize.height)];
     
     [[self monthLabel] setFrame:CGRectMake(roundf(headerSize.width / 2 - titleSize.width / 2),
-                                         roundf(headerSize.height / 2 - titleSize.height / 2+80),
+                                         roundf(headerSize.height / 2 - titleSize.height / 2+70),
                                          titleSize.width, titleSize.height)];
     
     [[self forwardButton] setFrame:CGRectMake(headerSize.width - 10 - nextMonthButtonSize.width,
@@ -241,7 +241,7 @@
     NSInteger column = 0;
     for (UILabel *weekDayLabel in [self weekDayLabels]) {
         CGFloat labelXPosition = [self dayCellEdgeInsets].left + (column * dayWidth) + (column * elementHorizonralDistance);
-        [weekDayLabel setFrame:CGRectMake(labelXPosition, CGRectGetMaxY([[self monthLabel] frame]), dayWidth, [self weekDayHeight])];
+        [weekDayLabel setFrame:CGRectMake(labelXPosition, CGRectGetMaxY([[self monthLabel] frame])+10, dayWidth, [self weekDayHeight])];
         column++;
     }
     
@@ -396,7 +396,7 @@
                 [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:14]];
             }
             else{
-                [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
+                [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:25]];
             }
 //            [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:14]];
             [weekDayLabel setTextColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7]];

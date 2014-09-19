@@ -124,7 +124,8 @@
     _settingView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
     [self.view addSubview:_settingView];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
+    //バックの色をfloralwhiteに設定
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.98 blue:0.941 alpha:1];
     
     //戻るボタンの作成
     backCalender = [[UIButton alloc]
