@@ -132,11 +132,6 @@
                initWithFrame:CGRectMake(0, 25, 100, 32)];
     [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
     [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-//        [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-//    }else{
-//        [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
-//    }
     [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backCalender addTarget:self
                 action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
@@ -210,9 +205,9 @@
      for (i=0; i<[idArray count]; i++) {
          CGRect readRect;
          if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-             readRect = CGRectMake(width/9*7, 65+i*40, width-40, 15);
+             readRect = CGRectMake(width/9*7, 70+i*40, width-40, 15);
          }else{
-             readRect = CGRectMake(width/9*7, 65+i*40, width-40, 30);
+             readRect = CGRectMake(width/9*7, 70+i*40, width-40, 30);
          }
          sw = [[UISwitch alloc] initWithFrame:readRect];
          sw.tag = i;
@@ -455,11 +450,6 @@
                initWithFrame:CGRectMake(70, 25, 100, 32)];
     [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
     [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-//        [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-//    }else{
-//        [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
-//    }
     [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backDate addTarget:self
                 action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
@@ -525,7 +515,6 @@
 
 //バックボタンの動作
 - (IBAction)toCalender:(id)sender{
-//    [self dismissViewControllerAnimated:YES completion:nil];
     [self performSegueWithIdentifier:@"readToCalender" sender:self];
 }
 

@@ -76,7 +76,6 @@
         // Setup defaults
         
         //現在の日付と選択日付
-//        _currentDayColor = [UIColor colorWithRed:80/255.0 green:200/255.0 blue:240/255.0 alpha:1.0];
         _currentDayColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7];
         _selectedDayColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.3];
         //_separatorColor = [UIColor lightGrayColor];
@@ -91,7 +90,6 @@
         // Setup header view
         
         _monthLabel = [[UILabel alloc] init];
-//        [_monthLabel setFont:[UIFont systemFontOfSize:22]];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:22]];
@@ -100,36 +98,30 @@
             [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:40]];
         }
         
-//        [_monthLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W6" size:22]];
         [_monthLabel setTextColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7]];
-//        [_monthLabel setTextColor:[UIColor whiteColor]];
         [_monthLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_monthLabel];
         
         _backButton = [[UIButton alloc] init];
         [_backButton setTitleColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7] forState:UIControlStateNormal];
-//        [_backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_backButton setTitle:NSLocalizedString(@"Prev", nil) forState:UIControlStateNormal];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             _backButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:17];
         }else{
             _backButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:25];
         }
-//        [_backButton setTitle:@"Prev" forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(showPreviousMonth)
               forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_backButton];
         
         _forwardButton = [[UIButton alloc] init];
         [_forwardButton setTitleColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7] forState:UIControlStateNormal];
-//        [_forwardButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_forwardButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             _forwardButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:17];
         }else{
             _forwardButton.titleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:25];
         }
-//        [_forwardButton setTitle:@"Next" forState:UIControlStateNormal];
         [_forwardButton addTarget:self action:@selector(showNextMonth)
                  forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_forwardButton];
@@ -390,7 +382,6 @@
         
         for (NSString *weekDayString in _weekDays) {
             UILabel *weekDayLabel = [[UILabel alloc] init];
-//            [weekDayLabel setFont:[UIFont systemFontOfSize:14]];
             
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
                 [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:14]];
@@ -398,9 +389,7 @@
             else{
                 [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:25]];
             }
-//            [weekDayLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:14]];
             [weekDayLabel setTextColor:[UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.7]];
-//            [weekDayLabel setTextColor:[UIColor whiteColor]];
             [weekDayLabel setTextAlignment:NSTextAlignmentCenter];
             [weekDayLabel setText:weekDayString];
             [weekDayLabels addObject:weekDayLabel];
