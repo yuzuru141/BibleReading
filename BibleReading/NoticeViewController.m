@@ -78,7 +78,8 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_settingView addSubview:listBtn];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
+    //バックの色をfloralwhiteに設定
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.98 blue:0.941 alpha:1];
 
 }
 

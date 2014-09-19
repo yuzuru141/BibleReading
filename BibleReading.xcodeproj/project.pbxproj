@@ -364,6 +364,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = YuZ;
 				TargetAttributes = {
+					FE064E3C197A371A0013BC97 = {
+						DevelopmentTeam = 7C78P8S8HP;
+					};
 					FE064E60197A371A0013BC97 = {
 						TestTargetID = FE064E3C197A371A0013BC97;
 					};
@@ -598,11 +601,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94C0DE4E-5608-4013-B585-63A120613856";
+				PROVISIONING_PROFILE = "243b20d1-9b2f-4486-9ce2-f926e3e261b6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -612,11 +616,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "94C0DE4E-5608-4013-B585-63A120613856";
+				PROVISIONING_PROFILE = "243b20d1-9b2f-4486-9ce2-f926e3e261b6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

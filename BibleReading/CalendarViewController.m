@@ -87,8 +87,8 @@
                 action:@selector(viewListMenu:) forControlEvents:UIControlEventTouchUpInside];
     [_planView addSubview:listBtn];
     
-    //バックの色をlinenに設定
-    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.941 blue:0.902 alpha:1];
+    //バックの色をfloralwhiteに設定
+    self.view.backgroundColor = [UIColor colorWithRed:1 green:0.98 blue:0.941 alpha:1];
     
 }
 
@@ -147,11 +147,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
                             initWithFrame:CGRectMake(0, 25, 100, 32)];
             [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
             [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-//                [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-//            }else{
-//                [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:30]];
-//            }
             [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
             [backCalender addTarget:self
                              action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,7 +165,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //webView削除
 - (IBAction)deleteWebView:(id)sender{
     [youtubeView removeFromSuperview];
-//    [controllerForWeb dismissViewControllerAnimated:YES completion:nil];
 }
 
 
