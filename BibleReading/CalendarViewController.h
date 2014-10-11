@@ -14,6 +14,7 @@
 #import "BNIndicator.h"
 #import "BNIndicatorView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "RNFrostedSidebar.h"
 
 @interface CalendarViewController : RDVCalendarViewController<RNFrostedSidebarDelegate,RDVCalendarViewDelegate,UIWebViewDelegate>
 
