@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RNFrostedSidebar.h"
+#import "DataBase.h"
 
 
 @interface CommentViewController : UIViewController<RNFrostedSidebarDelegate>
+
+@property DataBase *database;
+
 
 @end

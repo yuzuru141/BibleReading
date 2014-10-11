@@ -412,11 +412,73 @@
     while ([result next]) {
         rReadOrNot = [result intForColumn:@"readOrNot"];
         [readOrNotArray addObject:[NSNumber numberWithInteger:rReadOrNot]];
-        int rDate= [result intForColumn:@"date"];
-        NSLog(@"rDate=%d",rDate);
+//        int rDate= [result intForColumn:@"date"];
+//        NSLog(@"rDate=%d",rDate);
     }
     [db close];
     [resultArray addObject:readOrNotArray];
+    return resultArray;
+}
+
+
+//直近のコメントを返す
+- (NSMutableArray *)recentComment{
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale systemLocale]];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [formatter setCalendar:[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    int dateInt = [formatter stringFromDate:[NSDate date]].intValue;
+    int rId = 0;
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    NSMutableArray *comment = [[NSMutableArray alloc]init];
+    
+    FMResultSet *resultToday = [[FMResultSet alloc]init];
+    
+    [db open];
+    
+    //最初にForをスタートさせる日付を取得
+    NSString *todayId = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",dateInt];
+    resultToday = [db executeQuery:todayId];
+    while ([resultToday next]) {
+        rId   = [resultToday intForColumn:@"id"];
+        break;
+    }
+    
+    //コメントと日付を取得していく
+    FMResultSet *result = [[FMResultSet alloc]init];
+    int rDate=0;
+    int rDateNext=0;
+    for (int i=rId; i>=0; i--) {
+        NSString *recentCommentText = [NSString stringWithFormat:@"select * from myReadingTable where id = %d",rId];
+        result = [db executeQuery:recentCommentText];
+        while ([result next]) {
+            NSString *rComment = [result stringForColumn:@"comment"];
+            if (![rComment isEqualToString:@" "]) {
+                rDate= [result intForColumn:@"date"];
+                if (!(rDate==rDateNext)) {
+                    [dateArray addObject:[NSNumber numberWithInteger:rDate]];
+                    [comment addObject:rComment];
+                    rDateNext = rDate;
+                }
+            }
+        }
+        rId--;
+        //コメントを取得する件数を５件までにする
+        if ([comment count]==5) {
+            break;
+        }
+    }
+    
+    [db close];
+    [resultArray addObject:dateArray];
+    [resultArray addObject:comment];
     return resultArray;
 }
 
