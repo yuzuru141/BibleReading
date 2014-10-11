@@ -258,6 +258,7 @@
         textfield.returnKeyType = UIReturnKeyDefault;
         textfield.delegate = self;
         [scrollAllView addSubview:textfield];
+        [self registerForKeyboardNotifications];
     }
 }
 

@@ -12,7 +12,7 @@
 #import "BNIndicatorView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface ReadViewController : UIViewController<UIWebViewDelegate,UITextFieldDelegate,UIScrollViewDelegate,UITextViewDelegate>
+@interface ReadViewController : UIViewController<UIWebViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 
 @property DataBase *database;
 
