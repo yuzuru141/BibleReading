@@ -11,7 +11,7 @@
 @end
 
 @implementation DataBase{
-
+    
 }
 
 //全く新規でDatafolderがあるかないか確認する
@@ -68,20 +68,20 @@
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-
+    
     [db open];
     
     NSString *selectSql;
     
     switch (plan) {
-        //プランをgeneralに選択した場合
+            //プランをgeneralに選択した場合
         case 0:
             switch (year) {
-                //1yearに選択した場合
+                    //1yearに選択した場合
                 case 0:
                     selectSql = @"select * from baseTable order by general, one_year_group asc, id asc";
                     break;
-                //2yearに選択した場合
+                    //2yearに選択した場合
                 case 1:
                     selectSql = @"select * from baseTable order by general, two_year_group asc, id asc";
                     break;
@@ -90,14 +90,14 @@
                     break;
             }
             break;
-        //プランをtime_orderingに選択した場合
+            //プランをtime_orderingに選択した場合
         case 1:
             switch (year) {
-                //1yearに選択した場合
+                    //1yearに選択した場合
                 case 0:
                     selectSql = @"select * from baseTable order by time_ordering asc, one_year_group asc, id asc";
                     break;
-                //2yearに選択した場合
+                    //2yearに選択した場合
                 case 1:
                     selectSql = @"select * from baseTable order by time_ordering asc, two_year_group asc, id asc";
                     break;
@@ -106,14 +106,14 @@
                     break;
             }
             break;
-        //プランをrecommendに選択した場合
+            //プランをrecommendに選択した場合
         case 2:
             switch (year) {
-                //1yearに選択した場合
+                    //1yearに選択した場合
                 case 0:
                     selectSql = @"select * from baseTable order by recommend asc, one_year_group asc, id asc";
                     break;
-                //2yearに選択した場合
+                    //2yearに選択した場合
                 case 1:
                     selectSql = @"select * from baseTable order by recommend asc, two_year_group asc, id asc";
                     break;
@@ -193,18 +193,18 @@
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     
     [db open];
-
-    NSString *sql = @"CREATE TABLE IF NOT EXISTS myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse TEXT, date INTEGER, readOrNot INTEGER);";
+    
+    NSString *sql = @"CREATE TABLE IF NOT EXISTS myReadingTable(id INTEGER, bible_name TEXT, bible_name_japanese TEXT, bible_chinese TEXT, capter INTEGER, verse TEXT, date INTEGER, readOrNot INTEGER, comment TEXT);";
     
     [db executeUpdate:sql];
-
+    
     [db close];
 }
 
 
 //初期値を投入する前にDataを削除する
 - (void)deleteDataInTable{
- 
+    
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     
@@ -234,7 +234,7 @@
     
     [db open];
     
-    NSString *insert_sql = @"INSERT INTO myReadingTable(id, bible_name, bible_name_japanese, bible_chinese, capter, verse, date, readOrNot) VALUES (?,?,?,?,?,?,?,?)";
+    NSString *insert_sql = @"INSERT INTO myReadingTable(id, bible_name, bible_name_japanese, bible_chinese, capter, verse, date, readOrNot,comment) VALUES (?,?,?,?,?,?,?,?,?)";
     
     [db executeUpdate:insert_sql ,
      [NSNumber numberWithInteger:ID],
@@ -245,7 +245,9 @@
      VERSE,
      [NSNumber numberWithInteger:dateInt] ,
      //読んでいないのでreadOrNotの初期値は0
-     [NSNumber numberWithInteger:0]];
+     [NSNumber numberWithInteger:0],
+     @" "];
+    
     [db close];
 }
 
@@ -264,7 +266,8 @@
     NSMutableArray *capter = [[NSMutableArray alloc]init];
     NSMutableArray *verse = [[NSMutableArray alloc]init];
     NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
-
+    NSMutableArray *comment = [[NSMutableArray alloc]init];
+    
     [db open];
     
     NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",DATE];
@@ -289,13 +292,16 @@
         
         NSString *rVerse = [result stringForColumn:@"verse"];
         [verse addObject:rVerse];
-
+        
         int rReadOrNot = [result intForColumn:@"readOrNot"];
         [readOrNot addObject:[NSNumber numberWithInteger:rReadOrNot]];
+        
+        NSString *rComment = [result stringForColumn:@"comment"];
+        [comment addObject:rComment];
     }
     
     [db close];
-
+    
     [resultArray addObject:idArray];
     [resultArray addObject:bibleName];
     [resultArray addObject:bibleNameJp];
@@ -303,6 +309,7 @@
     [resultArray addObject:capter];
     [resultArray addObject:verse];
     [resultArray addObject:readOrNot];
+    [resultArray addObject:comment];
     
     return resultArray;
 }
@@ -310,7 +317,7 @@
 
 //DBへ読んだ情報をアップデート
 - (void)dbUpdateReadOrNot:(int)ID{
- 
+    
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     
@@ -344,12 +351,12 @@
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-
+    
     NSLog(@"ID=%d",ID);
     
     NSMutableArray *resultArray = [[NSMutableArray alloc]init];
     NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
-
+    
     [db open];
     
     NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where id = %d",ID];
@@ -365,6 +372,21 @@
     [resultArray addObject:readOrNot];
     NSLog(@"readOrNot=%d",[[readOrNot objectAtIndex:0]intValue]);
     return resultArray;
+}
+
+
+//コメントを書いた時に使う関数
+- (void)updateComment:(int)DATE TEXT:(NSString *)comment{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    //データのupdate
+    NSString *update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %d",comment, DATE];
+    
+    [db open];
+    [db executeUpdate:update_commentText];
+    [db close];
 }
 
 
@@ -401,11 +423,11 @@
 
 //DB接続
 - (NSString *)connectDB{
-
+    
     NSString *dbfile = @"Bibile_Read_BaseDB.db";
     NSString *dbPath = [[self dataFolderPath] stringByAppendingPathComponent:dbfile];
     return dbPath;
-
+    
 }
 
 
@@ -454,7 +476,7 @@
     NSString *documentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     //追加するディレクトリ名を指定
     NSString *dataFolderPath = [documentsPath stringByAppendingPathComponent:@"DataFolder"];
-//    NSLog(@"dataFolderPass=%@",dataFolderPath);
+    //    NSLog(@"dataFolderPass=%@",dataFolderPath);
     return dataFolderPath;
 }
 
