@@ -10,8 +10,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="NoticeViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="YEy-j5-vDO"/>
+                        <viewControllerLayoutGuide type="bottom" id="dWn-al-5na"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -33,8 +33,8 @@
             <objects>
                 <viewController id="7HG-i0-A2y" customClass="SettingViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nqc-6c-YXo"/>
-                        <viewControllerLayoutGuide type="bottom" id="vug-eQ-8Zt"/>
+                        <viewControllerLayoutGuide type="top" id="JRh-AZ-Qhx"/>
+                        <viewControllerLayoutGuide type="bottom" id="0ZT-od-OQP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rrt-ZH-SDs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -56,8 +56,8 @@
             <objects>
                 <viewController id="XYk-7K-V5K" customClass="CommentViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="9xZ-Qb-A8X"/>
-                        <viewControllerLayoutGuide type="bottom" id="MZX-um-GhY"/>
+                        <viewControllerLayoutGuide type="top" id="iib-9p-uc0"/>
+                        <viewControllerLayoutGuide type="bottom" id="opQ-mE-5pL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eXG-1N-khu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -79,8 +79,8 @@
             <objects>
                 <viewController id="FjA-Uo-8Th" customClass="CalendarViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="D6H-UJ-2OE"/>
-                        <viewControllerLayoutGuide type="bottom" id="b1N-3f-x5L"/>
+                        <viewControllerLayoutGuide type="top" id="4Z3-o8-nHu"/>
+                        <viewControllerLayoutGuide type="bottom" id="PrA-ci-lhI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mSc-bW-d2z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -103,8 +103,8 @@
             <objects>
                 <viewController id="gf3-EQ-QV8" customClass="ReadViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="izd-it-URs"/>
-                        <viewControllerLayoutGuide type="bottom" id="exP-EW-ja0"/>
+                        <viewControllerLayoutGuide type="top" id="9Lq-Yg-iry"/>
+                        <viewControllerLayoutGuide type="bottom" id="SLT-mo-FdG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gGB-nP-tdX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

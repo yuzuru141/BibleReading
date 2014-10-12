@@ -24,5 +24,6 @@
 - (void)updateComment:(int)DATE TEXT:(NSString *)comment;
 - (NSMutableArray*)checkDate:(int)DATE;
 - (NSMutableArray *)recentComment;
+- (NSMutableArray *)searchComment:(NSString *)WORD;
 
 @end

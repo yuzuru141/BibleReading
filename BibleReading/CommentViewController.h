@@ -11,7 +11,7 @@
 #import "DataBase.h"
 
 
-@interface CommentViewController : UIViewController<RNFrostedSidebarDelegate>
+@interface CommentViewController : UIViewController<RNFrostedSidebarDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 
 @property DataBase *database;
 

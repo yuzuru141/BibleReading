@@ -470,10 +470,10 @@
             }
         }
         rId--;
-        //コメントを取得する件数を５件までにする
-        if ([comment count]==5) {
-            break;
-        }
+//        //コメントを取得する件数を５件までにする
+//        if ([comment count]==5) {
+//            break;
+//        }
     }
     
     [db close];
@@ -481,6 +481,46 @@
     [resultArray addObject:comment];
     return resultArray;
 }
+
+
+//コメント検索
+- (NSMutableArray *)searchComment:(NSString *)WORD{
+    
+    NSString *dbPath = [self connectDB];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    
+    NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    NSMutableArray *commentArray = [[NSMutableArray alloc]init];
+    int rDate = 0;
+    int rDateNext = 0;
+    NSString *rComment;
+    
+    FMResultSet *resultComment = [[FMResultSet alloc]init];
+    
+    [db open];
+    
+    NSString *commentSearch = [NSString stringWithFormat:@"select * from myReadingTable where comment like '%%%@%%';",WORD];
+    resultComment = [db executeQuery:commentSearch];
+    while ([resultComment next]) {
+        rDate = [resultComment intForColumn:@"date"];
+        
+        if (!(rDate==rDateNext)) {
+            [dateArray addObject:[NSNumber numberWithInteger:rDate]];
+            NSLog(@"rDate=%d",rDate);
+            rComment   = [resultComment stringForColumn:@"comment"];
+            [commentArray addObject:rComment];
+            NSLog(@"rComment=%@",rComment);
+            rDateNext = rDate;
+        }
+    }
+    [db close];
+    [resultArray addObject:dateArray];
+    [resultArray addObject:commentArray];
+    return resultArray;
+
+}
+
 
 
 //DB接続

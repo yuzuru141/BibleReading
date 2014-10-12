@@ -284,7 +284,7 @@
 }
 
 
-//バックグラウンド状態の時に通知する。実際にテストが必要。
+//バックグラウンド状態の時に通知する。
 -(void)LocalNotificationStart{
     
     //NSuserdefaultsから設定した時間を読み込む
