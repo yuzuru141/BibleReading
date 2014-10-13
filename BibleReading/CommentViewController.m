@@ -147,6 +147,20 @@
     CGRect dateRect;
     CGRect commentRect;
     int i;
+    
+    //過去に保存したコメントデータがあればそれも読み込む
+    NSUserDefaults* commentDefault = [NSUserDefaults standardUserDefaults];
+    if ([commentDefault objectForKey:@"DATECOMMENT"]) {
+        NSMutableArray *commnetDateDefaultArray = [[NSMutableArray alloc]init];
+        commnetDateDefaultArray = [commentDefault objectForKey:@"DATECOMMENT"];
+        NSMutableArray *commnetDefaultArray = [[NSMutableArray alloc]init];
+        commnetDefaultArray = [commentDefault objectForKey:@"COMMENT"];
+        for (int i=0; i<[commnetDateDefaultArray count]; i++) {
+            [dateArray addObject:[commnetDateDefaultArray objectAtIndex:i]];
+            [commentArray addObject:[commnetDefaultArray objectAtIndex:i]];
+        }
+    }
+    
     if (!([dateArray count]==0)) {
         for (i = 0; i < [dateArray count]; i++) {
             NSLog(@"dateArrayCount=%d",[dateArray count]);

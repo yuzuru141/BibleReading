@@ -42,6 +42,7 @@
     NSMutableArray *dateArray;
     NSMutableArray *capter;
     NSMutableArray *verse;
+    NSMutableArray *commentArray;
     int idCount;
 }
 
@@ -478,6 +479,36 @@
     
     //DBファイルがない場合は、DBコピーして作成
     [self.database createDB];
+    
+    //既存のDBがある場合は、コメント欄と日付をNSUserdefaultに保存する。
+    BOOL exist = [self.database existDataFolderOrNot];
+    if (exist) {
+
+        NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+        dateArray = [[NSMutableArray alloc]init];
+        commentArray = [[NSMutableArray alloc]init];
+        
+        resultArray = [self.database recentComment];
+        
+        dateArray = resultArray[0];
+        commentArray = resultArray[1];
+        
+        //既にNSUserdefaultsに保存されている場合は、dateArray/commentArrayに追加する
+        NSUserDefaults* commentDefault = [NSUserDefaults standardUserDefaults];
+        if ([commentDefault objectForKey:@"DATECOMMENT"]) {
+            NSMutableArray *commnetDateDefaultArray = [[NSMutableArray alloc]init];
+            commnetDateDefaultArray = [commentDefault objectForKey:@"DATECOMMENT"];
+            NSMutableArray *commnetDefaultArray = [[NSMutableArray alloc]init];
+            commnetDefaultArray = [commentDefault objectForKey:@"COMMENT"];
+            for (int i=0; i<[commnetDateDefaultArray count]; i++) {
+                [dateArray addObject:[commnetDateDefaultArray objectAtIndex:i]];
+                [commentArray addObject:[commnetDefaultArray objectAtIndex:i]];
+            }
+        }
+        [commentDefault setObject:dateArray forKey:@"DATECOMMENT"];
+        [commentDefault setObject:commentArray forKey:@"COMMENT"];
+        [commentDefault synchronize];
+    }
     
     //プラン決定後、ソートする。
     results = [self.database selectPlan:selectNumber label:selectNumber2];
