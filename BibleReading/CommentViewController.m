@@ -128,7 +128,7 @@
         searchRect = CGRectMake(width/9, 100, width-40, 30);
     }
     textfield = [[UITextField alloc]initWithFrame:searchRect];
-    textfield.placeholder = @"searchComment";
+    textfield.placeholder = NSLocalizedString(@"search comment", nil);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         textfield.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
     }else{

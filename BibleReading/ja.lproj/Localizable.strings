@@ -24,3 +24,5 @@
 "toDate" = "< 日付";
 "toCalender" = "< カレンダー";
 "Would you like to see operating instructions movie?" = "初めに操作動画を見ますか？";
+"comment" = "一言コメントを書く";
+"search comment" = "コメント検索";

@@ -55,7 +55,6 @@
     self.calendar.delegate = self;
     
     [self setSideBar];
-    [self buttonToRead];
     [self checkFirst];
 
 }

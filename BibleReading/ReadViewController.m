@@ -235,18 +235,17 @@
     }
     
     //コメント欄作成
-    //なぜかviewcontrollerが呼ばれる時にこのコードが読まれるらしいので、myReadingTableがある場合のみ呼ばれるようにした。
     BOOL exist = [self.database existDataFolderOrNot];
     if (exist) {
         CGRect textRect;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-            textRect = CGRectMake(width/9, 50+10*height/12, width-40, 15);
+            textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 15);
         }else{
-            textRect = CGRectMake(width/9, 50+10*height/12, width-40, 30);
+            textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 30);
         }
         textfield = [[UITextField alloc]initWithFrame:textRect];
         if ([[comment objectAtIndex:0] isEqualToString:@" "]) {
-            textfield.placeholder = @"comment";
+            textfield.placeholder = NSLocalizedString(@"comment", nil);
         }else{
             textfield.text = [comment objectAtIndex:0] ;
         }
@@ -255,6 +254,7 @@
         }else{
             textfield.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
         }
+        textfield.backgroundColor = [UIColor whiteColor];
         textfield.returnKeyType = UIReturnKeyDefault;
         textfield.delegate = self;
         [scrollAllView addSubview:textfield];
