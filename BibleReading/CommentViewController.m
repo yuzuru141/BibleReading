@@ -44,6 +44,7 @@
     
     [self createsettingView];
     [self selectedDate];
+    [self oldComment];
     [self createLabel];
     [self setSideBar];
     
@@ -142,13 +143,9 @@
 }
 
 
-//ラベル作成
-- (void)createLabel{
-    CGRect dateRect;
-    CGRect commentRect;
-    int i;
-    
-    //過去に保存したコメントデータがあればそれも読み込む
+//過去に保存したコメントデータがあればそれも読み込む
+- (void)oldComment{
+
     NSUserDefaults* commentDefault = [NSUserDefaults standardUserDefaults];
     if ([commentDefault objectForKey:@"DATECOMMENT"]) {
         NSMutableArray *commnetDateDefaultArray = [[NSMutableArray alloc]init];
@@ -160,6 +157,15 @@
             [commentArray addObject:[commnetDefaultArray objectAtIndex:i]];
         }
     }
+
+}
+
+
+//ラベル作成
+- (void)createLabel{
+    CGRect dateRect;
+    CGRect commentRect;
+    int i;
     
     if (!([dateArray count]==0)) {
         for (i = 0; i < [dateArray count]; i++) {
@@ -224,6 +230,31 @@
     dateArray = resultArray[0];
     commentArray = resultArray[1];
     
+    
+    
+}
+
+
+//過去のコメントを検索する
+- (void)oldCommentSearch{
+    
+    NSUserDefaults* commentDefault = [NSUserDefaults standardUserDefaults];
+    if ([commentDefault objectForKey:@"DATECOMMENT"]) {
+        NSMutableArray *commnetDateDefaultArray = [[NSMutableArray alloc]init];
+        commnetDateDefaultArray = [commentDefault objectForKey:@"DATECOMMENT"];
+        NSMutableArray *commnetDefaultArray = [[NSMutableArray alloc]init];
+        commnetDefaultArray = [commentDefault objectForKey:@"COMMENT"];
+        for (int i=0; i<[commnetDateDefaultArray count]; i++) {
+            NSRange searchResult = [[commnetDefaultArray objectAtIndex:i] rangeOfString:textfield.text];
+            if (searchResult.location == NSNotFound) {
+                NSLog(@"過去データの中になし");
+            }else{
+                [dateArray addObject:[commnetDateDefaultArray objectAtIndex:i]];
+                [commentArray addObject:[commnetDefaultArray objectAtIndex:i]];
+            }
+        }
+    }
+    
 }
 
 
@@ -257,6 +288,7 @@
 //textfieldでリターンキーが押されるとキーボードを隠し、コメントをDBに保存する。
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self searchCommentResult:textfield.text];
+    [self oldCommentSearch];
     //現在のラベルを削除する
     for (UIView *v in [scrollAllView subviews]) {
             [v removeFromSuperview];
