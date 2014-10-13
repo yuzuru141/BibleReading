@@ -146,9 +146,11 @@
 - (void)createLabel{
     CGRect dateRect;
     CGRect commentRect;
+    int i;
     if (!([dateArray count]==0)) {
-        for (int i = 0; i < [dateArray count]; i++) {
-            
+        for (i = 0; i < [dateArray count]; i++) {
+            NSLog(@"dateArrayCount=%d",[dateArray count]);
+            NSLog(@"i=%d",i);
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
                 dateRect = CGRectMake(width/9, 150+i*height/12, width-40, 15);
                 commentRect = CGRectMake(width/9, 170+i*height/12, width-40, 15);
@@ -158,9 +160,7 @@
             }
             
             dateLabel = [[UILabel alloc]initWithFrame:dateRect];
-//            dateLabel.tag = i;
             commentLabel = [[UILabel alloc]initWithFrame:commentRect];
-//            commentLabel.tag = i;
             
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
                 dateLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
@@ -176,7 +176,6 @@
             [scrollAllView addSubview:dateLabel];
             [scrollAllView addSubview:commentLabel];
             [scrollAllView setContentSize:CGSizeMake(width, 200+i*height/12)];
-            i++;
         }
     }
 }
