@@ -278,7 +278,7 @@
 //キーボード表示関数
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    CGPoint scrollPoint = CGPointMake(0.0,250.0);
     [scrollAllView setContentOffset:scrollPoint animated:YES];
 }
 
