@@ -606,7 +606,7 @@
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "243b20d1-9b2f-4486-9ce2-f926e3e261b6";
+				PROVISIONING_PROFILE = "fc4a9ac7-6344-4560-87f3-003f612fcbcc";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -621,7 +621,7 @@
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "243b20d1-9b2f-4486-9ce2-f926e3e261b6";
+				PROVISIONING_PROFILE = "fc4a9ac7-6344-4560-87f3-003f612fcbcc";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
