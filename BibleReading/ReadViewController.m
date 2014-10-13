@@ -238,14 +238,18 @@
     BOOL exist = [self.database existDataFolderOrNot];
     if (exist) {
         CGRect textRect;
+//        CGRect textRect2;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 15);
+//            textRect2 = CGRectMake(width/10, 50+10*height/12, width-width/10*2, 15);
         }else{
             textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 30);
         }
         textfield = [[UITextField alloc]initWithFrame:textRect];
         if ([[comment objectAtIndex:0] isEqualToString:@" "]) {
-            textfield.placeholder = NSLocalizedString(@"comment", nil);
+            textfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"comment", nil)
+                                                                              attributes:@{ NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//            textfield.placeholder = NSLocalizedString(@"comment", nil);
         }else{
             textfield.text = [comment objectAtIndex:0] ;
         }
@@ -254,7 +258,9 @@
         }else{
             textfield.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
         }
-        textfield.backgroundColor = [UIColor whiteColor];
+        textfield.textColor = [UIColor whiteColor];
+        textfield.backgroundColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5];
+        textfield.layer.cornerRadius =3;
         textfield.returnKeyType = UIReturnKeyDefault;
         textfield.delegate = self;
         [scrollAllView addSubview:textfield];

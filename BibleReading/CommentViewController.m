@@ -172,11 +172,11 @@
             NSLog(@"dateArrayCount=%d",[dateArray count]);
             NSLog(@"i=%d",i);
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-                dateRect = CGRectMake(width/9, 150+i*height/12, width-40, 15);
-                commentRect = CGRectMake(width/9, 170+i*height/12, width-40, 15);
+                dateRect = CGRectMake(width/9, 150+i*height/12, width-width/9*2, 15);
+                commentRect = CGRectMake(width/9, 170+i*height/12, width-width/9*2, 15);
             }else{
-                dateRect = CGRectMake(width/9, 150+i*height/12, width-40, 30);
-                commentRect = CGRectMake(width/9, 180+i*height/12, width-40, 30);
+                dateRect = CGRectMake(width/9, 150+i*height/12, width-width/9*2, 30);
+                commentRect = CGRectMake(width/9, 180+i*height/12, width-width/9*2, 30);
             }
             
             dateLabel = [[UILabel alloc]initWithFrame:dateRect];
@@ -192,7 +192,11 @@
             
             dateLabel.text = [NSString stringWithFormat:@"%d",[[dateArray objectAtIndex:i]integerValue]];
             NSLog(@"dateLabel=%@",dateLabel.text);
-            commentLabel.text = [commentArray objectAtIndex:i] ;
+            commentLabel.text = [commentArray objectAtIndex:i];
+            //丸みが出来ていない
+            commentLabel.layer.cornerRadius = 10;
+            commentLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5];
+            commentLabel.textColor = [UIColor whiteColor];
             [scrollAllView addSubview:dateLabel];
             [scrollAllView addSubview:commentLabel];
             [scrollAllView setContentSize:CGSizeMake(width, 200+i*height/12)];
