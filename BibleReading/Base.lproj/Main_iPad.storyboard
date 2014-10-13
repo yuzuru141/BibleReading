@@ -1,106 +1,134 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="FjA-Uo-8Th">
-<dependencies>
-<plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
-</dependencies>
-<scenes>
-<!--Notice View Controller-->
-<scene sceneID="ufC-wZ-h7g">
-<objects>
-<viewController id="vXZ-lx-hvc" customClass="NoticeViewController" sceneMemberID="viewController">
-<layoutGuides>
-<viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-<viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-</layoutGuides>
-<view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-<rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-</view>
-<connections>
-<segue destination="FjA-Uo-8Th" kind="modal" identifier="toCalendarViewController" id="drU-lt-p9y"/>
-<segue destination="7HG-i0-A2y" kind="modal" identifier="toSettingViewController" id="xcy-j0-TRS"/>
-</connections>
-</viewController>
-<placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-</objects>
-<point key="canvasLocation" x="344" y="-78"/>
-</scene>
-<!--Setting View Controller-->
-<scene sceneID="IjN-iZ-aXd">
-<objects>
-<viewController id="7HG-i0-A2y" customClass="SettingViewController" sceneMemberID="viewController">
-<layoutGuides>
-<viewControllerLayoutGuide type="top" id="nqc-6c-YXo"/>
-<viewControllerLayoutGuide type="bottom" id="vug-eQ-8Zt"/>
-</layoutGuides>
-<view key="view" contentMode="scaleToFill" id="rrt-ZH-SDs">
-<rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-</view>
-<connections>
-<segue destination="FjA-Uo-8Th" kind="modal" identifier="settingToPlan" id="Km3-2x-44Q"/>
-<segue destination="vXZ-lx-hvc" kind="modal" identifier="settingToView" id="7vU-e7-8jJ"/>
-</connections>
-</viewController>
-<placeholder placeholderIdentifier="IBFirstResponder" id="w8C-JW-Wc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-</objects>
-<point key="canvasLocation" x="-124" y="609"/>
-</scene>
-<!--Calendar View Controller-->
-<scene sceneID="8NF-e6-Vsc">
-<objects>
-<viewController id="FjA-Uo-8Th" customClass="CalendarViewController" sceneMemberID="viewController">
-<layoutGuides>
-<viewControllerLayoutGuide type="top" id="D6H-UJ-2OE"/>
-<viewControllerLayoutGuide type="bottom" id="b1N-3f-x5L"/>
-</layoutGuides>
-<view key="view" contentMode="scaleToFill" id="mSc-bW-d2z">
-<rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-</view>
-<connections>
-<segue destination="vXZ-lx-hvc" kind="modal" identifier="calendarToView" id="gae-vY-vLW"/>
-<segue destination="7HG-i0-A2y" kind="modal" identifier="calendarToSetting" id="zKL-Sr-3nQ"/>
-<segue destination="gf3-EQ-QV8" kind="modal" identifier="calendarToRead" id="IeW-5c-PuD"/>
-</connections>
-</viewController>
-<placeholder placeholderIdentifier="IBFirstResponder" id="Lkg-Wv-Bq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-</objects>
-<point key="canvasLocation" x="816" y="609"/>
-</scene>
-<!--Read View Controller-->
-<scene sceneID="28H-mh-36e">
-<objects>
-<viewController id="gf3-EQ-QV8" customClass="ReadViewController" sceneMemberID="viewController">
-<layoutGuides>
-<viewControllerLayoutGuide type="top" id="izd-it-URs"/>
-<viewControllerLayoutGuide type="bottom" id="exP-EW-ja0"/>
-</layoutGuides>
-<view key="view" contentMode="scaleToFill" id="gGB-nP-tdX">
-<rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-<color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-</view>
-<connections>
-<segue destination="FjA-Uo-8Th" kind="modal" identifier="readToCalender" id="qLM-2c-gmZ"/>
-</connections>
-</viewController>
-<placeholder placeholderIdentifier="IBFirstResponder" id="nRG-3K-ul2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-</objects>
-<point key="canvasLocation" x="1243" y="609"/>
-</scene>
-</scenes>
-<simulatedMetricsContainer key="defaultSimulatedMetrics">
-<simulatedStatusBarMetrics key="statusBar"/>
-<simulatedOrientationMetrics key="orientation"/>
-<simulatedScreenMetrics key="destination" type="retina4"/>
-</simulatedMetricsContainer>
-<inferredMetricsTieBreakers>
-<segue reference="zKL-Sr-3nQ"/>
-<segue reference="qLM-2c-gmZ"/>
-<segue reference="gae-vY-vLW"/>
-</inferredMetricsTieBreakers>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="FjA-Uo-8Th">
+    <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--Notice View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="NoticeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YEy-j5-vDO"/>
+                        <viewControllerLayoutGuide type="bottom" id="dWn-al-5na"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="toCalendarViewController" id="drU-lt-p9y"/>
+                        <segue destination="7HG-i0-A2y" kind="modal" identifier="toSettingViewController" id="xcy-j0-TRS"/>
+                        <segue destination="XYk-7K-V5K" kind="modal" identifier="noticeToComment" id="AwT-Eg-N2W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="384" y="-130"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="IjN-iZ-aXd">
+            <objects>
+                <viewController id="7HG-i0-A2y" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JRh-AZ-Qhx"/>
+                        <viewControllerLayoutGuide type="bottom" id="0ZT-od-OQP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rrt-ZH-SDs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="settingToPlan" id="Km3-2x-44Q"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="settingToView" id="7vU-e7-8jJ"/>
+                        <segue destination="XYk-7K-V5K" kind="modal" identifier="settingToComment" id="nGv-Ci-Q5N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w8C-JW-Wc7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-234" y="591"/>
+        </scene>
+        <!--Comment View Controller-->
+        <scene sceneID="QaP-ba-iaj">
+            <objects>
+                <viewController id="XYk-7K-V5K" customClass="CommentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iib-9p-uc0"/>
+                        <viewControllerLayoutGuide type="bottom" id="opQ-mE-5pL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eXG-1N-khu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="commentToCalendar" id="Ylw-Ty-C7z"/>
+                        <segue destination="7HG-i0-A2y" kind="modal" identifier="commentToSetting" id="1fE-SH-NvD"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="commentToNotice" id="6Ro-fW-D5l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdb-RI-JYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="1206"/>
+        </scene>
+        <!--Calendar View Controller-->
+        <scene sceneID="8NF-e6-Vsc">
+            <objects>
+                <viewController id="FjA-Uo-8Th" customClass="CalendarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4Z3-o8-nHu"/>
+                        <viewControllerLayoutGuide type="bottom" id="PrA-ci-lhI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mSc-bW-d2z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="calendarToView" id="gae-vY-vLW"/>
+                        <segue destination="7HG-i0-A2y" kind="modal" identifier="calendarToSetting" id="zKL-Sr-3nQ"/>
+                        <segue destination="gf3-EQ-QV8" kind="modal" identifier="calendarToRead" id="IeW-5c-PuD"/>
+                        <segue destination="XYk-7K-V5K" kind="modal" identifier="calendarToComment" id="65S-Kr-wVV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lkg-Wv-Bq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="816" y="609"/>
+        </scene>
+        <!--Read View Controller-->
+        <scene sceneID="28H-mh-36e">
+            <objects>
+                <viewController id="gf3-EQ-QV8" customClass="ReadViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Lq-Yg-iry"/>
+                        <viewControllerLayoutGuide type="bottom" id="SLT-mo-FdG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gGB-nP-tdX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="FjA-Uo-8Th" kind="modal" identifier="readToCalender" id="qLM-2c-gmZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRG-3K-ul2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1243" y="609"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ylw-Ty-C7z"/>
+        <segue reference="AwT-Eg-N2W"/>
+        <segue reference="6Ro-fW-D5l"/>
+        <segue reference="1fE-SH-NvD"/>
+    </inferredMetricsTieBreakers>
 </document>
