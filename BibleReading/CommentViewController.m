@@ -42,11 +42,11 @@
 
 - (void)firstLoad{
     
-    [self setSideBar];
     [self createsettingView];
     [self selectedDate];
     [self createLabel];
-
+    [self setSideBar];
+    
 }
 
 
