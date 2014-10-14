@@ -491,7 +491,7 @@
 //jw.orgから聖書を読み込む
 - (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
     
-    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,60,self.view.bounds.size.width,self.view.bounds.size.height)];
+    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
     
     webViewJWORG.delegate = self;
     
