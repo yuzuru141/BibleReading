@@ -13,15 +13,15 @@
 
 - (BOOL)existDataFolderOrNot;
 - (void)createDB;
-- (NSMutableArray *)selectPlan:(int)year label:(int)plan;
+- (NSMutableArray *)selectPlan:(NSInteger)year label:(NSInteger)plan;
 - (void)createTable;
 - (void)deleteDataInTable;
 - (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(NSString*)VERSE label6:(NSDate*)DATE;
-- (NSMutableArray*)dbLoadByDate:(int)DATE;
+- (NSMutableArray*)dbLoadByDate:(NSInteger)DATE;
 - (void)dbUpdateReadOrNot:(int)ID;
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
-- (void)updateComment:(int)DATE TEXT:(NSString *)comment;
+- (void)updateComment:(NSInteger)DATE TEXT:(NSString *)comment;
 - (NSMutableArray*)checkDate:(int)DATE;
 - (NSMutableArray *)recentComment;
 - (NSMutableArray *)searchComment:(NSString *)WORD;

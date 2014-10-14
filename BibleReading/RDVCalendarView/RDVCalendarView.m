@@ -556,9 +556,9 @@
             NSMutableArray *readOrNot = [[NSMutableArray alloc]init];
             NSString *dateString;
             if (selectedDateComponents.month>9) {
-                dateString = [NSString stringWithFormat:@"%d%d",selectedDateComponents.year,selectedDateComponents.month];
+                dateString = [NSString stringWithFormat:@"%ld%ld",(long)selectedDateComponents.year,(long)selectedDateComponents.month];
             }else{
-                dateString = [NSString stringWithFormat:@"%d0%d",selectedDateComponents.year,selectedDateComponents.month];
+                dateString = [NSString stringWithFormat:@"%ld0%ld",(long)selectedDateComponents.year,(long)selectedDateComponents.month];
             }
             
             if ((index+1)>9) {
@@ -673,7 +673,7 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
     date_str = [formatter stringFromDate:dt]; //strに変換
-    int dateInt = [date_str integerValue];
+    NSInteger dateInt = [date_str integerValue];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:dateInt forKey:@"DATE"];
     

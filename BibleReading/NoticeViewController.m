@@ -238,8 +238,8 @@
 -(void)userSelectRow{
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    int hour = [defaults integerForKey:@"notificationTimeHour"];
-    int minutes = [defaults integerForKey:@"notificationTimeMinute"];
+    NSInteger hour = [defaults integerForKey:@"notificationTimeHour"];
+    NSInteger minutes = [defaults integerForKey:@"notificationTimeMinute"];
 
     //NSuserdefaultsから取得した情報をpickerの初期値に反映。
     [oPicker3 selectRow:hour+1 inComponent:0 animated:NO]; //１列目を一行目にセット
@@ -251,7 +251,7 @@
 //ユーザが選択した通知する時間を抜き出す
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
-    int selectNumber;
+    NSInteger selectNumber;
     selectNumber = [pickerView selectedRowInComponent:0];
     int hour;
     NSString *arrayComp0 = @"--";
@@ -263,7 +263,7 @@
     }
 
     
-    int selectNumber2;
+    NSInteger selectNumber2;
     selectNumber2 = [pickerView selectedRowInComponent:1];
     int minutes;
     if ([aItemList4 objectAtIndex:selectNumber]==arrayComp0) {
@@ -289,14 +289,14 @@
     
     //NSuserdefaultsから設定した時間を読み込む
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    int hour = [defaults integerForKey:@"notificationTimeHour"];
-    int minutes = [defaults integerForKey:@"notificationTimeMinute"];
+    NSInteger hour = [defaults integerForKey:@"notificationTimeHour"];
+    NSInteger minutes = [defaults integerForKey:@"notificationTimeMinute"];
 
     //選択した項目が"--"であれば通知をセットしない。
     if (hour==99 || minutes==99) {
         //全ての通知をキャンセルさせる
-        NSLog(@"hour=%d",hour);
-        NSLog(@"minutes=%d",minutes);
+        NSLog(@"hour=%ld",(long)hour);
+        NSLog(@"minutes=%ld",(long)minutes);
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
         NSLog(@"通知セットしない");
     }else{

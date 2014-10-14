@@ -180,7 +180,7 @@
     
     if (!([dateArray count]==0)) {
         for (i = 0; i < [dateArray count]; i++) {
-            NSLog(@"dateArrayCount=%d",[dateArray count]);
+            NSLog(@"dateArrayCount=%lu",(unsigned long)[dateArray count]);
             NSLog(@"i=%d",i);
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
                 dateRect = CGRectMake(width/9, 150+i*height/12, width-width/9*2, 15);
@@ -205,7 +205,7 @@
             NSString *year = [[NSString alloc]init];
             NSString *month = [[NSString alloc]init];
             NSString *day = [[NSString alloc]init];
-            splitDate = [NSString stringWithFormat:@"%d",[[dateArray objectAtIndex:i]integerValue]];
+            splitDate = [NSString stringWithFormat:@"%ld",(long)[[dateArray objectAtIndex:i]integerValue]];
             year = [splitDate substringToIndex:4];
             month = [splitDate substringWithRange:NSMakeRange(4,2)];
             day = [splitDate substringFromIndex:6];

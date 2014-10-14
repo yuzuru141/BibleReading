@@ -27,8 +27,8 @@
     NSString *pic1_str;
     NSString *pic2_str;
     NSString *pic3_str;
-    int selectNumber;
-    int selectNumber2;
+    NSInteger selectNumber;
+    NSInteger selectNumber2;
     UIDatePicker *datePicker;
     NSDateFormatter *df;
     NSMutableArray *results;
@@ -43,7 +43,7 @@
     NSMutableArray *capter;
     NSMutableArray *verse;
     NSMutableArray *commentArray;
-    int idCount;
+    NSInteger idCount;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -422,8 +422,8 @@
 -(void)userSelectRow{
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    int year = [defaults integerForKey:@"year"];
-    int plan = [defaults integerForKey:@"plan"];
+    NSInteger year = [defaults integerForKey:@"year"];
+    NSInteger plan = [defaults integerForKey:@"plan"];
     
     //NSuserdefaultsから取得した情報をpickerの初期値に反映。
     [oPicker selectRow:year inComponent:0 animated:NO]; //１列目を一行目にセット

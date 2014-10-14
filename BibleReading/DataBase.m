@@ -64,7 +64,7 @@
 
 
 //聖書通読プランを選択する
-- (NSMutableArray *)selectPlan:(int)year label:(int)plan{
+- (NSMutableArray *)selectPlan:(NSInteger)year label:(NSInteger)plan{
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -253,7 +253,7 @@
 
 
 //日付からDBを読み込む
-- (NSMutableArray*)dbLoadByDate:(int)DATE{
+- (NSMutableArray*)dbLoadByDate:(NSInteger)DATE{
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -270,7 +270,7 @@
     
     [db open];
     
-    NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where date = %d",DATE];
+    NSString *sql = [NSString stringWithFormat:@"select * from myReadingTable where date = %ld",(long)DATE];
     FMResultSet *result = [db executeQuery:sql];
     
     while ([result next]) {
@@ -376,13 +376,13 @@
 
 
 //コメントを書いた時に使う関数
-- (void)updateComment:(int)DATE TEXT:(NSString *)comment{
+- (void)updateComment:(NSInteger)DATE TEXT:(NSString *)comment{
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     
     //データのupdate
-    NSString *update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %d",comment, DATE];
+    NSString *update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",comment, (long)DATE];
     
     [db open];
     [db executeUpdate:update_commentText];
