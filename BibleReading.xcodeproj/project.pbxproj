@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE0272C219E94B8400763F88 /* Clock.png in Resources */ = {isa = PBXBuildFile; fileRef = FE0272C119E94B8400763F88 /* Clock.png */; };
+		FE0272C519E94E6000763F88 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0272C419E94E6000763F88 /* CommentViewController.m */; };
 		FE064E41197A371A0013BC97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E40197A371A0013BC97 /* Foundation.framework */; };
 		FE064E43197A371A0013BC97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E42197A371A0013BC97 /* CoreGraphics.framework */; };
 		FE064E45197A371A0013BC97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE064E44197A371A0013BC97 /* UIKit.framework */; };
@@ -26,9 +28,7 @@
 		FE064E91197A42670013BC97 /* profile_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E8B197A42670013BC97 /* profile_tk.png */; };
 		FE064E93197A42670013BC97 /* RNFrostedSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */; };
 		FE064E96197A47D10013BC97 /* image_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E94197A47D10013BC97 /* image_tk.png */; };
-		FE064E97197A47D10013BC97 /* video_tk.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E95197A47D10013BC97 /* video_tk.png */; };
 		FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E98197A4D2C0013BC97 /* Calendar-Month.png */; };
-		FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E99197A4D2C0013BC97 /* Chats.png */; };
 		FE064E9D197A4D330013BC97 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = FE064E9C197A4D330013BC97 /* Gear.png */; };
 		FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA0197A50240013BC97 /* RDVCalendarDayCell.m */; };
 		FE064EA8197A50240013BC97 /* RDVCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE064EA2197A50240013BC97 /* RDVCalendarView.m */; };
@@ -63,6 +63,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE0272C119E94B8400763F88 /* Clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Clock.png; sourceTree = "<group>"; };
+		FE0272C319E94E6000763F88 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		FE0272C419E94E6000763F88 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		FE064E3D197A371A0013BC97 /* BibleReading.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BibleReading.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE064E40197A371A0013BC97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FE064E42197A371A0013BC97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -88,9 +91,7 @@
 		FE064E8E197A42670013BC97 /* RNFrostedSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFrostedSidebar.h; sourceTree = "<group>"; };
 		FE064E8F197A42670013BC97 /* RNFrostedSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFrostedSidebar.m; sourceTree = "<group>"; };
 		FE064E94197A47D10013BC97 /* image_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_tk.png; sourceTree = "<group>"; };
-		FE064E95197A47D10013BC97 /* video_tk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_tk.png; sourceTree = "<group>"; };
 		FE064E98197A4D2C0013BC97 /* Calendar-Month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-Month.png"; sourceTree = "<group>"; };
-		FE064E99197A4D2C0013BC97 /* Chats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chats.png; sourceTree = "<group>"; };
 		FE064E9C197A4D330013BC97 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
 		FE064E9F197A50240013BC97 /* RDVCalendarDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVCalendarDayCell.h; sourceTree = "<group>"; };
 		FE064EA0197A50240013BC97 /* RDVCalendarDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVCalendarDayCell.m; sourceTree = "<group>"; };
@@ -218,6 +219,8 @@
 				FE63A294197A72D7003E3099 /* SettingViewController.m */,
 				FE064E58197A371A0013BC97 /* NoticeViewController.h */,
 				FE064E59197A371A0013BC97 /* NoticeViewController.m */,
+				FE0272C319E94E6000763F88 /* CommentViewController.h */,
+				FE0272C419E94E6000763F88 /* CommentViewController.m */,
 				FE63A2AA197CAF9B003E3099 /* DataBase.h */,
 				FE63A2AB197CAF9B003E3099 /* DataBase.m */,
 				FE064E5B197A371A0013BC97 /* Images.xcassets */,
@@ -263,8 +266,7 @@
 				FE064E94197A47D10013BC97 /* image_tk.png */,
 				FE064E98197A4D2C0013BC97 /* Calendar-Month.png */,
 				FE064E9C197A4D330013BC97 /* Gear.png */,
-				FE064E99197A4D2C0013BC97 /* Chats.png */,
-				FE064E95197A47D10013BC97 /* video_tk.png */,
+				FE0272C119E94B8400763F88 /* Clock.png */,
 				FE064E8A197A42670013BC97 /* list_tk.png */,
 				FE064E8B197A42670013BC97 /* profile_tk.png */,
 				FE064E8E197A42670013BC97 /* RNFrostedSidebar.h */,
@@ -401,15 +403,14 @@
 				FE63A2B5197CDC8C003E3099 /* Bibile_Read_BaseDB.db in Resources */,
 				FE064E96197A47D10013BC97 /* image_tk.png in Resources */,
 				FE064E9A197A4D2C0013BC97 /* Calendar-Month.png in Resources */,
+				FE0272C219E94B8400763F88 /* Clock.png in Resources */,
 				FE77F2C3199F6C3500BD8F02 /* Localizable.strings in Resources */,
 				FE064E91197A42670013BC97 /* profile_tk.png in Resources */,
 				FE064E57197A371A0013BC97 /* Main_iPad.storyboard in Resources */,
 				FE064E5C197A371A0013BC97 /* Images.xcassets in Resources */,
-				FE064E97197A47D10013BC97 /* video_tk.png in Resources */,
 				FE064E9D197A4D330013BC97 /* Gear.png in Resources */,
 				FE8C7B9F19970FEA00122385 /* Chat.png in Resources */,
 				FE064E90197A42670013BC97 /* list_tk.png in Resources */,
-				FE064E9B197A4D2C0013BC97 /* Chats.png in Resources */,
 				FE064E54197A371A0013BC97 /* Main_iPhone.storyboard in Resources */,
 				FE064E4B197A371A0013BC97 /* InfoPlist.strings in Resources */,
 			);
@@ -434,6 +435,7 @@
 				FE064EA7197A50240013BC97 /* RDVCalendarDayCell.m in Sources */,
 				FECF79A919C02BB100B78A10 /* BNIndicator.m in Sources */,
 				FE064EAD197A5CD50013BC97 /* CalendarViewController.m in Sources */,
+				FE0272C519E94E6000763F88 /* CommentViewController.m in Sources */,
 				FE064E5A197A371A0013BC97 /* NoticeViewController.m in Sources */,
 				FE63A2AC197CAF9B003E3099 /* DataBase.m in Sources */,
 				FE63A2A5197CAF6F003E3099 /* FMDatabase.m in Sources */,
@@ -601,7 +603,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuzuru Ishii (BG6JTFJX39)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";
@@ -616,7 +618,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuzuru Ishii (BG6JTFJX39)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BibleReading/BibleReading-Prefix.pch";
 				INFOPLIST_FILE = "BibleReading/BibleReading-Info.plist";

@@ -44,6 +44,7 @@
     NSArray *images = @[
                         [UIImage imageNamed:@"Calendar-Month.png"],
                         [UIImage imageNamed:@"Gear.png"],
+                        [UIImage imageNamed:@"Clock.png"],
                         [UIImage imageNamed:@"Chat.png"],
                         ];
     
@@ -95,6 +96,9 @@
             break;
         case 2:
             [self createsettingView];
+            break;
+        case 3:
+            [self performSegueWithIdentifier:@"noticeToComment" sender:self];
             break;
     }
 }
@@ -280,7 +284,7 @@
 }
 
 
-//バックグラウンド状態の時に通知する。実際にテストが必要。
+//バックグラウンド状態の時に通知する。
 -(void)LocalNotificationStart{
     
     //NSuserdefaultsから設定した時間を読み込む

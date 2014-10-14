@@ -25,9 +25,12 @@
     NSMutableArray *capter;
     NSMutableArray *verse;
     NSMutableArray *readOrNot;
+    NSMutableArray *comment;
     UIWebView *webViewJWORG;
     UISwitch *sw;
     BOOL toDate;
+    UIScrollView *scrollAllView;
+    UITextField *textfield;
 }
 
 
@@ -90,9 +93,10 @@
     capter = [[NSMutableArray alloc]init];
     verse = [[NSMutableArray alloc]init];
     readOrNot = [[NSMutableArray alloc]init];
+    comment = [[NSMutableArray alloc]init];
     
     resultArray = [self.database dbLoadByDate:intDate];
-
+    
     idArray = resultArray[0];
     bibleName = resultArray[1];
     bibleNameJp = resultArray[2];
@@ -100,8 +104,8 @@
     capter = resultArray[4];
     verse = resultArray[5];
     readOrNot = resultArray[6];
+    comment = resultArray[7];
 }
-
 - (void)setViewForFirst{
     
     //スクリーンサイズの取得
@@ -114,12 +118,14 @@
 }
 
 
+//それぞれのラベルを作成
 - (void)createsettingView{
     
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     width = screenSize.size.width;
     height = screenSize.size.height;
-
+    NSLog(@"height=%f",height);
+    
     //Viewの色
     _settingView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
     [self.view addSubview:_settingView];
@@ -127,21 +133,25 @@
     //バックの色をfloralwhiteに設定
     self.view.backgroundColor = [UIColor colorWithRed:1 green:0.98 blue:0.941 alpha:1];
     
+    //全体にUIScrollviewを作成
+    scrollAllView = [[UIScrollView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    [_settingView addSubview:scrollAllView];
+    
     //戻るボタンの作成
     backCalender = [[UIButton alloc]
-               initWithFrame:CGRectMake(0, 25, 100, 32)];
+                    initWithFrame:CGRectMake(0, 25, 100, 32)];
     [backCalender setTitle:NSLocalizedString(@"toCalender", nil) forState:UIControlStateNormal];
     [backCalender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [backCalender.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
     [backCalender addTarget:self
-                action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingView addSubview:backCalender];
+                     action:@selector(toCalender:) forControlEvents:UIControlEventTouchUpInside];
+    [scrollAllView addSubview:backCalender];
     
     //聖書ラベルの作成
     int i;
     for (i=0; i<[idArray count]; i++) {
         
-        CGRect bibleNameRect = CGRectMake(width/9, 70+i*40, width-40, 30);
+        CGRect bibleNameRect = CGRectMake(width/9, 50+i*height/12, width-40, 30);
         UILabel *bibleLabel = [[UILabel alloc]initWithFrame:bibleNameRect];
         if ([countryCode isEqualToString: countryCodeEn]) {
             bibleLabel.text = [bibleName objectAtIndex:i];
@@ -159,7 +169,7 @@
         }else{
             bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
         }
-        [_settingView addSubview:bibleLabel];
+        [scrollAllView addSubview:bibleLabel];
         
     }
     
@@ -168,16 +178,16 @@
         
         //章があるところだけラベル表示する
         if (![[capter objectAtIndex:i]intValue]==0) {
-        CGRect chapterRect = CGRectMake(width/9*4, 70+i*40, width-40, 30);
-        UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
-        chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
-        chaperLabel.textColor = [UIColor blackColor];
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-            chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
-        }else{
-            chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
-        }
-        [_settingView addSubview:chaperLabel];
+            CGRect chapterRect = CGRectMake(width/9*4, 50+i*height/12, width-40, 30);
+            UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
+            chaperLabel.text = [NSString stringWithFormat:@"%d",[[capter objectAtIndex:i]integerValue]];
+            chaperLabel.textColor = [UIColor blackColor];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+            }else{
+                chaperLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+            }
+            [scrollAllView addSubview:chaperLabel];
         }
     }
     
@@ -187,42 +197,110 @@
         NSString *verseString = [verse objectAtIndex:i];
         //節情報があるところだけラベル表示する
         if ([verseString length]>1) {
-        CGRect verseRect = CGRectMake(width/9*5, 70+i*40, width-40, 30);
-        UILabel *verseLabel = [[UILabel alloc]initWithFrame:verseRect];
-        verseLabel.text = [NSString stringWithFormat:@": %@",[verse objectAtIndex:i]];
-        verseLabel.textColor = [UIColor blackColor];
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-            verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
-        }else{
-            verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
-        }
-        [_settingView addSubview:verseLabel];
+            CGRect verseRect = CGRectMake(width/9*5, 50+i*height/12, width-40, 30);
+            UILabel *verseLabel = [[UILabel alloc]initWithFrame:verseRect];
+            verseLabel.text = [NSString stringWithFormat:@": %@",[verse objectAtIndex:i]];
+            verseLabel.textColor = [UIColor blackColor];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+            }else{
+                verseLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+            }
+            [scrollAllView addSubview:verseLabel];
         }
         
     }
     
     //読んだかどうかチェックボックス作成
-     for (i=0; i<[idArray count]; i++) {
-         CGRect readRect;
-         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-             readRect = CGRectMake(width/9*7, 70+i*40, width-40, 15);
-         }else{
-             readRect = CGRectMake(width/9*7, 70+i*40, width-40, 30);
-         }
-         sw = [[UISwitch alloc] initWithFrame:readRect];
-         sw.tag = i;
-         sw.onTintColor = [UIColor blackColor];
+    for (i=0; i<[idArray count]; i++) {
+        CGRect readRect;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            readRect = CGRectMake(width/9*7, 50+i*height/12, width-40, 15);
+        }else{
+            readRect = CGRectMake(width/9*7, 50+i*height/12, width-40, 30);
+        }
+        sw = [[UISwitch alloc] initWithFrame:readRect];
+        sw.tag = i;
+        sw.onTintColor = [UIColor blackColor];
         
-         if ([[readOrNot objectAtIndex:i]integerValue]==0) {
-                      sw.on = NO;
-         }else{
-                      sw.on = YES;
-         }
-         
-         // 値が変更された時にメソッドを呼び出す
-         [sw addTarget:self action:@selector(readOrNotSwitch:) forControlEvents:UIControlEventValueChanged];
-         [_settingView addSubview:sw];
-     }
+        if ([[readOrNot objectAtIndex:i]integerValue]==0) {
+            sw.on = NO;
+        }else{
+            sw.on = YES;
+        }
+        
+        // 値が変更された時にメソッドを呼び出す
+        [sw addTarget:self action:@selector(readOrNotSwitch:) forControlEvents:UIControlEventValueChanged];
+        [scrollAllView addSubview:sw];
+    }
+    
+    //コメント欄作成
+    BOOL exist = [self.database existDataFolderOrNot];
+    if (exist) {
+        CGRect textRect;
+//        CGRect textRect2;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 15);
+//            textRect2 = CGRectMake(width/10, 50+10*height/12, width-width/10*2, 15);
+        }else{
+            textRect = CGRectMake(width/9, 50+10*height/12, width-width/9*2, 30);
+        }
+        textfield = [[UITextField alloc]initWithFrame:textRect];
+        if ([[comment objectAtIndex:0] isEqualToString:@" "]) {
+            textfield.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"comment", nil)
+                                                                              attributes:@{ NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//            textfield.placeholder = NSLocalizedString(@"comment", nil);
+        }else{
+            textfield.text = [comment objectAtIndex:0] ;
+        }
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            textfield.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
+        }else{
+            textfield.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
+        }
+        textfield.textColor = [UIColor whiteColor];
+        textfield.backgroundColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5];
+        textfield.layer.cornerRadius =3;
+        textfield.returnKeyType = UIReturnKeyDefault;
+        textfield.delegate = self;
+        [scrollAllView addSubview:textfield];
+        [self registerForKeyboardNotifications];
+    }
+}
+
+
+//Viewがロードされるタイミングで呼ばれる関数
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+//キーボード表示関数
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    CGPoint scrollPoint = CGPointMake(0.0,250.0);
+    [scrollAllView setContentOffset:scrollPoint animated:YES];
+}
+
+
+//キーボードを隠す関数
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    [scrollAllView setContentOffset:CGPointZero animated:YES];
+}
+
+
+//textfieldでリターンキーが押されるとキーボードを隠し、コメントをDBに保存する。
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.database updateComment:intDate TEXT:textField.text];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 

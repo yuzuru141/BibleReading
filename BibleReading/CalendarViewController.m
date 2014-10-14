@@ -37,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self firstLoad];
+    
 }
 
 
@@ -54,7 +55,6 @@
     self.calendar.delegate = self;
     
     [self setSideBar];
-    [self buttonToRead];
     [self checkFirst];
 
 }
@@ -64,6 +64,7 @@
     NSArray *images = @[
                         [UIImage imageNamed:@"Calendar-Month.png"],
                         [UIImage imageNamed:@"Gear.png"],
+                        [UIImage imageNamed:@"Clock.png"],
                         [UIImage imageNamed:@"Chat.png"],
                         ];
     
@@ -102,6 +103,9 @@
             break;
         case 2:
             [self performSegueWithIdentifier:@"calendarToView" sender:self];
+            break;
+        case 3:
+            [self performSegueWithIdentifier:@"calendarToComment" sender:self];
             break;
     }
 }

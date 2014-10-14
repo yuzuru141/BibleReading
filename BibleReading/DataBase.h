@@ -21,7 +21,9 @@
 - (void)dbUpdateReadOrNot:(int)ID;
 - (void)dbDeleteReadOrNot:(int)ID;
 - (NSMutableArray*)dbLoadReadOrNot:(int)ID;
+- (void)updateComment:(int)DATE TEXT:(NSString *)comment;
 - (NSMutableArray*)checkDate:(int)DATE;
-
+- (NSMutableArray *)recentComment;
+- (NSMutableArray *)searchComment:(NSString *)WORD;
 
 @end
