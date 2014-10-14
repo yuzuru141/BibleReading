@@ -23,7 +23,7 @@
     NSArray*       aItemList4;
     UIPickerView*  oPicker;
     UIPickerView*  oPicker2;
-    UIPickerView*  oPicker3;
+//    UIPickerView*  oPicker3;
     NSString *pic1_str;
     NSString *pic2_str;
     NSString *pic3_str;
@@ -254,6 +254,8 @@
     oPicker2.transform = CGAffineTransformConcat(t10, CGAffineTransformConcat(s10, t11));
     [_settingView addSubview:oPicker2];
     
+    [self userSelectRow];
+    
 //    aItemList3 = [[NSArray alloc] initWithObjects:@"--",@"00:",@"01:",@"02:",@"03:",@"04:",@"05:",@"06:",@"07:",@"08:",@"09:",@"10:",@"11:",@"12:",@"13:",@"14:",@"15:",@"16:",@"17:",@"18:",@"19:",@"20:",@"21:",@"22:",@"23:",nil];
 //    aItemList4 = [[NSArray alloc] initWithObjects:@"--",@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"50",@"51",@"52",@"53",@"54",@"55",@"56",@"57",@"58",@"59",nil];
 //    oPicker3 = [[UIPickerView alloc] init];
@@ -340,10 +342,12 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     if (pickerView.tag == 1) {
+        selectNumber = 0;
         selectNumber = [pickerView selectedRowInComponent:0];
         return;
     }
     else if (pickerView.tag == 2){
+        selectNumber2 = 0;
         selectNumber2 = [pickerView selectedRowInComponent:0];
         return;
     }
@@ -411,6 +415,20 @@
 //ピッカーの高さを設定する
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     return 50;
+}
+
+
+//以前にユーザが設定した時間を読み込む
+-(void)userSelectRow{
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    int year = [defaults integerForKey:@"year"];
+    int plan = [defaults integerForKey:@"plan"];
+    
+    //NSuserdefaultsから取得した情報をpickerの初期値に反映。
+    [oPicker selectRow:year inComponent:0 animated:NO]; //１列目を一行目にセット
+    [oPicker2 selectRow:plan inComponent:0 animated:NO]; //２列目を二行目にセット
+    
 }
 
 
@@ -663,11 +681,15 @@
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     switch (buttonIndex) {
         case 0:
             NSLog(@"cancel");
             break;
         case 1:
+            //設定情報を保存する
+            [defaults setInteger:selectNumber forKey:@"year"];
+            [defaults setInteger:selectNumber2 forKey:@"plan"];
             [self multilevelThreadMethod];
             NSLog(@"OK");
             break;
