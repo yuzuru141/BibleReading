@@ -9,6 +9,10 @@
 #import "CommentViewController.h"
 
 @interface CommentViewController (){
+    NSString *countryCode;
+    NSString *countryCodeEn;
+    NSString *countryCodeJa;
+    NSString *countryCodeCn;
     UIButton *listBtn;
     int intDate;
     CGFloat width;
@@ -102,6 +106,13 @@
 //それぞれのラベルを作成
 - (void)createsettingView{
     
+    //デバイスの言語設定を読む
+    countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSLog(@"countryCode=%@",countryCode);
+    countryCodeEn = @"en";
+    countryCodeJa = @"ja";
+    countryCodeCn = @"zh-Hans";
+
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     width = screenSize.size.width;
     height = screenSize.size.height;
@@ -190,11 +201,23 @@
                 commentLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
             }
             
-            dateLabel.text = [NSString stringWithFormat:@"%d",[[dateArray objectAtIndex:i]integerValue]];
-            NSLog(@"dateLabel=%@",dateLabel.text);
+            NSString *splitDate = [[NSString alloc]init];
+            NSString *year = [[NSString alloc]init];
+            NSString *month = [[NSString alloc]init];
+            NSString *day = [[NSString alloc]init];
+            splitDate = [NSString stringWithFormat:@"%d",[[dateArray objectAtIndex:i]integerValue]];
+            year = [splitDate substringToIndex:4];
+            month = [splitDate substringWithRange:NSMakeRange(4,2)];
+            day = [splitDate substringFromIndex:6];
+            if ([countryCode isEqualToString: countryCodeEn]) {
+                dateLabel.text = [NSString stringWithFormat:@"%@/%@/%@",day,month,year];
+            }else if([countryCode isEqualToString: countryCodeJa]){
+                dateLabel.text = [NSString stringWithFormat:@"%@/%@/%@",year,month,day];
+            }else if([countryCode isEqualToString: countryCodeCn]){
+                dateLabel.text = [NSString stringWithFormat:@"%@/%@/%@",year,month,day];
+            }
+
             commentLabel.text = [commentArray objectAtIndex:i];
-            //丸みが出来ていない
-            commentLabel.layer.cornerRadius = 10;
             commentLabel.backgroundColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5];
             commentLabel.textColor = [UIColor whiteColor];
             [scrollAllView addSubview:dateLabel];
