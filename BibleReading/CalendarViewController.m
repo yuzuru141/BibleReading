@@ -140,10 +140,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             youtubeView.delegate = self;
             youtubeView.scalesPageToFit = YES;
             [BNIndicator showForView:youtubeView withMessage:@"Loading"];
-            NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/embed/SGc2S87uPp4?feature=player_detailpage&rel=0"];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            [youtubeView setMediaPlaybackRequiresUserAction:NO];
+            NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/embed/gedG8yEyrUU?feature=player_detailpage&rel=0&autoplay=1&playsinline=0&fs=1"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:0];
             [youtubeView loadRequest:request];
-            
             [self.view addSubview:youtubeView];
             
             //戻るボタンの作成
@@ -190,6 +190,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 - (void)buttonToRead{
     [self performSegueWithIdentifier:@"calendarToRead" sender:self];    
 }
+
 
 
 @end

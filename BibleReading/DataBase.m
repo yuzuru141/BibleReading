@@ -394,25 +394,9 @@
             if ([search isEqualToString:@"'"]) {
                 NSString *front = [comment substringToIndex:i+1];
                 NSString *back = [comment substringFromIndex:i+1];
-                //もう一回検索をかける
-//                NSRange searchResult2 = [back rangeOfString:@"'"];
-//                if (!(searchResult2.location == NSNotFound)) {
-//                for (int j=0; j<[back length]; j++) {
-//                    NSString *search2 = [back substringWithRange:NSMakeRange(j,1)];
-//                    if ([search2 isEqualToString:@"'"]) {
-//                        NSString *front2 = [back substringToIndex:j+1];
-//                        NSString *back2 = [back substringFromIndex:j+1];
-//                        NSString *unionComment2 = [NSString stringWithFormat:@"%@'%@'%@",front,front2,back2];
-//                        NSLog(@"unionComment2=%@",unionComment2);
-//                        update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",unionComment2, (long)DATE];
-//                    }
-//                }
-//                }else{
                     NSString *unionComment = [NSString stringWithFormat:@"%@'%@",front,back];
                     update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",unionComment, (long)DATE];
                     NSLog(@"update_commentText=%@",update_commentText);
-//                }
-//
             }
         }
     }
