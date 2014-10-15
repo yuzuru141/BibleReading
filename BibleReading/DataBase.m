@@ -380,10 +380,42 @@
     
     NSString *dbPath = [self connectDB];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    NSString *update_commentText;
     
-    //データのupdate
-    NSString *update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",comment, (long)DATE];
-    
+    //コメントにシングルクオーテーションが含まれるか確認する。
+    NSRange searchResult = [comment rangeOfString:@"'"];
+    if(searchResult.location == NSNotFound){
+        update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",comment, (long)DATE];
+    }else{
+        // みつかった場合の処理
+        NSInteger characterSum = [comment length];
+        for (int i=0; i<characterSum; i++) {
+            NSString *search = [comment substringWithRange:NSMakeRange(i,1)];
+            if ([search isEqualToString:@"'"]) {
+                NSString *front = [comment substringToIndex:i+1];
+                NSString *back = [comment substringFromIndex:i+1];
+                //もう一回検索をかける
+//                NSRange searchResult2 = [back rangeOfString:@"'"];
+//                if (!(searchResult2.location == NSNotFound)) {
+//                for (int j=0; j<[back length]; j++) {
+//                    NSString *search2 = [back substringWithRange:NSMakeRange(j,1)];
+//                    if ([search2 isEqualToString:@"'"]) {
+//                        NSString *front2 = [back substringToIndex:j+1];
+//                        NSString *back2 = [back substringFromIndex:j+1];
+//                        NSString *unionComment2 = [NSString stringWithFormat:@"%@'%@'%@",front,front2,back2];
+//                        NSLog(@"unionComment2=%@",unionComment2);
+//                        update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",unionComment2, (long)DATE];
+//                    }
+//                }
+//                }else{
+                    NSString *unionComment = [NSString stringWithFormat:@"%@'%@",front,back];
+                    update_commentText = [NSString stringWithFormat:@"update myReadingTable set comment = '%@' where date = %ld",unionComment, (long)DATE];
+                    NSLog(@"update_commentText=%@",update_commentText);
+//                }
+//
+            }
+        }
+    }
     [db open];
     [db executeUpdate:update_commentText];
     [db close];
@@ -495,12 +527,31 @@
     int rDate = 0;
     int rDateNext = 0;
     NSString *rComment;
+    NSString *commentSearch;
     
     FMResultSet *resultComment = [[FMResultSet alloc]init];
     
+    //検索ワードにシングルクオーテーションが含まれるか確認する。
+    NSRange searchResult = [WORD rangeOfString:@"'"];
+    if(searchResult.location == NSNotFound){
+        commentSearch = [NSString stringWithFormat:@"select * from myReadingTable where comment like '%%%@%%';",WORD];
+    }else{
+        // みつかった場合の処理
+        NSInteger characterSum = [WORD length];
+        for (int i=0; i<characterSum; i++) {
+            NSString *search = [WORD substringWithRange:NSMakeRange(i,1)];
+            if ([search isEqualToString:@"'"]) {
+                NSString *front = [WORD substringToIndex:i+1];
+                NSString *back = [WORD substringFromIndex:i+1];
+                NSString *unionComment = [NSString stringWithFormat:@"%@'%@",front,back];
+                commentSearch = [NSString stringWithFormat:@"select * from myReadingTable where comment like '%%%@%%';",unionComment];
+                NSLog(@"update_commentText=%@",commentSearch);
+            }
+        }
+    }
+    
     [db open];
     
-    NSString *commentSearch = [NSString stringWithFormat:@"select * from myReadingTable where comment like '%%%@%%';",WORD];
     resultComment = [db executeQuery:commentSearch];
     while ([resultComment next]) {
         rDate = [resultComment intForColumn:@"date"];
