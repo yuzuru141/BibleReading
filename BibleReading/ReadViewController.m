@@ -181,11 +181,16 @@
             CGRect chapterRect;
             //iphone英語のソロモンの歌とテサロニケは聖書名と章が重なってしまうので、章の位置を節にする
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                NSLog(@"確認１");
                 if ([countryCode isEqualToString: countryCodeEn]) {
+                    NSLog(@"確認２");
                     NSRange range = [[bibleName objectAtIndex:i] rangeOfString:@"Thessalonians"];
                     if ([[bibleName objectAtIndex:i]isEqualToString:@"SongofSolomon"] || !(range.location == NSNotFound)) {
                     chapterRect = CGRectMake(width/9*5, 50+i*height/12, width-40, 30);;
-                                    NSLog(@"確認");
+                                    NSLog(@"確認３");
+                    }
+                    else{
+                        break;
                     }
                 }
             }
