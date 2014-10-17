@@ -178,7 +178,20 @@
         
         //章があるところだけラベル表示する
         if (![[capter objectAtIndex:i]intValue]==0) {
-            CGRect chapterRect = CGRectMake(width/9*4, 50+i*height/12, width-40, 30);
+            CGRect chapterRect;
+            //iphone英語のソロモンの歌とテサロニケは聖書名と章が重なってしまうので、章の位置を節にする
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+                if ([countryCode isEqualToString: countryCodeEn]) {
+                    NSRange range = [[bibleName objectAtIndex:i] rangeOfString:@"Thessalonians"];
+                    if ([[bibleName objectAtIndex:i]isEqualToString:@"SongofSolomon"] || !(range.location == NSNotFound)) {
+                    chapterRect = CGRectMake(width/9*5, 50+i*height/12, width-40, 30);;
+                                    NSLog(@"確認");
+                    }
+                }
+            }
+            else{
+            chapterRect = CGRectMake(width/9*4, 50+i*height/12, width-40, 30);
+            }
             UILabel *chaperLabel = [[UILabel alloc]initWithFrame:chapterRect];
             chaperLabel.text = [NSString stringWithFormat:@"%ld",(long)[[capter objectAtIndex:i]integerValue]];
             chaperLabel.textColor = [UIColor blackColor];
