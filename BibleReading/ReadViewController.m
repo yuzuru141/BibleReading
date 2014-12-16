@@ -181,17 +181,16 @@
             CGRect chapterRect;
             //iphone英語のソロモンの歌とテサロニケは聖書名と章が重なってしまうので、章の位置を節にする
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-                NSLog(@"確認１");
                 if ([countryCode isEqualToString: countryCodeEn]) {
-                    NSLog(@"確認２");
                     NSRange range = [[bibleName objectAtIndex:i] rangeOfString:@"Thessalonians"];
                     if ([[bibleName objectAtIndex:i]isEqualToString:@"SongofSolomon"] || !(range.location == NSNotFound)) {
-                    chapterRect = CGRectMake(width/9*5, 50+i*height/12, width-40, 30);;
-                                    NSLog(@"確認３");
+                    chapterRect = CGRectMake(width/9*5, 50+i*height/12, width-40, 30);
                     }
                     else{
-                        break;
+                        chapterRect = CGRectMake(width/9*4, 50+i*height/12, width-40, 30);
                     }
+                }else{
+                    chapterRect = CGRectMake(width/9*4, 50+i*height/12, width-40, 30);
                 }
             }
             else{
@@ -507,55 +506,75 @@
 }
 
 //jw.orgから聖書を読み込む
+//- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+//    
+//    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
+//    
+//    webViewJWORG.delegate = self;
+//    
+//    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
+//    
+//    NSString *urlString;
+//    
+//    if ([countryCode isEqualToString: countryCodeEn]) {
+//        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+//    }else if ([countryCode isEqualToString: countryCodeJa]) {
+//         NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }else if ([countryCode isEqualToString: countryCodeCn]) {
+//            NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+//            urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+//
+//    NSHTTPURLResponse* resp;
+//    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+//    
+//    //通信エラーであれば、警告を出す
+//        if (resp.statusCode != 200){
+//            [self alertViewMethod];
+//            return;
+//        }
+//
+//    [webViewJWORG loadRequest:request];
+//    [_settingView addSubview:webViewJWORG];
+//    
+//    //戻るボタンの作成
+//    backDate = [[UIButton alloc]
+//               initWithFrame:CGRectMake(70, 25, 100, 32)];
+//    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
+//    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+//    [backDate addTarget:self
+//                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
+//    [_settingView addSubview:backDate];
+//    
+//    //toDateボタンを表示する
+//    toDate = YES;
+//    if (toDate==YES) {
+//        backDate.hidden = NO;
+//    }
+//    
+//}
+
+//UIWebviewではなくsafariを起動する
 - (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
-    
-    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
-    
-    webViewJWORG.delegate = self;
-    
-    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
     
     NSString *urlString;
     
     if ([countryCode isEqualToString: countryCodeEn]) {
         urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
     }else if ([countryCode isEqualToString: countryCodeJa]) {
-         NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
         urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }else if ([countryCode isEqualToString: countryCodeCn]) {
-            NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
-            urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
+
     NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
-
-    NSHTTPURLResponse* resp;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
-    
-    //通信エラーであれば、警告を出す
-        if (resp.statusCode != 200){
-            [self alertViewMethod];
-            return;
-        }
-
-    [webViewJWORG loadRequest:request];
-    [_settingView addSubview:webViewJWORG];
-    
-    //戻るボタンの作成
-    backDate = [[UIButton alloc]
-               initWithFrame:CGRectMake(70, 25, 100, 32)];
-    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
-    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-    [backDate addTarget:self
-                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingView addSubview:backDate];
-    
-    //toDateボタンを表示する
-    toDate = YES;
-    if (toDate==YES) {
-        backDate.hidden = NO;
-    }
+    [[UIApplication sharedApplication] openURL:url];
     
 }
 
