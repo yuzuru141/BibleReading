@@ -44,6 +44,7 @@
     NSMutableArray *verse;
     NSMutableArray *commentArray;
     NSInteger idCount;
+    int page;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -96,6 +97,9 @@
     [self createsettingView];
     [self setSchedule];
     
+    //pageの初期化
+    page = 1;
+    
 }
 
 
@@ -135,18 +139,21 @@
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
     switch (index) {
         case 0:
+            page = 0;
             [self alertViewMethod];
-            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
+//            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
             break;
         case 1:
-            [self setViewForFirst];
+            [self createsettingView];
             break;
         case 2:
-            [self performSegueWithIdentifier:@"settingToView" sender:self];
+            page = 2;
+//            [self performSegueWithIdentifier:@"settingToView" sender:self];
             [self alertViewMethod];
             break;
         case 3:
-            [self performSegueWithIdentifier:@"settingToComment" sender:self];
+            page =3;
+//            [self performSegueWithIdentifier:@"settingToComment" sender:self];
             [self alertViewMethod];
             break;
     }
@@ -483,12 +490,23 @@
 
 //creatAndSelectDBメソッドを使う際もユーザが操作できるようにマルチスレッドにする
 - (void)multilevelThreadMethod{
-    
-    [NSThread
-     detachNewThreadSelector:@selector(createAndSelectDB)
-     toTarget:self
-     withObject:nil];
 
+//    [NSThread
+//     detachNewThreadSelector:@selector(createAndSelectDB)
+//     toTarget:self
+//     withObject:nil];
+    
+        [NSThread
+         detachNewThreadSelector:@selector(kurukuru)
+         toTarget:self
+         withObject:nil];
+    
+    [self createAndSelectDB];
+
+}
+
+- (void)kurukuru{
+    [BNIndicator showForView:self.view withMessage:@"Loading" size:300];
 }
 
 //DB作成と読み込み
@@ -663,6 +681,25 @@
         }
         }
     }
+
+    switch (page) {
+        case 0:
+            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
+            break;
+        case 1:
+            break;
+        case 2:
+            [self performSegueWithIdentifier:@"settingToView" sender:self];
+            break;
+        case 3:
+            [self performSegueWithIdentifier:@"settingToComment" sender:self];
+            break;
+        default:
+            break;
+    }
+
+    [BNIndicator hideForView:_settingView];
+
 }
 
 

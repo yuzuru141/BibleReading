@@ -11,6 +11,8 @@
 #import "DataBase.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CalendarViewController.h"
+#import "BNIndicator.h"
+#import "BNIndicatorView.h"
 
 @interface SettingViewController : UIViewController<RNFrostedSidebarDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 

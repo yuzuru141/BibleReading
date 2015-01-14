@@ -98,6 +98,7 @@
             [self performSegueWithIdentifier:@"commentToNotice" sender:self];
             break;
         case 3:
+            [self setSideBar];
             break;
     }
 }
