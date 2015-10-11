@@ -96,9 +96,9 @@
             if (radius % 2 != 1) {
                 radius += 1; // force radius to be odd so that the three box-blur methodology works.
             }
-            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, radius, radius, 0, kvImageEdgeExtend);
-            vImageBoxConvolve_ARGB8888(&effectOutBuffer, &effectInBuffer, NULL, 0, 0, radius, radius, 0, kvImageEdgeExtend);
-            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, radius, radius, 0, kvImageEdgeExtend);
+            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
+            vImageBoxConvolve_ARGB8888(&effectOutBuffer, &effectInBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
+            vImageBoxConvolve_ARGB8888(&effectInBuffer, &effectOutBuffer, NULL, 0, 0, (int)radius, (int)radius, 0, kvImageEdgeExtend);
         }
         BOOL effectImageBuffersAreSwapped = NO;
         if (hasSaturationChange) {
@@ -209,10 +209,10 @@
     float r, g, b, a;
     float darkenFactor = 0.3f;
     UIColor *darkerColor;
-    if ([self.originalBackgroundColor getRed:&r green:&g blue:&b alpha:&a]) {
+    if ([self.originalBackgroundColor getRed:(double*)&r green:(double*)&g blue:(double*)&b alpha:(double*)&a]) {
         darkerColor = [UIColor colorWithRed:MAX(r - darkenFactor, 0.0) green:MAX(g - darkenFactor, 0.0) blue:MAX(b - darkenFactor, 0.0) alpha:a];
     }
-    else if ([self.originalBackgroundColor getWhite:&r alpha:&a]) {
+    else if ([self.originalBackgroundColor getWhite:(double*)&r alpha:(double*)&a]) {
         darkerColor = [UIColor colorWithWhite:MAX(r - darkenFactor, 0.0) alpha:a];
     }
     else {
@@ -328,9 +328,13 @@ static RNFrostedSidebar *rn_frostedMenu;
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+//- (NSUInteger)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskAll;
+//}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
+
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];

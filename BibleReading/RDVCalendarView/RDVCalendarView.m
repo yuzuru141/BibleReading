@@ -564,7 +564,7 @@
             if ((index+1)>9) {
                 dateString = [NSString stringWithFormat:@"%@%ld",dateString,index+1];
             }else{
-                dateString = [NSString stringWithFormat:@"%@0%ld",dateString,index+1];
+                dateString = [NSString stringWithFormat:@"%@%ld",dateString,index+1];
             }
         
             int dateInt = dateString.intValue;
@@ -576,14 +576,14 @@
             for (i=0; i<[readOrNot count]; i++) {
                 readOrNotString = [readOrNot objectAtIndex:i];
                 if (readOrNotString.intValue == 0) {
-                    [dayCell.textLabel setText:[NSString stringWithFormat:@"%ld", index + 1]];
+                    [dayCell.textLabel setText:[NSString stringWithFormat:@"%ldd", index + 1]];
                 }else{
-                    [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%ld", index + 1]];
+                    [dayCell.textLabel2 setText:[NSString stringWithFormat:@"%ldd", index + 1]];
                 }
             }
         }else{
         //初回は全てのカレンダー文字を黒にする
-        [dayCell.textLabel setText:[NSString stringWithFormat:@"%ld", index + 1]];
+        [dayCell.textLabel setText:[NSString stringWithFormat:@"%ldd", index + 1]];
         }
     
         if (index + 1 == [self currentDay].day &&
