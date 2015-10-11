@@ -234,7 +234,7 @@
     
     aItemList = [[NSArray alloc] initWithObjects:NSLocalizedString(@"1year", nil), NSLocalizedString(@"2year", nil) ,nil];
     oPicker = [[UIPickerView alloc] init];
-    oPicker.frame = CGRectMake(width/5, height/9*2, width-width/5*2, 35);
+    oPicker.frame = CGRectMake(width/5, height/9*2, width-width/5*2, 50);
     oPicker.showsSelectionIndicator = YES;
     oPicker.delegate = self;
     oPicker.dataSource = self;
@@ -247,11 +247,12 @@
     
     aItemList2 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"general", nil) ,NSLocalizedString(@"time ordering", nil) ,NSLocalizedString(@"recommend", nil) ,nil];
     oPicker2 = [[UIPickerView alloc] init];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 35);
-    }else{
-        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 35);
-    }
+//    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+//        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 18);
+//    }else{
+//        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 35);
+//    }
+    oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 50);
     oPicker2.showsSelectionIndicator = YES;
     oPicker2.delegate = self;
     oPicker2.dataSource = self;
@@ -370,7 +371,7 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:18];
     }else{
-        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:35];
+        label.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:30];
     }
     label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentLeft;
@@ -444,7 +445,7 @@
 //datepicker
 - (void)datePickerMethod{
     // イニシャライザ
-    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*6, width-width/10*2, 35)];
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*6, width-width/10*2, 45)];
     datePicker.datePickerMode = UIDatePickerModeDate;
     
     datePicker.tintColor = [UIColor blackColor];
