@@ -491,22 +491,18 @@
 //creatAndSelectDBメソッドを使う際もユーザが操作できるようにマルチスレッドにする
 - (void)multilevelThreadMethod{
 
-//    [NSThread
-//     detachNewThreadSelector:@selector(createAndSelectDB)
-//     toTarget:self
-//     withObject:nil];
+    [NSThread
+     detachNewThreadSelector:@selector(createAndSelectDB)
+     toTarget:self
+     withObject:nil];
     
-        [NSThread
-         detachNewThreadSelector:@selector(kurukuru)
-         toTarget:self
-         withObject:nil];
+    //loding画面を出す
+    [self kurukuru];
     
-    [self createAndSelectDB];
-
 }
 
 - (void)kurukuru{
-    [BNIndicator showForView:self.view withMessage:@"Loading" size:300];
+    [BNIndicator showForView:self.view withMessage:@"wait..." size:300];
 }
 
 //DB作成と読み込み
