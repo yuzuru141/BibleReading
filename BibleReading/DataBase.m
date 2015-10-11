@@ -220,7 +220,7 @@
 
 //聖書通読用のテーブルに初期値を投入
 - (void)insertTable:(int)ID label1:(NSString*)BIBBLE_NAME label2:(NSString*)BIBBLE_NAME_JAPANESE label3:(NSString*)BIBBLE_NAME_CHINESE label4:(int)CAPTER label5:(NSString*)VERSE label6:(NSDate*)DATE{
-    
+
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[NSLocale systemLocale]];
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];

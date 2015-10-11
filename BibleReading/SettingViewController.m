@@ -743,11 +743,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
 }
 
 // 縦のみサポート
-- (NSUInteger)supportedInterfaceOrientations
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskPortrait;
+//}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
-
 
 
 

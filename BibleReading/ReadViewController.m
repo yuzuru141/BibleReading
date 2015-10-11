@@ -75,7 +75,7 @@
     //デバイスの言語設定を読む
     countryCode = [[NSLocale preferredLanguages] objectAtIndex:0];
     NSLog(@"countryCode=%@",countryCode);
-    countryCodeEn = @"en";
+    countryCodeEn = @"JP";
     countryCodeJa = @"ja";
     countryCodeCn = @"zh-Hans";
     
@@ -105,6 +105,7 @@
     verse = resultArray[5];
     readOrNot = resultArray[6];
     comment = resultArray[7];
+    
 }
 - (void)setViewForFirst{
     
@@ -153,16 +154,26 @@
         
         CGRect bibleNameRect = CGRectMake(width/9, 50+i*height/12, width-40, 30);
         UILabel *bibleLabel = [[UILabel alloc]initWithFrame:bibleNameRect];
-        if ([countryCode isEqualToString: countryCodeEn]) {
-            bibleLabel.text = [bibleName objectAtIndex:i];
-            NSLog(@"countryCodeEn=%@",countryCodeEn);
-        }else if([countryCode isEqualToString: countryCodeJa]){
+//        if ([countryCode isEqualToString: countryCodeEn]) {
+//            bibleLabel.text = [bibleName objectAtIndex:i];
+//            NSLog(@"countryCodeEn=%@",countryCodeEn);
+//        }else if([countryCode isEqualToString: countryCodeJa]){
+//            bibleLabel.text = [bibleNameJp objectAtIndex:i];
+//            NSLog(@"countryCodeJa=%@",countryCodeJa);
+//        }else if([countryCode isEqualToString: countryCodeCn]){
+//            bibleLabel.text = [bibleNameCn objectAtIndex:i];
+//            NSLog(@"countryCodeCn=%@",countryCodeCn);
+//        }
+        
+        int countryInt = [self findWord:countryCode];
+        if (countryInt == 2) {
             bibleLabel.text = [bibleNameJp objectAtIndex:i];
-            NSLog(@"countryCodeJa=%@",countryCodeJa);
-        }else if([countryCode isEqualToString: countryCodeCn]){
+        }else if(countryInt == 3){
             bibleLabel.text = [bibleNameCn objectAtIndex:i];
-            NSLog(@"countryCodeCn=%@",countryCodeCn);
+        }else{
+            bibleLabel.text = [bibleName objectAtIndex:i];
         }
+
         bibleLabel.textColor = [UIColor blackColor];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
             bibleLabel.font = [UIFont fontWithName:@"HiraKakuProN-W3" size:15];
@@ -334,13 +345,23 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:0 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:0]integerValue] == 0) {
-                    if ([countryCode isEqualToString: countryCodeEn]) {
-                            [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
-                    }else if ([countryCode isEqualToString: countryCodeJa]) {
-                         [self readFromJwOrg:[bibleNameJp objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
-                    }else if ([countryCode isEqualToString: countryCodeCn]) {
-                         [self readFromJwOrg:[bibleNameCn objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
-                    }
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                            [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+//                    }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                         [self readFromJwOrg:[bibleNameJp objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+//                    }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                         [self readFromJwOrg:[bibleNameCn objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+//                    }
+                
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:0] label1:[[capter objectAtIndex:0]intValue]];
+                }
+                
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:0]intValue]];
             }else{
                  [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:0]intValue]];
@@ -351,12 +372,20 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:1 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:1]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
                     [self readFromJwOrg:[bibleNameJp objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
+                }else if(countryInt == 3){
                     [self readFromJwOrg:[bibleNameCn objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                     [self readFromJwOrg:[bibleName objectAtIndex:1] label1:[[capter objectAtIndex:1]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:1]intValue]];
@@ -369,12 +398,20 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:2 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:2]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
                 }
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:2]intValue]];
             }else{
@@ -386,13 +423,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:3 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:3]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:3]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:3]intValue]];
@@ -403,13 +449,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:4 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:4]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:4]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:4]intValue]];
@@ -420,13 +475,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:5 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:5]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:5]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:5]intValue]];
@@ -437,13 +501,23 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:6 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:6]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
+//                }
+
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
                 }
+                
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:6]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:6]intValue]];
@@ -454,13 +528,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:7 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:7]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:7]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:7]intValue]];
@@ -471,13 +554,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:8 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:8]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:8]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:8]intValue]];
@@ -488,13 +580,22 @@
             readOrNotIndivisualArray = resultArray[0];
             [readOrNot replaceObjectAtIndex:9 withObject:[readOrNotIndivisualArray objectAtIndex:0]];
             if ([[readOrNot objectAtIndex:9]integerValue] == 0) {
-                if ([countryCode isEqualToString: countryCodeEn]) {
-                    [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeJa]) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
-                }else if ([countryCode isEqualToString: countryCodeCn]) {
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
+//                if ([countryCode isEqualToString: countryCodeEn]) {
+//                    [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeJa]) {
+//                    [self readFromJwOrg:[bibleNameJp objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
+//                }else if ([countryCode isEqualToString: countryCodeCn]) {
+//                    [self readFromJwOrg:[bibleNameCn objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
+//                }
+                int countryInt = [self findWord:countryCode];
+                if (countryInt == 2) {
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
+                }else if(countryInt == 3){
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
+                }else{
+                    [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
                 }
+
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:9]intValue]];
             }else{
                 [self.database dbDeleteReadOrNot:[[idArray objectAtIndex:9]intValue]];
@@ -506,16 +607,15 @@
 }
 
 //jw.orgから聖書を読み込む
-//- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
-//    
-//    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
-//    
-//    webViewJWORG.delegate = self;
-//    
-//    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
-//    
-//    NSString *urlString;
-//    
+- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
+    
+    webViewJWORG.delegate = self;
+    
+    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
+    
+    NSString *urlString;
+    
 //    if ([countryCode isEqualToString: countryCodeEn]) {
 //        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
 //    }else if ([countryCode isEqualToString: countryCodeJa]) {
@@ -525,58 +625,71 @@
 //            NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
 //            urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    }
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
-//
-//    NSHTTPURLResponse* resp;
-//    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
-//    
-//    //通信エラーであれば、警告を出す
-//        if (resp.statusCode != 200){
-//            [self alertViewMethod];
-//            return;
-//        }
-//
-//    [webViewJWORG loadRequest:request];
-//    [_settingView addSubview:webViewJWORG];
-//    
-//    //戻るボタンの作成
-//    backDate = [[UIButton alloc]
-//               initWithFrame:CGRectMake(70, 25, 100, 32)];
-//    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
-//    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-//    [backDate addTarget:self
-//                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
-//    [_settingView addSubview:backDate];
-//    
-//    //toDateボタンを表示する
-//    toDate = YES;
-//    if (toDate==YES) {
-//        backDate.hidden = NO;
-//    }
-//    
-//}
-
-//UIWebviewではなくsafariを起動する
-- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
     
-    NSString *urlString;
-    
-    if ([countryCode isEqualToString: countryCodeEn]) {
-        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
-    }else if ([countryCode isEqualToString: countryCodeJa]) {
-        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+    int countryInt = [self findWord:countryCode];
+    if (countryInt == 2) {
+        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
         urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    }else if ([countryCode isEqualToString: countryCodeCn]) {
-        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+    }else if(countryInt == 3){
+        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
         urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }else{
+        urlString = [NSString stringWithFormat:@"https://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
     }
 
+    
     NSURL *url = [NSURL URLWithString:urlString];
-    [[UIApplication sharedApplication] openURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+
+    NSHTTPURLResponse* resp;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+    
+    //通信エラーであれば、警告を出す
+        if (resp.statusCode != 200){
+            [self alertViewMethod];
+            return;
+        }
+
+    [webViewJWORG loadRequest:request];
+    [_settingView addSubview:webViewJWORG];
+    
+    //戻るボタンの作成
+    backDate = [[UIButton alloc]
+               initWithFrame:CGRectMake(70, 25, 100, 32)];
+    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
+    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+    [backDate addTarget:self
+                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingView addSubview:backDate];
+    
+    //toDateボタンを表示する
+    toDate = YES;
+    if (toDate==YES) {
+        backDate.hidden = NO;
+    }
     
 }
+
+//UIWebviewではなくsafariを起動する(言語の設定がこのままでは使えないので、これを使う時は上記を参照にすること)
+//- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+//    
+//    NSString *urlString;
+//    
+//    if ([countryCode isEqualToString: countryCodeEn]) {
+//        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+//    }else if ([countryCode isEqualToString: countryCodeJa]) {
+//        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }else if ([countryCode isEqualToString: countryCodeCn]) {
+//        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }
+//
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    [[UIApplication sharedApplication] openURL:url];
+//    
+//}
 
 
 
@@ -615,6 +728,25 @@
 }
 
 
+//文字検索関数
+- (int)findWord:(NSString*)WORD{
+    int countryInt = 0;
+    NSRange range = [WORD rangeOfString:countryCodeEn];
+    if (range.location != NSNotFound) {
+        countryInt = 1;
+    }
+    range = [WORD rangeOfString:countryCodeJa];
+    if (range.location != NSNotFound) {
+        countryInt = 2;
+
+    }
+    range = [WORD rangeOfString:countryCodeCn];
+    if (range.location != NSNotFound) {
+        countryInt = 3;;
+    }
+    return countryInt;
+}
+
 // 常に回転させない
 - (BOOL)shouldAutorotate
 {
@@ -622,11 +754,14 @@
 }
 
 // 縦のみサポート
-- (NSUInteger)supportedInterfaceOrientations
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskPortrait;
+//}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
-
 
 //バックボタンの動作
 - (IBAction)toCalender:(id)sender{
