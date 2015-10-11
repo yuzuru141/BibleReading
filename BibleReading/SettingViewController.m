@@ -93,6 +93,7 @@
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     width = screenSize.size.width;
     height = screenSize.size.height;
+
     
     [self createsettingView];
     [self setSchedule];
@@ -189,7 +190,7 @@
 //ラベル作成とピッカー読み込み
 - (void)setSchedule{
 
-    CGRect textRect = CGRectMake(width/10, height/9+30, width-width/10*2, 35);
+    CGRect textRect = CGRectMake(width/10, height/9, width-width/10*2, 35);
     UILabel *labelPlan = [[UILabel alloc]init];
     labelPlan = [[UILabel alloc]initWithFrame:textRect];
     labelPlan.text = NSLocalizedString(@"Your Plan", nil);
@@ -233,7 +234,7 @@
     
     aItemList = [[NSArray alloc] initWithObjects:NSLocalizedString(@"1year", nil), NSLocalizedString(@"2year", nil) ,nil];
     oPicker = [[UIPickerView alloc] init];
-    oPicker.frame = CGRectMake(width/5, height/9+30, width-width/5*2, 35);
+    oPicker.frame = CGRectMake(width/5, height/9*2, width-width/5*2, 35);
     oPicker.showsSelectionIndicator = YES;
     oPicker.delegate = self;
     oPicker.dataSource = self;
@@ -247,9 +248,9 @@
     aItemList2 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"general", nil) ,NSLocalizedString(@"time ordering", nil) ,NSLocalizedString(@"recommend", nil) ,nil];
     oPicker2 = [[UIPickerView alloc] init];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-        oPicker2.frame = CGRectMake(width/5, height/9+100, width-width/5*2, 35);
+        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 35);
     }else{
-        oPicker2.frame = CGRectMake(width/5, height/5+100, width-width/5*2, 35);
+        oPicker2.frame = CGRectMake(width/5, height/9*3, width-width/5*2, 35);
     }
     oPicker2.showsSelectionIndicator = YES;
     oPicker2.delegate = self;
@@ -443,7 +444,7 @@
 //datepicker
 - (void)datePickerMethod{
     // イニシャライザ
-    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*5+10, width-width/10*2, 35)];
+    datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(width/10, height/9*6, width-width/10*2, 35)];
     datePicker.datePickerMode = UIDatePickerModeDate;
     
     datePicker.tintColor = [UIColor blackColor];
@@ -457,12 +458,21 @@
         datePicker.transform = CGAffineTransformConcat(t30, CGAffineTransformConcat(s30, t31));
     }
     
-    if ([countryCode isEqualToString: countryCodeEn]) {
-        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+//    if ([countryCode isEqualToString: countryCodeEn]) {
+//        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+//    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+//        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"];
+//    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+//        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
+//    }
+    
+    int countryInt = [self findWord:countryCode];
+    if (countryInt == 2) {
         datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"];
-    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+    }else if(countryInt == 3){
         datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"];
+    }else{
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     }
     
     [datePicker addTarget:self
@@ -477,13 +487,23 @@
 {
     datePicker = sender;
     df = [[NSDateFormatter alloc]init];
-    if ([countryCode isEqualToString: countryCodeEn]) {
-        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+//    if ([countryCode isEqualToString: countryCodeEn]) {
+//        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//    }else  if ([countryCode isEqualToString: countryCodeJa]) {
+//        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
+//    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+//        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]];
+//    }
+    int countryInt = [self findWord:countryCode];
+    if (countryInt == 2) {
         [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]];
-    }else  if ([countryCode isEqualToString: countryCodeCn]) {
+    }else if(countryInt == 3){
         [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]];
+    }else{
+        [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     }
+
+    
     NSLog(@"%@", [df stringFromDate:datePicker.date]);
 }
 
@@ -731,6 +751,25 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     
 }
 
+
+//文字検索関数
+- (int)findWord:(NSString*)WORD{
+    int countryInt = 0;
+    NSRange range = [WORD rangeOfString:countryCodeEn];
+    if (range.location != NSNotFound) {
+        countryInt = 1;
+    }
+    range = [WORD rangeOfString:countryCodeJa];
+    if (range.location != NSNotFound) {
+        countryInt = 2;
+        
+    }
+    range = [WORD rangeOfString:countryCodeCn];
+    if (range.location != NSNotFound) {
+        countryInt = 3;;
+    }
+    return countryInt;
+}
 
 // 常に回転させない
 - (BOOL)shouldAutorotate

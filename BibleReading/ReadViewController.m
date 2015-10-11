@@ -113,7 +113,7 @@
     CGRect screenSize = [[UIScreen mainScreen] bounds];
     width = screenSize.size.width;
     height = screenSize.size.height;
-    
+
     [self createsettingView];
     
 }
