@@ -616,6 +616,10 @@
     
     NSString *urlString;
     
+    if (CHAPTER==0) {
+        CHAPTER = 1;
+    }
+    
 //    if ([countryCode isEqualToString: countryCodeEn]) {
 //        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
 //    }else if ([countryCode isEqualToString: countryCodeJa]) {
