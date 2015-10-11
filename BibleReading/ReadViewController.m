@@ -407,11 +407,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:2] label1:[[capter objectAtIndex:2]intValue]];
                 }
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:2]intValue]];
             }else{
@@ -432,11 +432,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:3] label1:[[capter objectAtIndex:3]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:3]intValue]];
@@ -458,11 +458,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:4] label1:[[capter objectAtIndex:4]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:4]intValue]];
@@ -484,11 +484,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:5] label1:[[capter objectAtIndex:5]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:5]intValue]];
@@ -511,11 +511,11 @@
 
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:6] label1:[[capter objectAtIndex:6]intValue]];
                 }
                 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:6]intValue]];
@@ -537,11 +537,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:7] label1:[[capter objectAtIndex:7]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:7]intValue]];
@@ -563,11 +563,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:8] label1:[[capter objectAtIndex:8]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:8]intValue]];
@@ -589,11 +589,11 @@
 //                }
                 int countryInt = [self findWord:countryCode];
                 if (countryInt == 2) {
-                    [self readFromJwOrg:[bibleNameJp objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameJp objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
                 }else if(countryInt == 3){
-                    [self readFromJwOrg:[bibleNameCn objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleNameCn objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
                 }else{
-                    [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:1]intValue]];
+                    [self readFromJwOrg:[bibleName objectAtIndex:9] label1:[[capter objectAtIndex:9]intValue]];
                 }
 
                 [self.database dbUpdateReadOrNot:[[idArray objectAtIndex:9]intValue]];
@@ -639,6 +639,7 @@
 
     
     NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"url=%@",urlString);
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
 
     NSHTTPURLResponse* resp;

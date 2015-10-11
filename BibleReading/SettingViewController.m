@@ -45,6 +45,7 @@
     NSMutableArray *commentArray;
     NSInteger idCount;
     int page;
+    int tapedNextPage;
 }
 
 @property (nonatomic, strong) NSMutableIndexSet *optionIndices;
@@ -101,6 +102,8 @@
     //pageの初期化
     page = 1;
     
+    //次のページに行く値の初期化
+    tapedNextPage = 0;
 }
 
 
@@ -138,24 +141,30 @@
 
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+    
+    
+    
     switch (index) {
         case 0:
             page = 0;
             [self alertViewMethod];
 //            [self performSegueWithIdentifier:@"settingToPlan" sender:self];
+            tapedNextPage = 0;
             break;
         case 1:
             [self createsettingView];
             break;
         case 2:
             page = 2;
-//            [self performSegueWithIdentifier:@"settingToView" sender:self];
             [self alertViewMethod];
+//            [self performSegueWithIdentifier:@"settingToView" sender:self];
+            tapedNextPage = 2;
             break;
         case 3:
             page =3;
-//            [self performSegueWithIdentifier:@"settingToComment" sender:self];
             [self alertViewMethod];
+//            [self performSegueWithIdentifier:@"settingToComment" sender:self];
+            tapedNextPage = 3;
             break;
     }
 }
@@ -517,8 +526,8 @@
      toTarget:self
      withObject:nil];
     
-    //loding画面を出す
-    [self kurukuru];
+//    //loding画面を出す
+//    [self kurukuru];
     
 }
 
@@ -740,6 +749,21 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
             NSLog(@"cancel");
+            switch (tapedNextPage) {
+                case 0:
+                    [self performSegueWithIdentifier:@"settingToPlan" sender:self];
+                    break;
+                case 2:
+                    [self performSegueWithIdentifier:@"settingToView" sender:self];;
+                    break;
+                case 3:
+                    [self performSegueWithIdentifier:@"settingToComment" sender:self];
+                    break;
+                default:
+                    break;
+            }
+            
+            
             break;
         case 1:
             //設定情報を保存する
@@ -747,6 +771,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
             [defaults setInteger:selectNumber2 forKey:@"plan"];
             [self multilevelThreadMethod];
             NSLog(@"OK");
+                         [self kurukuru];
             break;
     }
     
