@@ -560,11 +560,13 @@
             }else{
                 dateString = [NSString stringWithFormat:@"%ld0%ld",(long)selectedDateComponents.year,(long)selectedDateComponents.month];
             }
+        
+            NSLog(@"dateString=%@",dateString);
             
             if ((index+1)>9) {
                 dateString = [NSString stringWithFormat:@"%@%ld",dateString,(long)index+1];
             }else{
-                dateString = [NSString stringWithFormat:@"%@%ld",dateString,(long)index+1];
+                dateString = [NSString stringWithFormat:@"%@0%ld",dateString,(long)index+1];
             }
         
             int dateInt = dateString.intValue;
