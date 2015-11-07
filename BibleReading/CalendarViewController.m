@@ -141,7 +141,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             youtubeView.scalesPageToFit = YES;
             [BNIndicator showForView:youtubeView withMessage:@"Loading"];
             [youtubeView setMediaPlaybackRequiresUserAction:NO];
-            NSURL *url = [NSURL URLWithString:@"http://www.youtube.com/embed/gedG8yEyrUU?feature=player_detailpage&rel=0&autoplay=1&playsinline=0&fs=1"];
+            NSURL *url = [NSURL URLWithString:@"https://www.youtube.com/embed/gedG8yEyrUU?feature=player_detailpage&rel=0&autoplay=1&playsinline=0&fs=1"];
             NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:0];
             [youtubeView loadRequest:request];
             [self.view addSubview:youtubeView];
