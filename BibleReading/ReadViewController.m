@@ -606,81 +606,29 @@
     }
 }
 
-////jw.orgから聖書を読み込む
-//- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
-//    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
-//    
-//    webViewJWORG.delegate = self;
-//    
-//    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
-//    
-//    NSString *urlString;
-//    
-//    if (CHAPTER==0) {
-//        CHAPTER = 1;
-//    }
-//    
-////    if ([countryCode isEqualToString: countryCodeEn]) {
-////        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
-////    }else if ([countryCode isEqualToString: countryCodeJa]) {
-////         NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
-////        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-////    }else if ([countryCode isEqualToString: countryCodeCn]) {
-////            NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
-////            urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-////    }
-//    
-//    int countryInt = [self findWord:countryCode];
-//    if (countryInt == 2) {
-//        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
-//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    }else if(countryInt == 3){
-//        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
-//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    }else{
-//        urlString = [NSString stringWithFormat:@"https://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
-//    }
-//
-//    
-//    NSURL *url = [NSURL URLWithString:urlString];
-//    NSLog(@"url=%@",urlString);
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
-//
-//    NSHTTPURLResponse* resp;
-//    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
-//    
-//    //通信エラーであれば、警告を出す
-//        if (resp.statusCode != 200){
-//            [self alertViewMethod];
-//            return;
-//        }
-//
-//    [webViewJWORG loadRequest:request];
-//    [_settingView addSubview:webViewJWORG];
-//    
-//    //戻るボタンの作成
-//    backDate = [[UIButton alloc]
-//               initWithFrame:CGRectMake(70, 25, 100, 32)];
-//    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
-//    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
-//    [backDate addTarget:self
-//                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
-//    [_settingView addSubview:backDate];
-//    
-//    //toDateボタンを表示する
-//    toDate = YES;
-//    if (toDate==YES) {
-//        backDate.hidden = NO;
-//    }
-//    
-//}
-
-//UIWebviewではなくsafariを起動する
+//jw.orgから聖書を読み込む
 - (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+    webViewJWORG = [[UIWebView alloc]initWithFrame:CGRectMake(0,50,self.view.bounds.size.width,self.view.bounds.size.height)];
+    
+    webViewJWORG.delegate = self;
+    
+    [BNIndicator showForView:webViewJWORG withMessage:@"Loading"];
     
     NSString *urlString;
     
+    if (CHAPTER==0) {
+        CHAPTER = 1;
+    }
+    
+//    if ([countryCode isEqualToString: countryCodeEn]) {
+//        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+//    }else if ([countryCode isEqualToString: countryCodeJa]) {
+//         NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }else if ([countryCode isEqualToString: countryCodeCn]) {
+//            NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+//            urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }
     
     int countryInt = [self findWord:countryCode];
     if (countryInt == 2) {
@@ -692,22 +640,74 @@
     }else{
         urlString = [NSString stringWithFormat:@"https://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
     }
-    
-    
-//    if ([countryCode isEqualToString: countryCodeEn]) {
-//        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
-//    }else if ([countryCode isEqualToString: countryCodeJa]) {
-//        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
-//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    }else if ([countryCode isEqualToString: countryCodeCn]) {
-//        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
-//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    }
 
+    
     NSURL *url = [NSURL URLWithString:urlString];
-    [[UIApplication sharedApplication] openURL:url];
+    NSLog(@"url=%@",urlString);
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+
+    NSHTTPURLResponse* resp;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
+    
+    //通信エラーであれば、警告を出す
+        if (resp.statusCode != 200){
+            [self alertViewMethod];
+            return;
+        }
+
+    [webViewJWORG loadRequest:request];
+    [_settingView addSubview:webViewJWORG];
+    
+    //戻るボタンの作成
+    backDate = [[UIButton alloc]
+               initWithFrame:CGRectMake(70, 25, 100, 32)];
+    [backDate setTitle:NSLocalizedString(@"toDate", nil) forState:UIControlStateNormal];
+    [backDate setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [backDate.titleLabel setFont:[UIFont fontWithName:@"HiraKakuProN-W3" size:15]];
+    [backDate addTarget:self
+                action:@selector(deleteWebView:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingView addSubview:backDate];
+    
+    //toDateボタンを表示する
+    toDate = YES;
+    if (toDate==YES) {
+        backDate.hidden = NO;
+    }
     
 }
+
+////UIWebviewではなくsafariを起動する
+//- (void)readFromJwOrg:(NSString*)BIBLENAME label1:(int)CHAPTER{
+//    
+//    NSString *urlString;
+//    
+//    
+//    int countryInt = [self findWord:countryCode];
+//    if (countryInt == 2) {
+//        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }else if(countryInt == 3){
+//        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+//        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    }else{
+//        urlString = [NSString stringWithFormat:@"https://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+//    }
+//    
+//    
+////    if ([countryCode isEqualToString: countryCodeEn]) {
+////        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+////    }else if ([countryCode isEqualToString: countryCodeJa]) {
+////        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+////        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+////    }else if ([countryCode isEqualToString: countryCodeCn]) {
+////        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+////        urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+////    }
+//
+//    NSURL *url = [NSURL URLWithString:urlString];
+//    [[UIApplication sharedApplication] openURL:url];
+//    
+//}
 
 
 
