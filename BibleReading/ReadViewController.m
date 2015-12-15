@@ -632,13 +632,13 @@
     
     int countryInt = [self findWord:countryCode];
     if (countryInt == 2) {
-        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
+        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/ja/出版物/聖書/nwt/各書/%@/%d/",BIBLENAME,CHAPTER];
         urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }else if(countryInt == 3){
-        NSString *kariString = [NSString stringWithFormat:@"https://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
+        NSString *kariString = [NSString stringWithFormat:@"http://www.jw.org/zh-hans/出版物/圣经/nwt/圣经经卷/%@/%d/",BIBLENAME,CHAPTER];
         urlString = [kariString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }else{
-        urlString = [NSString stringWithFormat:@"https://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
+        urlString = [NSString stringWithFormat:@"http://www.jw.org/en/publications/bible/nwt/books/%@/%d/",BIBLENAME,CHAPTER];
     }
 
     
