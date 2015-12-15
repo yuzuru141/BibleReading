@@ -644,7 +644,7 @@
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"url=%@",urlString);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
 
     NSHTTPURLResponse* resp;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
