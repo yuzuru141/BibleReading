@@ -648,7 +648,7 @@
 
     NSHTTPURLResponse* resp;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:nil];
-    
+
     //通信エラーであれば、警告を出す
         if (resp.statusCode != 200){
             [self alertViewMethod];
